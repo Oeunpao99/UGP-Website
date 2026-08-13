@@ -1,0 +1,14 @@
+node_modules
+frontend/node_modules
+frontend/dist
+**/__pycache__
+**/*.pyc
+**/*.pyo
+backend/data
+data
+.git
+.gitignore
+*.md
+.vscode
+.idea
+.DS_Store

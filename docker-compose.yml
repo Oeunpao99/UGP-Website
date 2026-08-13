@@ -1,0 +1,26 @@
+services:
+  web:
+    build: .
+    image: upg-pipe-website:latest
+    container_name: upg-pipe-website
+    ports:
+      - "8080:8000"
+    environment:
+      # Optional: enables the real AI answers in the chatbot.
+      # Without it the assistant uses its offline fallback answers.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
+      WEB_WORKERS: ${WEB_WORKERS:-4}
+      QUOTE_DB: /app/data/quotes.db
+    volumes:
+      - upg-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+volumes:
+  upg-data:

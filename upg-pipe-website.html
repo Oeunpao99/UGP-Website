@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UPG PIPE CO., LTD — uPVC, HDPE, PPR pipes & electrical conduit made in Cambodia</title>
+<meta name="description" content="UPG PIPE CO., LTD manufactures uPVC pipes and fittings, HDPE pipes, PPR pipes, electrical conduit and trunking in Phnom Penh. The first ISO 9001:2015 certified pipe factory of its kind in Cambodia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,400..900;1,75..125,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   UPG PIPE — design tokens
+   Palette taken from the extruded product itself: the deep
+   printing blue and signal yellow of the Eagle / Lion Head /
+   Smart pipe legends, plus the ID stripe colour of each family.
+   ============================================================ */
+:root{
+  --ink:#07213F;
+  --ink-2:#0C3466;
+  --blue:#0B57A4;
+  --blue-lite:#2BA7E0;
+  --yellow:#FFD100;
+  --yellow-deep:#F2B705;
+  --red:#E4002B;
+  --paper:#F2F5F9;
+  --paper-2:#E7ECF3;
+  --white:#fff;
+  --grey:#5C6F8A;
+  --line:rgba(7,33,63,.13);
+  --line-strong:rgba(7,33,63,.28);
+
+  /* product family ID stripes */
+  --c-upvc:#2BA7E0;
+  --c-ppr:#12A150;
+  --c-hdpe:#15191F;
+  --c-conduit:#FFC400;
+  --c-corr:#EDF1F6;
+
+  --display:'Archivo','Arial Narrow',sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --kh:'Noto Sans Khmer','IBM Plex Sans',sans-serif;
+
+  --r:14px;
+  --shell:1240px;
+  --ease:cubic-bezier(.22,.8,.28,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+
+h1,h2,h3,h4{
+  font-family:var(--display);margin:0;line-height:1.04;
+  font-variation-settings:'wdth' 112;letter-spacing:-.018em;
+}
+h1{font-weight:800;font-size:clamp(2.6rem,6.4vw,5.1rem)}
+h2{font-weight:800;font-size:clamp(2rem,4.1vw,3.35rem)}
+h3{font-weight:700;font-size:clamp(1.25rem,2vw,1.6rem);font-variation-settings:'wdth' 105}
+p{margin:0 0 1.05em}
+.kh{font-family:var(--kh);font-weight:600}
+
+.shell{width:min(var(--shell),calc(100% - 44px));margin-inline:auto}
+.mono{font-family:var(--mono)}
+
+/* ---------- eyebrow / structural labels ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:.7rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--blue);
+  margin:0 0 18px;
+}
+.eyebrow::before{
+  content:"";width:26px;height:3px;background:var(--yellow);flex:none;border-radius:2px;
+}
+.eyebrow .kh{letter-spacing:0;font-size:.92rem;opacity:.65;text-transform:none}
+.on-dark .eyebrow{color:var(--yellow)}
+.on-dark .eyebrow::before{background:var(--yellow)}
+
+.lead{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--grey);max-width:62ch}
+.on-dark .lead{color:rgba(255,255,255,.76)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;border-radius:100px;border:0;cursor:pointer;
+  font-family:var(--display);font-weight:700;font-size:.95rem;
+  font-variation-settings:'wdth' 105;letter-spacing:.01em;
+  background:var(--yellow);color:var(--ink);
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .2s;
+  box-shadow:0 2px 0 rgba(7,33,63,.18);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(7,33,63,.5);background:#FFDC3D}
+.btn .ar{transition:transform .25s var(--ease)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line-strong)}
+.btn.ghost:hover{background:var(--white);box-shadow:inset 0 0 0 2px var(--ink)}
+.on-dark .btn.ghost{color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.36)}
+.on-dark .btn.ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 2px #fff}
+.btn.solid{background:var(--blue);color:#fff;box-shadow:0 2px 0 rgba(7,33,63,.3)}
+.btn.solid:hover{background:var(--ink-2)}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.utility{background:var(--ink);color:rgba(255,255,255,.72);font-size:.78rem}
+.utility .shell{display:flex;align-items:center;gap:26px;height:38px;justify-content:flex-end;flex-wrap:wrap}
+.utility a{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:color .18s}
+.utility a:hover{color:var(--yellow)}
+.utility svg{width:14px;height:14px;flex:none;opacity:.8}
+.utility .iso{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--ink);
+  background:var(--yellow);padding:3px 9px;border-radius:3px;font-weight:600;
+}
+
+.masthead{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .25s}
+.masthead.stuck{box-shadow:0 14px 34px -26px rgba(7,33,63,.7)}
+.masthead .shell{display:flex;align-items:center;gap:22px;height:74px}
+
+.brandmark{display:flex;align-items:center;gap:12px;margin-right:auto}
+.brandmark .glyph{width:42px;height:42px;flex:none}
+.brandmark .wordmark{line-height:1}
+.brandmark .wordmark b{
+  display:block;font-family:var(--display);font-weight:900;font-size:1.35rem;
+  font-variation-settings:'wdth' 118;letter-spacing:-.02em;
+}
+.brandmark .wordmark span{
+  display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;
+  color:var(--grey);text-transform:uppercase;margin-top:3px;
+}
+
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{
+  position:relative;padding:10px 15px;border-radius:8px;font-size:.93rem;font-weight:500;
+  color:var(--ink);transition:color .18s,background .18s;
+}
+.nav a::after{
+  content:"";position:absolute;left:15px;right:15px;bottom:2px;height:3px;border-radius:2px;
+  background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease);
+}
+.nav a:hover{background:var(--paper)}
+.nav a[aria-current="page"]{color:var(--blue);font-weight:600}
+.nav a[aria-current="page"]::after{transform:scaleX(1)}
+
+.masthead .btn{padding:11px 20px;font-size:.88rem}
+.burger{display:none;width:46px;height:46px;border:1px solid var(--line-strong);background:#fff;border-radius:11px;cursor:pointer;align-items:center;justify-content:center}
+.burger span{display:block;width:19px;height:2px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:19px;height:2px;background:var(--ink);transition:transform .25s var(--ease)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+.drawer{display:none;border-top:1px solid var(--line);background:#fff}
+.drawer.open{display:block}
+.drawer a{display:flex;align-items:baseline;gap:12px;padding:15px 22px;border-bottom:1px solid var(--line);font-weight:600}
+.drawer a .kh{font-size:.85rem;color:var(--grey);font-weight:400}
+.drawer a[aria-current="page"]{color:var(--blue);background:var(--paper)}
+
+/* ============================================================
+   PAGE ROUTER
+   ============================================================ */
+.page{display:none}
+.page.active{display:block;animation:pageIn .5s var(--ease) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+section{padding:clamp(64px,8vw,112px) 0}
+section.tight{padding:clamp(48px,5vw,72px) 0}
+.dark{background:var(--ink);color:#fff}
+.dark h2,.dark h3{color:#fff}
+.band{background:var(--white)}
+
+/* ============================================================
+   HERO — the thesis: a rack of pipe, printed legend and all
+   ============================================================ */
+.hero{
+  position:relative;overflow:hidden;background:var(--ink);color:#fff;
+  padding:clamp(56px,7vw,96px) 0 0;
+}
+.hero::before{ /* concentric bore rings, echoing the pipe section */
+  content:"";position:absolute;inset:-30% -10% auto auto;width:920px;height:920px;
+  background:repeating-radial-gradient(circle at center,rgba(255,255,255,.055) 0 1px,transparent 1px 17px);
+  border-radius:50%;pointer-events:none;
+}
+.hero::after{ /* yellow wedge, lifted from the catalogue cover */
+  content:"";position:absolute;top:0;left:0;width:230px;height:230px;
+  background:var(--yellow);clip-path:polygon(0 0,100% 0,0 100%);opacity:.95;pointer-events:none;
+}
+.hero .shell{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:end}
+.hero h1{font-variation-settings:'wdth' 108;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--yellow);display:block}
+.hero .lead{margin-top:26px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:34px 0 clamp(40px,5vw,64px)}
+
+.hero-facts{display:flex;gap:34px;flex-wrap:wrap;padding-bottom:44px}
+.fact b{display:block;font-family:var(--display);font-weight:800;font-size:2.1rem;color:var(--yellow);line-height:1;font-variation-settings:'wdth' 100}
+.fact span{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* --- the pipe rack (signature element) --- */
+.rack{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;height:clamp(300px,40vw,470px)}
+.pipe{
+  position:relative;flex:none;width:clamp(34px,4.2vw,52px);border-radius:26px 26px 5px 5px;
+  background-color:var(--c);
+  background-image:linear-gradient(90deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.12) 12%,rgba(255,255,255,.42) 34%,rgba(255,255,255,.1) 60%,rgba(0,0,0,.3) 88%,rgba(0,0,0,.45) 100%);
+  box-shadow:0 24px 40px -22px rgba(0,0,0,.9);
+  display:flex;align-items:center;justify-content:center;
+  transform-origin:bottom center;
+  animation:rise .9s var(--ease) both;animation-delay:var(--d);
+}
+@keyframes rise{from{transform:translateY(60px) scaleY(.9);opacity:0}to{transform:none;opacity:1}}
+.pipe::before{ /* socket lip */
+  content:"";position:absolute;top:0;left:-3px;right:-3px;height:34px;border-radius:26px 26px 8px 8px;
+  background:inherit;filter:brightness(1.06);box-shadow:inset 0 -1px 0 rgba(0,0,0,.25);
+}
+.pipe .legend{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;line-height:1;
+  color:rgba(255,255,255,.9);white-space:nowrap;user-select:none;
+  margin-top:26px;
+}
+.pipe.on-light .legend{color:rgba(7,33,63,.62)}
+.pipe .stripe{position:absolute;top:34px;bottom:0;width:5px;background:var(--s);left:7px;opacity:.95}
+.pipe .stripe.r{left:auto;right:7px}
+
+/* --- size rail: every diameter UPG extrudes, on a loop --- */
+.rail{border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.22);overflow:hidden;position:relative;z-index:2}
+.rail-track{display:flex;gap:0;width:max-content;animation:slide 46s linear infinite}
+.rail:hover .rail-track{animation-play-state:paused}
+.rail-item{display:flex;align-items:center;gap:10px;padding:15px 26px;border-right:1px solid rgba(255,255,255,.1);font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;color:rgba(255,255,255,.62);white-space:nowrap}
+.rail-item b{color:var(--yellow);font-weight:600}
+.rail-item .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-lite)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   REUSABLE BLOCKS
+   ============================================================ */
+.head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:clamp(34px,4vw,56px);flex-wrap:wrap}
+.head-row .lead{margin-top:14px;margin-bottom:0}
+
+.reveal{opacity:0;transform:translateY(22px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+/* brand trio */
+.brands{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.brand-card{
+  position:relative;background:var(--yellow);border-radius:var(--r);padding:32px 26px 26px;
+  color:var(--ink-2);overflow:hidden;transition:transform .3s var(--ease);
+}
+.brand-card:nth-child(2){background:var(--ink);color:#fff}
+.brand-card:hover{transform:translateY(-5px)}
+.brand-card .ring{position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:repeating-radial-gradient(circle,currentColor 0 1px,transparent 1px 12px);opacity:.16}
+.brand-card svg{width:56px;height:56px;position:relative}
+.brand-card h3{margin:16px 0 4px;font-size:1.45rem}
+.brand-card .role{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
+.brand-card p{margin:14px 0 0;font-size:.93rem;opacity:.85}
+.brand-card .iso{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;color:var(--red);background:#fff;padding:4px 9px;border-radius:3px;font-weight:600}
+
+/* family cards */
+.families{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.family{
+  position:relative;background:#fff;border-radius:var(--r);padding:28px 26px 24px;
+  border:1px solid var(--line);overflow:hidden;cursor:pointer;text-align:left;width:100%;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;
+}
+.family:hover{transform:translateY(-6px);box-shadow:0 26px 44px -30px rgba(7,33,63,.75);border-color:transparent}
+.family .bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.family .idx{font-family:var(--mono);font-size:.7rem;color:var(--grey);letter-spacing:.14em}
+.family h3{margin:12px 0 8px}
+.family p{font-size:.92rem;color:var(--grey);margin-bottom:16px}
+.family .tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;padding:5px 10px;border-radius:100px;background:var(--paper);color:var(--ink-2);border:1px solid var(--line)}
+.family .go{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-weight:600;font-size:.9rem;color:var(--blue)}
+
+/* feature list */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:2px;background:var(--line);border-radius:var(--r);overflow:hidden}
+.feat{background:var(--white);padding:30px 26px}
+.dark .feat{background:var(--ink-2)}
+.feat svg{width:30px;height:30px;color:var(--blue);margin-bottom:16px}
+.dark .feat svg{color:var(--yellow)}
+.feat h4{font-size:1.06rem;margin-bottom:8px;font-family:var(--display);font-weight:700}
+.feat p{font-size:.9rem;color:var(--grey);margin:0}
+.dark .feat p{color:rgba(255,255,255,.66)}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,.16)}
+.stat{background:var(--ink);padding:34px 26px}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,4.4vw,3.4rem);color:var(--yellow);line-height:1}
+.stat span{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.stat p{margin:10px 0 0;font-size:.88rem;color:rgba(255,255,255,.68)}
+
+/* client logos as typographic plates */
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.client{background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 14px;min-height:96px;
+  font-family:var(--display);font-weight:700;font-size:.92rem;font-variation-settings:'wdth' 96;color:var(--ink-2);letter-spacing:-.01em;
+  transition:background .25s,color .25s}
+.client:hover{background:var(--ink);color:var(--yellow)}
+.client.intl{background:var(--paper)}
+.client.intl:hover{background:var(--blue);color:#fff}
+
+/* ============================================================
+   PRODUCTS
+   ============================================================ */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{
+  padding:10px 18px;border-radius:100px;border:1px solid var(--line-strong);background:#fff;cursor:pointer;
+  font-size:.88rem;font-weight:600;transition:all .2s var(--ease);display:inline-flex;align-items:center;gap:9px;
+}
+.chip .sw{width:9px;height:9px;border-radius:50%;background:var(--c,var(--blue))}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.prod{display:grid;grid-template-columns:200px 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.prod-visual{background:var(--ink);position:relative;display:flex;align-items:flex-end;justify-content:center;padding:26px 0 0;overflow:hidden;min-height:230px}
+.prod-visual::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:200px;background:repeating-radial-gradient(circle at 50% 100%,rgba(255,255,255,.06) 0 1px,transparent 1px 14px)}
+.prod-visual .pipe{animation:none;width:62px;height:88%}
+.prod-body{padding:30px 32px 32px}
+.prod-body h3{margin-bottom:6px}
+.prod-meta{font-family:var(--mono);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.prod-body p{font-size:.94rem;color:var(--grey)}
+.spec-toggle{
+  margin-top:6px;background:none;border:0;padding:10px 0;cursor:pointer;color:var(--ink);
+  font-weight:700;font-family:var(--display);display:inline-flex;align-items:center;gap:10px;font-size:.92rem;
+}
+.spec-toggle .pm{width:22px;height:22px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:.9rem;transition:transform .3s var(--ease)}
+.spec-toggle[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.spec-panel{display:none;margin-top:14px}
+.spec-panel.open{display:block;animation:pageIn .4s var(--ease) both}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--mono);font-size:.79rem}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{background:var(--ink);color:#fff;font-weight:500;letter-spacing:.08em;font-size:.7rem;text-transform:uppercase;position:sticky;top:0}
+tbody tr:nth-child(even){background:var(--paper)}
+tbody tr:hover{background:#FFF8D6}
+caption{caption-side:bottom;padding:10px 2px;font-size:.75rem;color:var(--grey);text-align:left;font-family:var(--body)}
+
+.fitgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.fit{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 16px;text-align:center;transition:border-color .2s,transform .2s var(--ease)}
+.fit:hover{border-color:var(--blue);transform:translateY(-3px)}
+.fit svg{width:44px;height:44px;margin:0 auto 12px;color:var(--blue-lite)}
+.fit b{display:block;font-size:.88rem;font-family:var(--display);font-weight:700}
+.fit span{font-family:var(--mono);font-size:.68rem;color:var(--grey)}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+.feature-event{display:grid;grid-template-columns:1.1fr .9fr;background:var(--ink);color:#fff;border-radius:var(--r);overflow:hidden}
+.feature-event .txt{padding:clamp(32px,4vw,52px)}
+.feature-event .visual{background:var(--yellow);position:relative;min-height:300px;display:grid;place-items:center;overflow:hidden}
+.feature-event .visual .ring{position:absolute;inset:-20%;background:repeating-radial-gradient(circle,rgba(7,33,63,.14) 0 1.5px,transparent 1.5px 18px)}
+.feature-event .visual .stamp{position:relative;text-align:center;font-family:var(--display);color:var(--ink);font-weight:900;font-size:clamp(2rem,4vw,3rem);line-height:.95;padding:20px}
+.feature-event .visual .stamp small{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;font-weight:500;margin-top:12px}
+
+.events{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}
+.event{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.event:hover{transform:translateY(-5px);box-shadow:0 26px 44px -30px rgba(7,33,63,.7)}
+.event .top{height:126px;position:relative;background:var(--c,var(--blue));display:grid;place-items:center;overflow:hidden}
+.event .top::before{content:"";position:absolute;inset:-40%;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.1) 0 10px,transparent 10px 20px)}
+.event .top b{position:relative;font-family:var(--display);color:#fff;font-size:2.4rem;font-weight:800;opacity:.92}
+.event .body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+.event .date{font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:9px;display:flex;gap:10px;align-items:center}
+.event .date .kind{color:var(--grey)}
+.event h3{font-size:1.12rem;margin-bottom:9px}
+.event p{font-size:.9rem;color:var(--grey);margin:0}
+
+/* ============================================================
+   CAREERS
+   ============================================================ */
+.jobs{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+.job{border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:0}
+.job-head{width:100%;display:flex;align-items:center;gap:20px;padding:24px 26px;background:none;border:0;cursor:pointer;text-align:left;transition:background .2s}
+.job-head:hover{background:var(--paper)}
+.job-head .no{font-family:var(--mono);font-size:.76rem;color:var(--grey);width:26px;flex:none}
+.job-head .t{flex:1}
+.job-head .t b{display:block;font-family:var(--display);font-weight:700;font-size:1.08rem}
+.job-head .t span{font-size:.84rem;color:var(--grey)}
+.job-head .loc{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);background:var(--paper);padding:6px 12px;border-radius:100px;white-space:nowrap}
+.job-head .pm{width:26px;height:26px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;flex:none;transition:transform .3s var(--ease);font-weight:700}
+.job-head[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.job-panel{display:none;padding:0 26px 28px 72px}
+.job-panel.open{display:block;animation:pageIn .4s var(--ease) both}
+.job-panel ul{margin:0 0 18px;padding-left:18px}
+.job-panel li{font-size:.93rem;color:var(--grey);margin-bottom:6px}
+.job-panel h4{font-family:var(--display);font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;color:var(--ink)}
+
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.perk{padding:26px 24px;background:#fff;border-radius:var(--r);border:1px solid var(--line)}
+.perk b{display:block;font-family:var(--display);font-size:1.02rem;margin-bottom:7px}
+.perk p{margin:0;font-size:.89rem;color:var(--grey)}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+.form{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(26px,3vw,38px)}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:8px}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 15px;border:1px solid var(--line-strong);border-radius:10px;background:var(--paper);
+  transition:border-color .2s,background .2s;font-size:.95rem;
+}
+.field input:focus,.field select:focus,.field textarea:focus{background:#fff;border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(11,87,164,.14)}
+.field textarea{min-height:124px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-note{font-size:.82rem;color:var(--grey);margin:14px 0 0}
+.sent{display:none;margin-top:16px;padding:14px 16px;border-radius:10px;background:#E9F7EF;border:1px solid #A8DEC0;font-size:.9rem}
+.sent.show{display:block}
+
+.info-card{background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(26px,3vw,36px);margin-bottom:18px}
+.info-card h3{margin-bottom:20px}
+.info-row{display:flex;gap:16px;padding:15px 0;border-top:1px solid rgba(255,255,255,.14)}
+.info-row:first-of-type{border-top:0}
+.info-row svg{width:18px;height:18px;color:var(--yellow);flex:none;margin-top:4px}
+.info-row .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:3px}
+.info-row .v{font-size:.96rem;line-height:1.5}
+.info-row a.v:hover{color:var(--yellow)}
+
+.map{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--paper-2);min-height:220px;display:grid;place-items:center;text-align:center;padding:30px}
+.map .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:34px 34px}
+.map .pin{position:relative}
+.map .pin svg{width:34px;height:34px;color:var(--red);margin:0 auto 10px}
+.map b{font-family:var(--display);display:block;margin-bottom:4px}
+.map span{font-size:.88rem;color:var(--grey);display:block;margin-bottom:14px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--ink);color:rgba(255,255,255,.68);padding:clamp(56px,6vw,80px) 0 0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:34px;padding-bottom:48px}
+footer h4{font-family:var(--display);color:#fff;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin-bottom:10px;font-size:.92rem}
+footer a:hover{color:var(--yellow)}
+.foot-brand .brandmark .wordmark b{color:#fff}
+.foot-brand .brandmark .wordmark span{color:rgba(255,255,255,.5)}
+.foot-brand p{font-size:.92rem;margin-top:18px;max-width:34ch}
+.socials{display:flex;gap:10px;margin-top:18px}
+.socials a{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;transition:all .2s}
+.socials a:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.socials svg{width:17px;height:17px}
+.legal{border-top:1px solid rgba(255,255,255,.13);padding:22px 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.8rem;font-family:var(--mono);letter-spacing:.04em;color:rgba(255,255,255,.45)}
+
+/* ============================================================
+   AI CHATBOT
+   ============================================================ */
+.chat-fab{
+  position:fixed;right:24px;bottom:24px;z-index:80;display:flex;align-items:center;gap:11px;
+  padding:13px 20px 13px 15px;border-radius:100px;border:0;cursor:pointer;background:var(--ink);color:#fff;
+  box-shadow:0 16px 34px -14px rgba(7,33,63,.85);font-family:var(--display);font-weight:700;font-size:.92rem;
+  transition:transform .25s var(--ease),background .25s;
+}
+.chat-fab:hover{transform:translateY(-3px);background:var(--blue)}
+.chat-fab .dot{width:9px;height:9px;border-radius:50%;background:#3BD37E;box-shadow:0 0 0 0 rgba(59,211,126,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(59,211,126,0)}100%{box-shadow:0 0 0 0 rgba(59,211,126,0)}}
+.chat-fab.hidden{display:none}
+
+.chat{
+  position:fixed;right:24px;bottom:24px;z-index:90;width:min(392px,calc(100vw - 32px));
+  height:min(612px,calc(100vh - 48px));background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 34px 70px -22px rgba(7,33,63,.6);display:none;flex-direction:column;
+  border:1px solid var(--line);
+}
+.chat.open{display:flex;animation:chatIn .34s var(--ease) both}
+@keyframes chatIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.chat-head{background:var(--ink);color:#fff;padding:17px 18px;display:flex;align-items:center;gap:13px}
+.chat-head .av{width:40px;height:40px;border-radius:12px;background:var(--yellow);display:grid;place-items:center;flex:none}
+.chat-head .av svg{width:24px;height:24px;color:var(--ink)}
+.chat-head b{display:block;font-family:var(--display);font-size:1rem}
+.chat-head span{font-size:.74rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px}
+.chat-head span i{width:7px;height:7px;border-radius:50%;background:#3BD37E;display:block}
+.chat-close{margin-left:auto;background:rgba(255,255,255,.12);border:0;color:#fff;width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1.1rem;line-height:1;transition:background .2s}
+.chat-close:hover{background:rgba(255,255,255,.24)}
+.chat-log{flex:1;overflow-y:auto;padding:20px 18px;background:var(--paper);display:flex;flex-direction:column;gap:13px;scroll-behavior:smooth}
+.msg{max-width:84%;padding:12px 15px;border-radius:15px;font-size:.92rem;line-height:1.55;white-space:pre-wrap;word-wrap:break-word}
+.msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.me{background:var(--blue);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg strong{font-weight:600}
+.typing{display:flex;gap:5px;align-self:flex-start;background:#fff;border:1px solid var(--line);padding:14px 16px;border-radius:15px;border-bottom-left-radius:5px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--grey);animation:bounce 1.3s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{opacity:.28;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.quick{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 12px;background:var(--paper)}
+.quick button{padding:8px 13px;border-radius:100px;border:1px solid var(--line-strong);background:#fff;font-size:.79rem;cursor:pointer;transition:all .18s}
+.quick button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chat-form{display:flex;gap:9px;padding:13px;border-top:1px solid var(--line);background:#fff}
+.chat-form input{flex:1;padding:12px 15px;border-radius:100px;border:1px solid var(--line-strong);background:var(--paper);font-size:.92rem}
+.chat-form input:focus{outline:none;border-color:var(--blue);background:#fff}
+.chat-form button{width:46px;height:46px;flex:none;border-radius:50%;border:0;background:var(--yellow);cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}
+.chat-form button:hover{background:var(--ink);color:#fff;transform:scale(1.05)}
+.chat-form svg{width:19px;height:19px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1020px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .rack{justify-content:flex-start;height:250px}
+  .contact-grid,.feature-event{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .brands{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .nav,.masthead .btn{display:none}
+  .burger{display:flex}
+  .utility .shell{justify-content:center;gap:16px;height:auto;padding-block:8px}
+  .utility .addr{display:none}
+  .prod{grid-template-columns:1fr}
+  .prod-visual{min-height:170px;padding-top:20px}
+  .prod-visual .pipe{height:150px}
+  .job-panel{padding-left:26px}
+  .two{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero::after{width:150px;height:150px}
+}
+@media (max-width:520px){
+  .shell{width:calc(100% - 32px)}
+  .chat{right:0;bottom:0;width:100vw;height:100dvh;border-radius:0}
+  .chat-fab{right:16px;bottom:16px}
+  .hero-facts{gap:22px}
+  .fact b{font-size:1.7rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<!-- ================= UTILITY BAR ================= -->
+<div class="utility">
+  <div class="shell">
+    <span class="iso">ISO 9001:2015</span>
+    <a href="tel:+85523939399"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>+855 (0)23 939 399</a>
+    <a href="mailto:sales@upgpipe.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>sales@upgpipe.com</a>
+    <a class="addr" href="#/contact" data-link><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Building #6, St.289, Toul Kork, Phnom Penh</a>
+  </div>
+</div>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="masthead" id="masthead">
+  <div class="shell">
+    <a href="#/home" data-link class="brandmark" aria-label="UPG PIPE home">
+      <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
+        <rect width="48" height="48" rx="11" fill="#07213F"/>
+        <circle cx="24" cy="24" r="14" fill="none" stroke="#FFD100" stroke-width="2.4"/>
+        <circle cx="24" cy="24" r="8" fill="none" stroke="#2BA7E0" stroke-width="2.4"/>
+        <path d="M24 10v28" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M10 24h28" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".35"/>
+      </svg>
+      <span class="wordmark"><b>UPG PIPE</b><span>Made in Cambodia</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#/home" data-link>Home</a>
+      <a href="#/about" data-link>About Us</a>
+      <a href="#/products" data-link>Products</a>
+      <a href="#/events" data-link>Events</a>
+      <a href="#/careers" data-link>Careers</a>
+      <a href="#/contact" data-link>Contact Us</a>
+    </nav>
+    <a href="#/contact" data-link class="btn">Request a quote <span class="ar">→</span></a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="#/home" data-link>Home <span class="kh">ទំព័រដើម</span></a>
+    <a href="#/about" data-link>About Us <span class="kh">អំពីយើង</span></a>
+    <a href="#/products" data-link>Products <span class="kh">ផលិតផល</span></a>
+    <a href="#/events" data-link>Events <span class="kh">ព្រឹត្តិការណ៍</span></a>
+    <a href="#/careers" data-link>Careers <span class="kh">អាជីព</span></a>
+    <a href="#/contact" data-link>Contact Us <span class="kh">ទំនាក់ទំនង</span></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     HOME
+     ============================================================ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">UPG PIPE CO., LTD <span class="kh">ផលិតនៅកម្ពុជា</span></p>
+          <h1>Water only moves<br>as well as the pipe<em>carrying it.</em></h1>
+          <p class="lead">We extrude uPVC, HDPE and PPR pipe, fittings and electrical conduit in Phnom Penh — and we were the first factory of our kind in Cambodia to earn ISO 9001:2015 certification.</p>
+          <div class="hero-cta">
+            <a href="#/products" data-link class="btn">See the product range <span class="ar">→</span></a>
+            <a href="#/contact" data-link class="btn ghost">Talk to sales</a>
+          </div>
+          <div class="hero-facts">
+            <div class="fact"><b>2016</b><span>Founded in Phnom Penh</span></div>
+            <div class="fact"><b>177</b><span>People on the team</span></div>
+            <div class="fact"><b>1/2"–12"</b><span>uPVC size range</span></div>
+            <div class="fact"><b>3</b><span>Pipe brands</span></div>
+          </div>
+        </div>
+        <div class="rack" aria-hidden="true">
+          <div class="pipe" style="--c:var(--c-hdpe);--d:.05s;height:62%"><span class="stripe" style="--s:#FFD100"></span><span class="legend">EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-ppr);--d:.15s;height:78%"><span class="legend">EAGLE PPR PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-upvc);--d:.25s;height:100%"><span class="legend">EAGLE uPVC PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-upvc);--d:.35s;height:88%"><span class="legend">LION HEAD uPVC PIPE · ISO 9001:2015</span></div>
+          <div class="pipe" style="--c:var(--c-hdpe);--d:.45s;height:70%"><span class="stripe" style="--s:#E4002B"></span><span class="legend">EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-conduit);--d:.55s;height:54%"><span class="legend" style="color:rgba(7,33,63,.66)">EAGLE ELECTRICAL CONDUIT · ISO 9001:2015</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="rail" aria-hidden="true"><div class="rail-track" id="railTrack"></div></div>
+  </div>
+
+  <!-- three brands -->
+  <section class="tight band">
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Our brands</p>
+          <h2>One factory,<br>three marks on the pipe.</h2>
+        </div>
+        <p class="lead">Every brand runs through the same quality system, the same lab and the same certified process. The mark tells your installer which line the pipe came from.</p>
+      </div>
+      <div class="brands reveal">
+        <div class="brand-card">
+          <span class="ring"></span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="32" cy="32" r="15"/><path d="M32 17v-6M32 53v-6M17 32h-6M53 32h-6M21.4 21.4l-4.3-4.3M46.6 46.6l4.3 4.3M42.6 21.4l4.3-4.3M21.4 42.6l-4.3 4.3"/><circle cx="32" cy="32" r="6"/>
+          </svg>
+          <div class="role">Engineering line</div>
+          <h3>SMART PIPE</h3>
+          <p>uPVC and HDPE for contractors who specify by pressure class and want repeatable, gauge-checked wall thickness.</p>
+          <span class="iso">ISO 9001:2015</span>
+        </div>
+        <div class="brand-card">
+          <span class="ring"></span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 34c8-3 14-9 18-16 3 6 8 10 14 11 6 1 12 5 16 11-6-2-11-1-15 2-5 4-11 6-17 5S12 42 8 34Z"/><path d="M26 18c2 5 6 9 11 11M18 30c5 2 9 6 11 11"/>
+          </svg>
+          <div class="role">Flagship line</div>
+          <h3>EAGLE PIPE</h3>
+          <p>The full range — uPVC, PPR, HDPE, conduit, trunking and fittings. The pipe you'll see on most Cambodian sites.</p>
+          <span class="iso">ISO 9001:2015</span>
+        </div>
+        <div class="brand-card">
+          <span class="ring"></span>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="32" cy="33" r="13"/><path d="M32 20c0-6 5-9 9-7-2 4 0 7 3 8M32 20c0-6-5-9-9-7 2 4 0 7-3 8"/><path d="M26 31h.01M38 31h.01M27 40c3 2 7 2 10 0"/>
+          </svg>
+          <div class="role">Value line</div>
+          <h3>LION HEAD PIPE</h3>
+          <p>uPVC pressure pipe and fittings for housing developments and repeat residential work at a working budget.</p>
+          <span class="iso">ISO 9001:2015</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- product families -->
+  <section>
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Products <span class="kh">ផលិតផល</span></p>
+          <h2>What we extrude</h2>
+        </div>
+        <a href="#/products" data-link class="btn ghost">Full catalogue &amp; specs <span class="ar">→</span></a>
+      </div>
+      <div class="families reveal" id="familyGrid"></div>
+    </div>
+  </section>
+
+  <!-- why UPG -->
+  <section class="dark on-dark">
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Why it matters</p>
+          <h2>A leak is never<br>just a leak.</h2>
+        </div>
+        <p class="lead">Low-quality pipe fails after the wall is closed and the slab is poured. Everything below is what we do so that doesn't happen on your project.</p>
+      </div>
+      <div class="feats reveal">
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <h4>Pressure &amp; compression</h4>
+          <p>Hydrostatic pressure, impact and flattening tests run in our own lab so the pipe holds up to internal pressure and to the trench above it.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.4-7-10a7 7 0 0 1 14 0c0 5.6-7 10-7 10Z"/><path d="M12 5c0 3-3 4-3 7a3 3 0 0 0 6 0c0-3-3-4-3-7Z"/></svg>
+          <h4>Safe for drinking water</h4>
+          <p>Non-toxic compounds suitable for potable water, with no odour or taste carried into the supply.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+          <h4>Heat &amp; UV resistant</h4>
+          <p>Formulated for tropical exposure — stabilised against sunlight and heat on rooftop and above-ground runs.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8.5 14.5A5 5 0 0 1 12 6a5 5 0 0 1 3.5 8.5"/><path d="M9 18h6M10 21h4M12 2v1"/></svg>
+          <h4>Fire &amp; electrical safety</h4>
+          <p>Self-extinguishing conduit and trunking that insulates rather than conducts, tested for flame propagation.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 12h18M3 17h18"/><circle cx="7" cy="7" r="1.6" fill="currentColor"/><circle cx="13" cy="12" r="1.6" fill="currentColor"/><circle cx="17" cy="17" r="1.6" fill="currentColor"/></svg>
+          <h4>Our own formulation</h4>
+          <p>Compounds developed in-house through our R&amp;D lab rather than bought as a generic recipe — that's where the consistency comes from.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12 3 3 5-6"/></svg>
+          <h4>ISO 9001:2015, audited</h4>
+          <p>A certified quality management system covering uPVC, HDPE, LDPE, PPR pipes, conduit and fittings — externally re-audited, not self-declared.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- stats -->
+  <div class="stats">
+    <div class="stat"><b>2016</b><span>Established</span><p>Founded in June 2016 as a Cambodian manufacturer.</p></div>
+    <div class="stat"><b>177</b><span>Total staff</span><p>30 at the head office, 147 at the Prek Phnov factory.</p></div>
+    <div class="stat"><b>1st</b><span>ISO certified</span><p>First factory of its kind in Cambodia to be certified.</p></div>
+    <div class="stat"><b>400mm</b><span>Largest HDPE OD</span><p>From 20 mm service line up to 400 mm mains.</p></div>
+  </div>
+
+  <!-- projects -->
+  <section class="band">
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Where our pipe is installed</p>
+          <h2>Boreys, towers, malls,<br>and everything under them.</h2>
+        </div>
+        <p class="lead">A selection of the developers, contractors and engineering firms who build with UPG pipe.</p>
+      </div>
+      <div class="clients reveal" id="clientGrid"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="dark on-dark tight">
+    <div class="shell" style="text-align:center;max-width:820px">
+      <p class="eyebrow" style="justify-content:center">Next step</p>
+      <h2>Send us the take-off.<br>We'll price it and confirm stock.</h2>
+      <p class="lead" style="margin:22px auto 30px">Give us your sizes, classes and quantities — our sales team will come back with pricing, lead time and delivery to site.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#/contact" data-link class="btn">Request a quote <span class="ar">→</span></a>
+        <a href="tel:+85523939399" class="btn ghost">+855 (0)23 939 399</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<div class="page" id="page-about">
+  <section class="dark on-dark">
+    <div class="shell">
+      <p class="eyebrow">About us <span class="kh">អំពីយើង</span></p>
+      <h2 style="max-width:16ch">The first ISO 9001:2015 pipe factory in the Kingdom.</h2>
+      <p class="lead" style="margin-top:24px">UPG PIPE CO., LTD is a Cambodian manufacturing company established in June 2016. We produce and supply high-quality polymer products — uPVC pipes and fittings, electrical conduits and accessories, corrugated conduit, HDPE pipes, PPR pipes and more.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell">
+      <div class="head-row">
+        <div style="max-width:62ch">
+          <p class="eyebrow">Who we are</p>
+          <h2>Built here, for here.</h2>
+          <p class="lead" style="margin-top:22px">Water pipes are a critical component of any distribution network, and leaks caused by low-quality products land squarely on the end user. We started UPG to give Cambodian projects a locally made alternative that doesn't ask anyone to compromise on that.</p>
+          <p class="lead">Today the company runs a head office in Toul Kork and a factory at Prek Phnov, with 177 people across both. Our compounds are developed in our own R&amp;D lab, and every product family is covered by an externally audited quality management system.</p>
+        </div>
+        <div style="flex:none;min-width:250px">
+          <div class="perk" style="margin-bottom:14px"><b>Vision</b><p>To be the leading innovative and specialised manufacturer and supplier of high-quality polymer products in Cambodia and international markets.</p></div>
+          <div class="perk"><b>Mission</b><p>To deliver innovative, reliable and durable polymer products that meet global standards and provide effective solutions — quality and value for every customer we serve.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="shell">
+      <p class="eyebrow">How the product is proven</p>
+      <h2 style="margin-bottom:40px">Five checks before it leaves the floor.</h2>
+      <div class="feats reveal">
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20h16M7 20V9M12 20V4M17 20v-7"/></svg><h4>Tensile &amp; impact</h4><p>Samples pulled and struck on the bench to confirm the compound behaves the way the formulation says it should.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h4>Hydrostatic pressure</h4><p>Pipe held under sustained internal pressure in the test bath for the required duration without failure.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg><h4>Dimensional check</h4><p>Outside diameter, wall thickness and socket depth gauged against the published table, tolerance by tolerance.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3s5 4.5 5 9a5 5 0 0 1-10 0c0-4.5 5-9 5-9Z"/></svg><h4>Vertical reversion</h4><p>Heat-shrink behaviour measured so the pipe stays dimensionally stable in service, not just at the die.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><h4>Visual &amp; opacity</h4><p>Surface finish, colour consistency and non-transparency inspected on every production run.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 10h8M8 14h5"/></svg><h4>Documented &amp; traceable</h4><p>Results recorded under the ISO 9001:2015 system so a batch can be traced back if a question ever comes up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">Certification</p>
+          <h2>ISO 9001:2015</h2>
+          <p class="lead" style="margin-top:20px">With the internationally recognised Quality Management System standard ISO 9001:2015, together with the development of our own product formulations, we can hold product quality steady across every run — not just on the day of the audit.</p>
+          <div class="tablewrap" style="margin-top:26px">
+            <table>
+              <caption>Certificate details as printed on the current registration.</caption>
+              <tbody>
+                <tr><th scope="row">Standard</th><td>ISO 9001:2015</td></tr>
+                <tr><th scope="row">Certificate no.</th><td>745371</td></tr>
+                <tr><th scope="row">Registrar</th><td>Guardian Independent Certification Ltd</td></tr>
+                <tr><th scope="row">Scope</th><td>Manufacturing of uPVC, HDPE, LDPE, PPR pipes, and electrical cable conduits and fitting products</td></tr>
+                <tr><th scope="row">Issued</th><td>22 March 2024</td></tr>
+                <tr><th scope="row">Expires</th><td>21 March 2027</td></tr>
+                <tr><th scope="row">First certified</th><td>2017</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="info-card">
+            <h3>Head office</h3>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><span class="k">Address</span><span class="v">Building #6, St. 289, Sangkat Boeung Kak 2,<br>Khan Toul Kork, Phnom Penh, Cambodia</span></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg><div><span class="k">Team</span><span class="v">30 staff — sales, technical, admin and logistics</span></div></div>
+          </div>
+          <div class="info-card" style="background:var(--blue)">
+            <h3>Factory</h3>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><span class="k">Address</span><span class="v">Phoum Por Mongkoul, Sangkat Prek Phnov,<br>Khan Prek Phnov, Phnom Penh, Cambodia</span></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M4 20V9l5-3v14M13 20V4l7 4v12"/><path d="M8 12h.01M8 16h.01M17 12h.01M17 16h.01"/></svg><div><span class="k">Team</span><span class="v">147 staff — extrusion, injection, QC and warehouse</span></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><span class="k">Factory visits</span><span class="v">We host customer visits — ask sales to arrange one</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PRODUCTS
+     ============================================================ -->
+<div class="page" id="page-products">
+  <section class="dark on-dark tight">
+    <div class="shell">
+      <p class="eyebrow">Products <span class="kh">ផលិតផល</span></p>
+      <h2 style="max-width:18ch">Pipe, fittings and conduit — with the numbers attached.</h2>
+      <p class="lead" style="margin-top:22px">Filter by brand, open any product to see the published dimension table. Sizes are shown as market size, UPG size and inch so your take-off matches what arrives on site.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="shell">
+      <div class="filters" id="brandFilters" role="group" aria-label="Filter products by brand">
+        <button class="chip" data-brand="all" aria-pressed="true">All products</button>
+        <button class="chip" data-brand="Eagle" aria-pressed="false" style="--c:var(--yellow-deep)"><span class="sw"></span>Eagle</button>
+        <button class="chip" data-brand="Lion Head" aria-pressed="false" style="--c:var(--red)"><span class="sw"></span>Lion Head</button>
+        <button class="chip" data-brand="Smart" aria-pressed="false" style="--c:var(--blue)"><span class="sw"></span>Smart</button>
+      </div>
+      <div id="prodList"></div>
+      <p class="form-note" id="prodEmpty" style="display:none">No products under that brand yet. Clear the filter to see the full range.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Fittings</p>
+          <h2>Everything that joins,<br>turns or ends a run.</h2>
+        </div>
+        <p class="lead">Injection-moulded uPVC fittings in class 13.5 (21–165 mm) and class 8.5 (60–165 mm), plus the full conduit accessory range.</p>
+      </div>
+      <div class="fitgrid reveal" id="fitGrid"></div>
+    </div>
+  </section>
+
+  <section class="dark on-dark tight">
+    <div class="shell" style="text-align:center;max-width:760px">
+      <h2>Need the printed catalogue?</h2>
+      <p class="lead" style="margin:20px auto 28px">The 2026 product catalogue carries every dimension table, tolerance and fitting drawing. Ask sales and we'll send the PDF or drop a copy to your office.</p>
+      <a href="#/contact" data-link class="btn">Request the catalogue <span class="ar">→</span></a>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     EVENTS
+     ============================================================ -->
+<div class="page" id="page-events">
+  <section class="tight">
+    <div class="shell">
+      <p class="eyebrow">Events <span class="kh">ព្រឹត្តិការណ៍</span></p>
+      <h2 style="max-width:16ch">Audits, site visits and everything in between.</h2>
+      <p class="lead" style="margin-top:22px">What the factory and the team have been doing lately — customer visits, supplier trips, certification work and trade events.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="feature-event reveal">
+        <div class="txt">
+          <p class="eyebrow" style="color:var(--yellow)">Featured</p>
+          <h3 style="font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:14px">Open factory day at Prek Phnov</h3>
+          <p style="color:rgba(255,255,255,.74);font-size:.96rem">Contractors and consultants walk the extrusion line, watch a hydrostatic pressure test run start to finish, and check wall thickness on the bench themselves. If you specify pipe for a living, this is the fastest way to know what you're specifying.</p>
+          <a href="#/contact" data-link class="btn" style="margin-top:14px">Book a factory visit <span class="ar">→</span></a>
+        </div>
+        <div class="visual">
+          <span class="ring"></span>
+          <div class="stamp">FACTORY<br>VISIT<small>PREK PHNOV · BY APPOINTMENT</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:clamp(40px,4vw,56px)">
+    <div class="shell">
+      <div class="filters" id="eventFilters" role="group" aria-label="Filter events">
+        <button class="chip" data-kind="all" aria-pressed="true">All updates</button>
+        <button class="chip" data-kind="Quality" aria-pressed="false">Quality</button>
+        <button class="chip" data-kind="Customers" aria-pressed="false">Customers</button>
+        <button class="chip" data-kind="Supply chain" aria-pressed="false">Supply chain</button>
+        <button class="chip" data-kind="Community" aria-pressed="false">Community</button>
+      </div>
+      <div class="events" id="eventGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     CAREERS
+     ============================================================ -->
+<div class="page" id="page-careers">
+  <section class="dark on-dark tight">
+    <div class="shell">
+      <p class="eyebrow">Careers <span class="kh">អាជីព</span></p>
+      <h2 style="max-width:17ch">Come make something that stays in the ground for 50 years.</h2>
+      <p class="lead" style="margin-top:22px">We're 177 people across a head office in Toul Kork and a factory at Prek Phnov. Most of our supervisors started on the line — if you want to learn extrusion, injection moulding or QC properly, this is a good place to do it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell">
+      <p class="eyebrow">What you get</p>
+      <h2 style="margin-bottom:34px">Working here</h2>
+      <div class="perks reveal">
+        <div class="perk"><b>Training that transfers</b><p>Machine operation, quality inspection and ISO procedure training you can take anywhere in manufacturing.</p></div>
+        <div class="perk"><b>Promotion from inside</b><p>Line leaders, QC inspectors and shift supervisors are hired internally first, wherever we can.</p></div>
+        <div class="perk"><b>NSSF &amp; insurance</b><p>Full registration, seniority payment and public holidays per Cambodian labour law.</p></div>
+        <div class="perk"><b>Factory transport &amp; meals</b><p>Staff transport to the Prek Phnov site and a meal allowance on production shifts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="shell">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">Open roles</p>
+          <h2>We're hiring</h2>
+        </div>
+        <p class="lead">Send your CV to <a href="mailto:hr@upgpipe.com" style="color:var(--blue);font-weight:600">hr@upgpipe.com</a> with the role in the subject line, or drop it at the head office reception.</p>
+      </div>
+      <div class="jobs reveal" id="jobList"></div>
+      <p class="form-note" style="margin-top:20px">Don't see your role? We keep open applications on file for six months — send your CV anyway and tell us what you'd like to do.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<div class="page" id="page-contact">
+  <section class="tight">
+    <div class="shell">
+      <p class="eyebrow">Contact us <span class="kh">ទំនាក់ទំនង</span></p>
+      <h2 style="max-width:14ch">Tell us what you're building.</h2>
+      <p class="lead" style="margin-top:22px">Quotes, stock checks, technical questions or a factory visit — reach the right person on the first try.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="contact-grid">
+        <div class="form">
+          <h3 style="margin-bottom:20px">Request a quote</h3>
+          <form id="quoteForm" novalidate>
+            <div class="two">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required placeholder="Sok Dara"></div>
+              <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" placeholder="Contractor or developer"></div>
+            </div>
+            <div class="two">
+              <div class="field"><label for="f-phone">Phone / Telegram</label><input id="f-phone" name="phone" required placeholder="012 345 678"></div>
+              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" placeholder="you@company.com"></div>
+            </div>
+            <div class="two">
+              <div class="field">
+                <label for="f-product">Product</label>
+                <select id="f-product" name="product">
+                  <option>uPVC pressure pipe</option>
+                  <option>uPVC fittings</option>
+                  <option>PPR pipe (hot &amp; cold)</option>
+                  <option>HDPE pipe</option>
+                  <option>Electrical conduit</option>
+                  <option>Corrugated conduit</option>
+                  <option>Trunking</option>
+                  <option>Conduit fittings</option>
+                  <option>Mixed order / not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-topic">I need</label>
+                <select id="f-topic" name="topic">
+                  <option>A price quote</option>
+                  <option>Stock availability</option>
+                  <option>Technical specifications</option>
+                  <option>A factory visit</option>
+                  <option>To become a distributor</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label for="f-msg">Sizes, quantities and site</label><textarea id="f-msg" name="message" placeholder="e.g. 400 m of 60 mm (2&quot;) uPVC class 13.5 + fittings, delivery to Sen Sok, needed in three weeks"></textarea></div>
+            <button type="submit" class="btn solid">Send request <span class="ar">→</span></button>
+            <p class="form-note">We reply during office hours, usually the same working day.</p>
+            <div class="sent" id="formSent"></div>
+          </form>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <h3>Talk to us</h3>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg><div><span class="k">Sales</span><a class="v" href="tel:+85523939399">+855 (0)23 939 399</a></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><div><span class="k">Email</span><a class="v" href="mailto:sales@upgpipe.com">sales@upgpipe.com</a></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><span class="k">Office hours</span><span class="v">Monday–Saturday, 7:30–17:00<br>Closed on public holidays</span></div></div>
+          </div>
+          <div class="info-card" style="background:var(--blue)">
+            <h3>Visit us</h3>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg><div><span class="k">Head office</span><span class="v">Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh</span></div></div>
+            <div class="info-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M4 20V9l5-3v14M13 20V4l7 4v12"/></svg><div><span class="k">Factory</span><span class="v">Phoum Por Mongkoul, Sangkat Prek Phnov, Khan Prek Phnov, Phnom Penh</span></div></div>
+          </div>
+          <div class="map">
+            <span class="grid-bg"></span>
+            <div class="pin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <b>UPG PIPE — Head Office</b>
+              <span>St. 289, Toul Kork, Phnom Penh</span>
+              <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=UPG+PIPE+CO+LTD+Phnom+Penh" target="_blank" rel="noopener">Open in Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brandmark">
+          <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
+            <rect width="48" height="48" rx="11" fill="#FFD100"/>
+            <circle cx="24" cy="24" r="14" fill="none" stroke="#07213F" stroke-width="2.4"/>
+            <circle cx="24" cy="24" r="8" fill="none" stroke="#0B57A4" stroke-width="2.4"/>
+            <path d="M24 10v28" stroke="#07213F" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span class="wordmark"><b>UPG PIPE</b><span>CO., LTD · ISO 9001:2015</span></span>
+        </div>
+        <p>Cambodian manufacturer of uPVC, HDPE and PPR pipe, fittings, electrical conduit and trunking. Established June 2016.</p>
+        <div class="socials">
+          <a href="#/contact" data-link aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg></a>
+          <a href="#/contact" data-link aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 20c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.3-.1-.5-.6-.2L6.3 13.1l-4.8-1.5c-1-.3-1-1 .2-1.5l18.8-7.3c.9-.3 1.6.2 1.4 1.5Z"/></svg></a>
+          <a href="#/contact" data-link aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5.5h-3c-2.2 0-4 1.8-4 4V12H7.5v3.5H10V22h3.5v-6.5H16l.5-3.5H13.5V9.5c0-.3.2-.5.5-.5Z"/></svg></a>
+          <a href="#/contact" data-link aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.3-.4-4.9a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.7C2 8.7 2 12 2 12s0 3.3.4 4.9a2.5 2.5 0 0 0 1.8 1.7C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.7C22 15.3 22 12 22 12ZM10 15V9l5.2 3L10 15Z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#/products" data-link>uPVC pipe</a></li>
+          <li><a href="#/products" data-link>uPVC fittings</a></li>
+          <li><a href="#/products" data-link>PPR pipe</a></li>
+          <li><a href="#/products" data-link>HDPE pipe</a></li>
+          <li><a href="#/products" data-link>Electrical conduit</a></li>
+          <li><a href="#/products" data-link>Trunking &amp; accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#/about" data-link>About us</a></li>
+          <li><a href="#/about" data-link>ISO 9001:2015</a></li>
+          <li><a href="#/events" data-link>Events</a></li>
+          <li><a href="#/careers" data-link>Careers</a></li>
+          <li><a href="#/contact" data-link>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+85523939399">+855 (0)23 939 399</a></li>
+          <li><a href="mailto:sales@upgpipe.com">sales@upgpipe.com</a></li>
+          <li style="margin-top:16px;line-height:1.6">Head office: Building #6, St. 289,<br>Sangkat Boeung Kak 2, Khan Toul Kork,<br>Phnom Penh, Cambodia</li>
+          <li style="line-height:1.6">Factory: Phoum Por Mongkoul,<br>Sangkat Prek Phnov, Phnom Penh</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© <span id="year"></span> UPG PIPE CO., LTD — All rights reserved.</span>
+      <span>EAGLE · LION HEAD · SMART — PRODUCT OF CAMBODIA</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     AI CHATBOT
+     ============================================================ -->
+<button class="chat-fab" id="chatFab" aria-label="Open the UPG assistant">
+  <span class="dot"></span> Ask UPG Assistant
+</button>
+
+<div class="chat" id="chat" role="dialog" aria-label="UPG Assistant" aria-modal="false">
+  <div class="chat-head">
+    <div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+    <div><b>UPG Assistant</b><span><i></i> Sizes, specs and stock questions</span></div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="quick" id="quick"></div>
+  <form class="chat-form" id="chatForm">
+    <input id="chatInput" placeholder="Ask about pipe sizes, PN class, delivery…" autocomplete="off" aria-label="Message">
+    <button type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg></button>
+  </form>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   1. DATA — taken from the 2026 UPG product catalogue
+   ============================================================ */
+const PRODUCTS = [
+  {
+    id:'upvc', name:'uPVC pressure pipe', brands:['Eagle','Lion Head','Smart'],
+    color:'var(--c-upvc)', meta:'Class 13.5 & 8.5 · 1/2"–12" · 4 m lengths',
+    legend:'EAGLE uPVC PIPE ISO 9001:2015 · PRODUCT OF CAMBODIA',
+    blurb:'The backbone of the range. Unplasticised PVC for cold water supply, drainage and irrigation — light to handle, solvent-cement jointed, and completely non-toxic so it is safe on potable water. Corrosion cannot touch it and scale does not build up inside the bore, so flow stays where the designer put it.',
+    tags:['Cold water supply','Drainage','Irrigation','Fire sprinkler','Chemical transfer'],
+    specTitle:'uPVC pipe dimensions — socket end',
+    caption:'Market size / UPG size / outside diameter D / socket bore Dr / socket depth L. Tolerances as published in the 2026 catalogue.',
+    cols:['Market size (mm)','UPG (mm)','Inch','D (mm)','Dr (mm)','Socket L min–max (mm)'],
+    rows:[
+      ['21','22','1/2"','22.4 ± 0.2','21.4 ± 0.3','30 – 35'],
+      ['27','26','3/4"','26.4 ± 0.2','25.3 ± 0.3','35 – 40'],
+      ['34','34','1"','34.6 ± 0.2','33.3 ± 0.3','41 – 46'],
+      ['42','42','1 1/4"','42.6 ± 0.2','41.2 ± 0.3','46 – 51'],
+      ['49','48','1 1/2"','48.7 ± 0.3','47.2 ± 0.4','55 – 60'],
+      ['60','60','2"','60.8 ± 0.3','59.0 ± 0.4','63 – 68'],
+      ['75','76','2 1/2"','76.6 ± 0.3','75.2 ± 0.4','63 – 68'],
+      ['90','89','3"','89.6 ± 0.3','88.2 ± 0.4','64 – 69'],
+      ['100','114','4"','114.7 ± 0.4','113.2 ± 0.4','84 – 103'],
+      ['125','140','5"','140.8 ± 0.4','139.0 ± 0.4','104 – 109'],
+      ['165','165','6"','166.0 ± 0.4','163.9 ± 0.4','132 – 137'],
+      ['200','216','8"','217.9 ± 0.8','213.8 ± 0.9','200 – 210'],
+      ['250','267','10"','269.3 ± 0.9','264.2 ± 1.0','250 – 260'],
+      ['300','318','12"','320.7 ± 1.0','314.6 ± 1.1','300 – 310']
+    ]
+  },
+  {
+    id:'ppr', name:'PPR pipe — hot & cold', brands:['Eagle'],
+    color:'var(--c-ppr)', meta:'Polypropylene random copolymer · 20–110 mm',
+    legend:'EAGLE PPR PIPE ISO 9001:2015 · PRODUCT OF CAMBODIA',
+    blurb:'Green PPR for hot and cold water inside buildings. Heat-fusion welded, so the joint becomes part of the pipe instead of a weak point — no threads, no solvent, nothing to leak at the fitting. Non-toxic, low thermal conductivity and quiet under flow, which is why it goes into hotels, hospitals and apartments.',
+    tags:['Hot water','Cold water','Heat fusion','Potable','Low noise'],
+    specTitle:'PPR pipe series',
+    caption:'S3.2 for hot water systems, S5 for cold water. Nominal sizes shared across both series.',
+    cols:['Series','Working pressure','Nominal sizes (mm)','Typical use'],
+    rows:[
+      ['S3.2','2.0 MPa','20 · 25 · 32 · 40 · 50 · 63 · 75 · 90 · 110','Hot water supply system'],
+      ['S5','1.25 MPa','20 · 25 · 32 · 40 · 50 · 63 · 75 · 90 · 110','Cold water supply system']
+    ]
+  },
+  {
+    id:'hdpe', name:'HDPE pipe', brands:['Eagle','Smart'],
+    color:'var(--c-hdpe)', stripe:'#FFD100',
+    meta:'PE100 raw material · OD 20–400 mm · PN6–PN20',
+    legend:'EAGLE HDPE PIPE ISO 9001:2015 · PRODUCT OF CAMBODIA',
+    blurb:'Coiled black polyethylene for municipal water supply and drainage, and for telecommunication, electricity and gas conduit. Butt-fusion and electrofusion joints are stronger than the pipe itself, so a buried line has no leak path — and the material is tough enough to take ground movement and traffic loading without cracking.',
+    tags:['Water mains','Telecom duct','Electrical duct','Gas conduit','Butt fusion'],
+    specTitle:'HDPE outside diameters & pressure classes',
+    caption:'Wall thickness follows the SDR series for the selected PN. Ask sales for the full wall-thickness table for your size and class.',
+    cols:['Outside diameter (mm)','Pressure classes','Material'],
+    rows:[
+      ['20 · 25 · 32 · 40 · 50 · 63','PN6 – PN20','PE100'],
+      ['75 · 90 · 110 · 125 · 140 · 160','PN6 – PN20','PE100'],
+      ['180 · 200 · 225 · 250 · 280','PN6 – PN20','PE100'],
+      ['315 · 355 · 400','PN6 – PN20','PE100']
+    ]
+  },
+  {
+    id:'conduit', name:'uPVC electrical conduit', brands:['Eagle'],
+    color:'var(--c-conduit)', light:true,
+    meta:'3/8"–1" · rigid cable conduit',
+    legend:'EAGLE ELECTRICAL CONDUIT ISO 9001:2015 · PRODUCT OF CAMBODIA',
+    blurb:'Rigid conduit that protects cable from impact, damp and rodents while insulating rather than conducting. It is self-extinguishing, does not corrode in a wall chase, and pulls easily because the bore is smooth — an electrician can rewire the same run years later without opening the plaster.',
+    tags:['Concealed wiring','Surface mount','Self-extinguishing','Corrosion free'],
+    specTitle:'Eagle cable conduit dimensions',
+    caption:'Rigid conduit outside diameter by market size.',
+    cols:['Market size (mm)','Inch','Outside diameter (mm)'],
+    rows:[
+      ['16','3/8"','15.80'],
+      ['20','1/2"','19.95'],
+      ['25','3/4"','24.95'],
+      ['32','1"','31.78']
+    ]
+  },
+  {
+    id:'corrugated', name:'Corrugated flexible conduit', brands:['Eagle'],
+    color:'#E9EEF4', light:true,
+    meta:'Flexible · 16–32 mm · voids & slabs',
+    legend:'EAGLE CORRUGATED CONDUIT ISO 9001:2015',
+    blurb:'Flexible corrugated conduit for hidden, re-pullable wiring inside slabs, ceilings and wall voids. It bends around structure without fittings, takes temperatures from -5 °C to 60 °C, and lets you change a circuit later without breaking concrete.',
+    tags:['Slab & ceiling voids','Re-pullable','-5 °C to 60 °C','Impact resistant'],
+    specTitle:'Flexible conduit dimensions',
+    caption:'Corrugated conduit outside diameter by market size.',
+    cols:['Market size (mm)','Outside diameter (mm)'],
+    rows:[['16','18'],['20','22'],['25','26'],['32','33']]
+  },
+  {
+    id:'trunking', name:'uPVC trunking', brands:['Eagle'],
+    color:'#F3F6FA', light:true,
+    meta:'Surface cable management with snap-on lid',
+    legend:'EAGLE uPVC TRUNKING · PRODUCT OF CAMBODIA',
+    blurb:'Surface trunking for offices, shops and renovations where chasing the wall is not an option. The snap-on lid keeps cable tidy and accessible, the body insulates, and the uPVC resists flame propagation and UV — so it stays white instead of yellowing along a sunlit wall.',
+    tags:['Surface mount','Snap-on lid','Flame retardant','UV stable'],
+    specTitle:'Trunking',
+    caption:'Multiple widths and heights are produced, including 40 mm × 20 mm. Ask sales for the current size list and lid accessories.',
+    cols:['Product','Sizes','Finish'],
+    rows:[['uPVC trunking with lid','Several widths incl. 40 mm × 20 mm','White']]
+  },
+  {
+    id:'fittings', name:'uPVC pipe fittings', brands:['Eagle','Lion Head','Smart'],
+    color:'var(--c-upvc)',
+    meta:'Class 13.5 (21–165 mm) & class 8.5 (60–165 mm)',
+    legend:'EAGLE uPVC FITTINGS ISO 9001:2015 · PRODUCT OF CAMBODIA',
+    blurb:'Injection-moulded fittings dimensioned to the same tables as the pipe, so socket depth and taper actually match what you are gluing them to. Tees, elbows, couplings, reducers, plugs, caps and clamps across both wall classes.',
+    tags:['Tees','Elbows 90° & 45°','Couplings','Reducers','Plugs & caps','Clamps'],
+    specTitle:'Fitting classes',
+    caption:'Full dimension drawings for every fitting are in the printed catalogue.',
+    cols:['Class','Size range','Includes'],
+    rows:[
+      ['13.5','21 – 165 mm (1/2" – 6")','Tees, 90°/45° elbows, female & male elbows, couplings, reducers, male plugs, end caps, clamps'],
+      ['8.5','60 – 165 mm (2" – 6")','Drainage tees, swept tees, 45° elbows, reducing bushes, waste traps']
+    ]
+  },
+  {
+    id:'condfit', name:'Conduit fittings & boxes', brands:['Eagle'],
+    color:'#EDF1F6', light:true,
+    meta:'16–32 mm accessories for the conduit range',
+    legend:'EAGLE CONDUIT FITTINGS ISO 9001:2015',
+    blurb:'The accessories that finish a conduit run: 90° elbows, one-way to four-way junction boxes, cover boxes, connectors and U-clips — all sized to the same 16, 20, 25 and 32 mm conduit so nothing needs shimming on site.',
+    tags:['90° elbows','Junction boxes','Cover boxes','Connectors','U-clips'],
+    specTitle:'Conduit accessory sizes',
+    caption:'Junction box outside diameter D and height H2 by conduit size.',
+    cols:['Conduit size (mm)','Inch','Box D (mm)','Box H2 (mm)'],
+    rows:[
+      ['16','3/8"','19','50.0'],
+      ['20','1/2"','23','51.5'],
+      ['25','3/4"','28','54.5'],
+      ['32','1"','36','66.5']
+    ]
+  }
+];
+
+const FITTINGS = [
+  {n:'Equal tee',s:'21–165 mm',p:'M4 6h16M12 6v12'},
+  {n:'Reducing tee',s:'27×21 – 165×125',p:'M4 6h16M12 6v12'},
+  {n:'90° elbow',s:'21–165 mm',p:'M6 4v9a5 5 0 0 0 5 5h7'},
+  {n:'45° elbow',s:'21–165 mm',p:'M5 5v6l9 9h5'},
+  {n:'Female elbow',s:'21–165 mm',p:'M6 4v9a5 5 0 0 0 5 5h7'},
+  {n:'Male elbow',s:'21–165 mm',p:'M6 4v9a5 5 0 0 0 5 5h7'},
+  {n:'Coupling',s:'21–100 mm',p:'M3 12h18M8 8v8M16 8v8'},
+  {n:'Reducing socket',s:'27×21 – 165×140',p:'M3 12h18M9 8v8M15 10v4'},
+  {n:'Male plug',s:'21–100 mm',p:'M4 12h10M14 8v8'},
+  {n:'End cap',s:'21–100 mm',p:'M4 12h12M16 7v10'},
+  {n:'Pipe clamp',s:'21 · 27 · 60 mm',p:'M6 12a6 6 0 1 1 12 0M4 18h16'},
+  {n:'Junction box',s:'16–32 mm',p:'M5 5h14v14H5zM12 5v14M5 12h14'}
+];
+
+const EVENTS = [
+  {y:'2026',m:'JUN',kind:'Quality',c:'var(--blue)',t:'ISO 9001:2015 surveillance audit passed',d:'Auditors walked the extrusion and injection lines, sampled batch records and closed the visit with no major findings. Certificate remains valid to March 2027.'},
+  {y:'2026',m:'MAY',kind:'Customers',c:'var(--c-ppr)',t:'Consultant group tours the Prek Phnov plant',d:'A group of MEP consultants ran their own wall-thickness checks on the bench and watched a hydrostatic pressure test from start to finish.'},
+  {y:'2026',m:'APR',kind:'Supply chain',c:'var(--ink-2)',t:'Mould supplier visit, Guangdong',d:'Our technical team reviewed new fitting mould tooling and injection cycles ahead of expanding the class 8.5 fitting range.'},
+  {y:'2026',m:'MAR',kind:'Customers',c:'var(--c-upvc)',t:'HDPE supplied to a Phnom Penh mains upgrade',d:'PE100 pipe delivered in coil and straight length for a district water supply upgrade, with butt-fusion guidance for the contractor on site.'},
+  {y:'2026',m:'FEB',kind:'Community',c:'var(--yellow-deep)',t:'Technical training for plumbing students',d:'A half-day session on PPR heat fusion and solvent cement jointing for vocational trainees, run at the factory training bay.'},
+  {y:'2025',m:'DEC',kind:'Quality',c:'var(--red)',t:'New pressure test bath commissioned',d:'Additional capacity in the lab means longer-duration hydrostatic testing can run in parallel with daily production QC.'},
+  {y:'2025',m:'NOV',kind:'Customers',c:'var(--blue)',t:'Distributor day, provincial partners',d:'Provincial distributors met the sales and technical team to review the 2026 range, brand marks and stock planning.'},
+  {y:'2025',m:'SEP',kind:'Supply chain',c:'var(--ink-2)',t:'Raw material partner audit',d:'Resin supplier audit completed to keep incoming material within the specification our own formulations depend on.'}
+];
+
+const JOBS = [
+  {t:'Sales Executive — Construction Projects',dept:'Sales & Marketing',loc:'Head Office',
+   r:['Build relationships with contractors, developers and hardware distributors in Phnom Penh and the provinces','Prepare quotations from bills of quantity and follow orders through to delivery','Report pipeline and market feedback weekly'],
+   q:['2+ years selling construction materials, or a strong technical sales background','Khmer fluent, functional English','Own transport and a valid licence']},
+  {t:'Production Supervisor — Extrusion',dept:'Production',loc:'Prek Phnov Factory',
+   r:['Run the extrusion shift: output targets, line changeovers and machine settings','Keep dimensional checks on schedule and log the results','Coach operators on safety and quality procedures'],
+   q:['Experience supervising plastic extrusion or a similar continuous process','Comfortable reading dimension tables and using gauges','Able to work rotating shifts']},
+  {t:'QA / QC Technician',dept:'Quality',loc:'Prek Phnov Factory',
+   r:['Run tensile, impact, hydrostatic pressure and reversion tests to the published methods','Record results and raise non-conformance reports','Support internal and external ISO 9001:2015 audits'],
+   q:['Diploma or degree in engineering, chemistry or a related field','Careful with measurement and documentation','Fresh graduates with strong lab discipline will be considered']},
+  {t:'Warehouse & Logistics Coordinator',dept:'Operations',loc:'Prek Phnov Factory',
+   r:['Plan loading and delivery routes to sites across Phnom Penh and the provinces','Keep stock records accurate between the system and the racks','Coordinate with sales on urgent site deliveries'],
+   q:['Warehouse or logistics experience in building materials','Confident with spreadsheets and stock systems','Organised under pressure']},
+  {t:'Marketing Officer — Digital',dept:'Sales & Marketing',loc:'Head Office',
+   r:['Run the Facebook, TikTok and Telegram channels and the product content on them','Shoot and edit short product and factory video','Support exhibitions, distributor days and print material'],
+   q:['1+ years in digital marketing, ideally B2B or construction','Can shoot and cut video on a phone to a good standard','Khmer copywriting, working English']}
+];
+
+const CLIENTS = [
+  ['ORKIDE Development',0],['Borey Kheang Heng',0],['TV Star Villa House',0],['Borey New Hope',0],
+  ['Long Ny',0],['Borey LV',0],['The Blue Sky Tower',0],['ACLEDA',0],['B&BM Development',0],
+  ['Kang Hwa E&C',0],['Mekong Royal',0],['Lionhart',0],['Pisnoka',0],['Pitta Engineering',0],
+  ['KOFI',0],['TEAMS',0],['Senserey Construction',0],['Borey Grand Park',0],['Pimoup Rasmey',0],
+  ['Galaxy Residence',0],
+  ['AEON MALL Phnom Penh',1],['Booyoung Town',1],['Jebsen & Jessen',1],['Sumitomo Mitsui Construction',1],['Diamond One',1]
+];
+
+/* ============================================================
+   2. RENDER
+   ============================================================ */
+const $ = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* size rail */
+(function rail(){
+  const sizes=['21 mm · 1/2"','27 mm · 3/4"','34 mm · 1"','42 mm · 1 1/4"','49 mm · 1 1/2"','60 mm · 2"','75 mm · 2 1/2"','90 mm · 3"','100 mm · 4"','125 mm · 5"','165 mm · 6"','200 mm · 8"','250 mm · 10"','300 mm · 12"'];
+  const one = sizes.map(s=>`<div class="rail-item"><span class="dot"></span>uPVC <b>${s}</b></div>`).join('');
+  $('#railTrack').innerHTML = one + one;
+})();
+
+/* family cards on home */
+$('#familyGrid').innerHTML = PRODUCTS.slice(0,6).map((p,i)=>`
+  <button class="family" data-goto="${p.id}" style="--c:${p.color}">
+    <span class="bar"></span>
+    <span class="idx">${String(i+1).padStart(2,'0')} / ${p.brands.join(' · ')}</span>
+    <h3>${esc(p.name)}</h3>
+    <p>${esc(p.meta)}</p>
+    <span class="tags">${p.tags.slice(0,3).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</span>
+    <span class="go">Specifications →</span>
+  </button>`).join('');
+
+/* clients */
+$('#clientGrid').innerHTML = CLIENTS.map(([n,intl])=>`<div class="client${intl?' intl':''}">${esc(n)}</div>`).join('');
+
+/* products page */
+function pipeEl(p){
+  return `<div class="pipe${p.light?' on-light':''}" style="--c:${p.color}">
+    ${p.stripe?`<span class="stripe" style="--s:${p.stripe}"></span>`:''}
+    <span class="legend"${p.light?' style="color:rgba(7,33,63,.6)"':''}>${esc(p.legend)}</span>
+  </div>`;
+}
+function renderProducts(brand){
+  const list = PRODUCTS.filter(p=> brand==='all' || p.brands.includes(brand));
+  $('#prodEmpty').style.display = list.length? 'none':'block';
+  $('#prodList').innerHTML = list.map(p=>`
+    <article class="prod" id="p-${p.id}">
+      <div class="prod-visual">${pipeEl(p)}</div>
+      <div class="prod-body">
+        <div class="prod-meta">${p.brands.join(' · ')}</div>
+        <h3>${esc(p.name)}</h3>
+        <p>${esc(p.blurb)}</p>
+        <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+        <button class="spec-toggle" aria-expanded="false" aria-controls="s-${p.id}"><span class="pm">+</span> ${esc(p.specTitle)}</button>
+        <div class="spec-panel" id="s-${p.id}">
+          <div class="tablewrap">
+            <table>
+              <caption>${esc(p.caption)}</caption>
+              <thead><tr>${p.cols.map(c=>`<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+              <tbody>${p.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </article>`).join('');
+}
+renderProducts('all');
+
+$('#fitGrid').innerHTML = FITTINGS.map(f=>`
+  <div class="fit">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="${f.p}"/></svg>
+    <b>${esc(f.n)}</b><span>${esc(f.s)}</span>
+  </div>`).join('');
+
+/* events */
+function renderEvents(kind){
+  const list = EVENTS.filter(e=> kind==='all' || e.kind===kind);
+  $('#eventGrid').innerHTML = list.map(e=>`
+    <article class="event">
+      <div class="top" style="--c:${e.c}"><b>${e.m}</b></div>
+      <div class="body">
+        <div class="date">${e.m} ${e.y} <span class="kind">· ${esc(e.kind)}</span></div>
+        <h3>${esc(e.t)}</h3>
+        <p>${esc(e.d)}</p>
+      </div>
+    </article>`).join('');
+}
+renderEvents('all');
+
+/* jobs */
+$('#jobList').innerHTML = JOBS.map((j,i)=>`
+  <div class="job">
+    <button class="job-head" aria-expanded="false" aria-controls="j-${i}">
+      <span class="no">${String(i+1).padStart(2,'0')}</span>
+      <span class="t"><b>${esc(j.t)}</b><span>${esc(j.dept)}</span></span>
+      <span class="loc">${esc(j.loc)}</span>
+      <span class="pm">+</span>
+    </button>
+    <div class="job-panel" id="j-${i}">
+      <h4>What you'll do</h4><ul>${j.r.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <h4>What we're looking for</h4><ul>${j.q.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <a class="btn solid" href="mailto:hr@upgpipe.com?subject=${encodeURIComponent('Application — '+j.t)}">Apply by email <span class="ar">→</span></a>
+    </div>
+  </div>`).join('');
+
+$('#year').textContent = new Date().getFullYear();
+
+/* ============================================================
+   3. ROUTER + INTERACTIONS
+   ============================================================ */
+const PAGES = ['home','about','products','events','careers','contact'];
+function route(){
+  let id = (location.hash.replace('#/','') || 'home').split('?')[0];
+  if(!PAGES.includes(id)) id='home';
+  PAGES.forEach(p=>{
+    const el = document.getElementById('page-'+p);
+    if(el) el.classList.toggle('active', p===id);
+  });
+  $$('[data-link]').forEach(a=>{
+    const t = a.getAttribute('href').replace('#/','');
+    if(t===id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+  });
+  document.title = (id==='home'?'UPG PIPE CO., LTD — uPVC, HDPE, PPR pipes & electrical conduit made in Cambodia'
+    : id.charAt(0).toUpperCase()+id.slice(1)+' — UPG PIPE CO., LTD');
+  $('#drawer').classList.remove('open');
+  $('#burger').setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+  observe();
+}
+window.addEventListener('hashchange',route);
+
+/* home family card -> products page, open that spec */
+document.addEventListener('click',e=>{
+  const card = e.target.closest('[data-goto]');
+  if(card){
+    const id = card.dataset.goto;
+    location.hash = '#/products';
+    setTimeout(()=>{
+      const t = $(`#p-${id} .spec-toggle`);
+      if(t){ if(t.getAttribute('aria-expanded')!=='true') t.click();
+        $('#p-'+id).scrollIntoView({behavior:'smooth',block:'center'}); }
+    },120);
+    return;
+  }
+  const st = e.target.closest('.spec-toggle');
+  if(st){
+    const open = st.getAttribute('aria-expanded')==='true';
+    st.setAttribute('aria-expanded', String(!open));
+    document.getElementById(st.getAttribute('aria-controls')).classList.toggle('open',!open);
+  }
+  const jh = e.target.closest('.job-head');
+  if(jh){
+    const open = jh.getAttribute('aria-expanded')==='true';
+    jh.setAttribute('aria-expanded', String(!open));
+    document.getElementById(jh.getAttribute('aria-controls')).classList.toggle('open',!open);
+  }
+});
+
+/* filters */
+$('#brandFilters').addEventListener('click',e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  $$('#brandFilters .chip').forEach(c=>c.setAttribute('aria-pressed', String(c===b)));
+  renderProducts(b.dataset.brand);
+});
+$('#eventFilters').addEventListener('click',e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  $$('#eventFilters .chip').forEach(c=>c.setAttribute('aria-pressed', String(c===b)));
+  renderEvents(b.dataset.kind);
+});
+
+/* menu + sticky header */
+$('#burger').addEventListener('click',function(){
+  const open = this.getAttribute('aria-expanded')==='true';
+  this.setAttribute('aria-expanded',String(!open));
+  $('#drawer').classList.toggle('open',!open);
+});
+window.addEventListener('scroll',()=>{
+  $('#masthead').classList.toggle('stuck', window.scrollY>8);
+},{passive:true});
+
+/* scroll reveal */
+let io;
+function observe(){
+  if(!('IntersectionObserver' in window)){ $$('.reveal').forEach(e=>e.classList.add('in')); return; }
+  if(!io) io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{rootMargin:'0px 0px -60px 0px'});
+  $$('.reveal:not(.in)').forEach(el=>io.observe(el));
+}
+
+/* quote form */
+$('#quoteForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const f = new FormData(this);
+  const name=(f.get('name')||'').trim(), phone=(f.get('phone')||'').trim();
+  const box = $('#formSent');
+  if(!name || !phone){
+    box.className='sent show';
+    box.style.background='#FDECEC'; box.style.borderColor='#F3B6B6';
+    box.textContent='Add your name and a phone number so we can reply.';
+    return;
+  }
+  const body = `Name: ${name}\nCompany: ${f.get('company')||'-'}\nPhone: ${phone}\nEmail: ${f.get('email')||'-'}\nProduct: ${f.get('product')}\nRequest: ${f.get('topic')}\n\n${f.get('message')||''}`;
+  box.className='sent show'; box.style.background='#E9F7EF'; box.style.borderColor='#A8DEC0';
+  box.innerHTML = `Thanks, ${esc(name)} — your request is ready to send. <a href="mailto:sales@upgpipe.com?subject=${encodeURIComponent('Quote request — '+(f.get('product')||''))}&body=${encodeURIComponent(body)}" style="font-weight:600;color:#0B57A4">Open it in your email app</a>, or call +855 (0)23 939 399 to speak to sales now.`;
+});
+
+route();
+
+/* ============================================================
+   4. UPG ASSISTANT — AI chat with an offline fallback
+   ============================================================ */
+const KNOWLEDGE = `
+UPG PIPE CO., LTD — company facts:
+- Cambodian manufacturer established June 2016. Head office: Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh. Factory: Phoum Por Mongkoul, Sangkat Prek Phnov, Khan Prek Phnov, Phnom Penh.
+- Phone +855 (0)23 939 399. Email sales@upgpipe.com. HR: hr@upgpipe.com. Office hours Mon-Sat 07:30-17:00.
+- 177 staff: 30 head office, 147 factory.
+- First ISO 9001:2015 certified factory of its kind in Cambodia. Certificate 745371, Guardian Independent Certification Ltd, issued 22 March 2024, expires 21 March 2027, first certified 2017. Scope: manufacturing of uPVC, HDPE, LDPE, PPR pipes and electrical cable conduits and fitting products.
+- Three brands, all ISO 9001:2015: EAGLE (flagship, full range), LION HEAD (uPVC value line), SMART (uPVC and HDPE engineering line).
+- Vision: leading innovative and specialised manufacturer and supplier of high-quality polymer products in Cambodia and international markets.
+
+Products:
+1. uPVC pressure pipe, class 13.5 and 8.5, market sizes 21, 27, 34, 42, 49, 60, 75, 90, 100, 125, 165, 200, 250, 300 mm = 1/2" to 12". UPG sizes 22, 26, 34, 42, 48, 60, 76, 89, 114, 140, 165, 216, 267, 318 mm. Outside diameters 22.4 mm (1/2") up to 320.7 mm (12"). Socket end. For cold water supply, drainage, irrigation, fire sprinkler systems, chemical transfer and as electrical conduit.
+2. PPR pipe (polypropylene random copolymer) for hot and cold water: series S3.2 at 2.0 MPa for hot water, series S5 at 1.25 MPa for cold water. Nominal sizes 20, 25, 32, 40, 50, 63, 75, 90, 110 mm. Joined by heat fusion.
+3. HDPE pipe, PE100 raw material, outside diameters 20 to 400 mm, pressure classes PN6 to PN20 following the SDR series. For municipal water supply and drainage, telecom conduit, electricity conduit and gas conduit. Joined by butt fusion or electrofusion.
+4. uPVC electrical conduit: sizes 16, 20, 25, 32 mm = 3/8", 1/2", 3/4", 1". Outside diameters 15.80, 19.95, 24.95, 31.78 mm.
+5. Corrugated flexible conduit: sizes 16, 20, 25, 32 mm with outside diameters 18, 22, 26, 33 mm. Rated -5 C to 60 C.
+6. uPVC trunking with snap-on lid, several sizes including 40 mm x 20 mm.
+7. uPVC fittings: class 13.5 in 21-165 mm and class 8.5 in 60-165 mm. Tees, reducing tees, 90 and 45 degree elbows, female and male elbows, couplings, reducing sockets, male plugs, end caps, clamps.
+8. Conduit fittings: 90 degree elbows, 1-4 way junction boxes, cover boxes, connectors, U-clips for 16-32 mm conduit.
+
+Quality: in-house R&D lab and own compound formulations. Tests include visual inspection, non-transparency, vertical reversion rate, impact, tensile and hydrostatic pressure testing. Products are non-toxic and safe for potable water, resistant to corrosion, heat and UV, and self-extinguishing in the conduit range.
+
+Projects supplied: AEON Mall Phnom Penh, Booyoung Town, Jebsen & Jessen, Sumitomo Mitsui Construction, Diamond One, ORKIDE Development, Borey Kheang Heng, Borey New Hope, The Blue Sky Tower, ACLEDA, Kang Hwa E&C, Galaxy Residence and many other local developers and contractors.
+
+Pricing: UPG does not publish prices on the website. Quotes are given by the sales team based on sizes, class and quantity.
+`;
+
+const SYSTEM = `You are the UPG Assistant on the website of UPG PIPE CO., LTD, a pipe manufacturer in Phnom Penh, Cambodia.
+
+Answer only from the company information below. If something is not covered — pricing, current stock, lead times, project-specific engineering advice — say so plainly and point the person to sales on +855 (0)23 939 399 or sales@upgpipe.com. Never invent a specification, a price or a certificate detail.
+
+Be brief: two to four sentences, or a short list when giving sizes. Sound like a knowledgeable person at the counter, not a brochure. Reply in the language the visitor writes in — Khmer if they write Khmer, English if they write English.
+
+${KNOWLEDGE}`;
+
+const FALLBACK = [
+  {k:['price','cost','how much','quote','តម្លៃ'],a:"We don't publish prices — they depend on size, class and quantity. Send your sizes and quantities through the quote form on the Contact page, or call sales on +855 (0)23 939 399 and they'll price it the same day."},
+  {k:['upvc','pvc','pressure pipe'],a:"Our uPVC pressure pipe comes in class 13.5 and class 8.5, market sizes 21 mm to 300 mm (1/2\" to 12\"), under the Eagle, Lion Head and Smart brands. Outside diameters run from 22.4 mm up to 320.7 mm. Open the uPVC card on the Products page for the full dimension table."},
+  {k:['ppr','hot water'],a:"Eagle PPR is made for hot and cold water: series S3.2 at 2.0 MPa for hot, series S5 at 1.25 MPa for cold, in 20, 25, 32, 40, 50, 63, 75, 90 and 110 mm. It is heat-fusion welded, so the joint is as strong as the pipe."},
+  {k:['hdpe','pe100','butt fusion','mains'],a:"Eagle and Smart HDPE is made from PE100 in outside diameters from 20 mm to 400 mm, pressure classes PN6 to PN20. It's used for water mains, drainage, and telecom, electricity and gas conduit, joined by butt fusion or electrofusion."},
+  {k:['conduit','electrical','wiring','corrugated','trunking'],a:"We make rigid electrical conduit in 16, 20, 25 and 32 mm (3/8\"–1\"), flexible corrugated conduit in the same sizes, uPVC trunking with a snap-on lid, plus junction boxes, elbows, connectors and U-clips."},
+  {k:['fitting','elbow','tee','coupling','socket'],a:"uPVC fittings are moulded in class 13.5 (21–165 mm) and class 8.5 (60–165 mm): tees, reducing tees, 90° and 45° elbows, female and male elbows, couplings, reducing sockets, plugs, end caps and clamps. They're dimensioned to the same tables as our pipe."},
+  {k:['iso','certif','quality','test','standard'],a:"UPG is the first factory of its kind in Cambodia certified to ISO 9001:2015 — certificate 745371 through Guardian Independent Certification Ltd, valid to March 2027, first certified in 2017. We run our own lab: hydrostatic pressure, impact, tensile, reversion and dimensional checks."},
+  {k:['size','diameter','dimension','mm','inch'],a:"uPVC runs 21–300 mm (1/2\"–12\"), PPR 20–110 mm, HDPE 20–400 mm, and conduit 16–32 mm. Every dimension table is on the Products page — open the card for the product you need."},
+  {k:['where','address','location','factory','office','map','visit'],a:"Head office: Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh. Factory: Phoum Por Mongkoul, Sangkat Prek Phnov. We host customer factory visits — ask sales to arrange one."},
+  {k:['contact','call','phone','email','telegram'],a:"Call +855 (0)23 939 399 or email sales@upgpipe.com, Monday to Saturday 7:30–17:00. For jobs, write to hr@upgpipe.com."},
+  {k:['job','career','hiring','apply','cv','recruit'],a:"We're hiring in sales, production, quality, warehouse and marketing — the open roles are listed on the Careers page. Send your CV to hr@upgpipe.com with the role in the subject line."},
+  {k:['deliver','lead time','stock','ship','transport'],a:"Delivery and stock depend on the size and quantity, so sales will confirm both when they quote. Call +855 (0)23 939 399 with your list and they'll check availability."},
+  {k:['brand','eagle','lion','smart'],a:"Three brands, one factory and one quality system: EAGLE is the flagship covering the full range, LION HEAD is the uPVC value line for housing work, and SMART is the uPVC and HDPE engineering line. All three are ISO 9001:2015."},
+  {k:['drink','potable','safe','toxic','health'],a:"Our compounds are non-toxic and suitable for potable water — no bad odour or taste carried into the supply, and no chemicals leaching from the pipe wall."},
+  {k:['distributor','dealer','wholesale','partner'],a:"We work with distributors across Cambodia. Tell us your province and the range you'd stock through the Contact page, and the sales team will follow up."},
+  {k:['who','about','company','history'],a:"UPG PIPE CO., LTD is a Cambodian manufacturer established in June 2016, with 177 staff between the Toul Kork head office and the Prek Phnov factory. We produce uPVC, HDPE and PPR pipe, fittings, electrical conduit and trunking."}
+];
+
+const chat=$('#chat'), fab=$('#chatFab'), log=$('#chatLog'), input=$('#chatInput');
+const QUICKS=['What uPVC sizes do you make?','PPR for hot water?','Where is the factory?','How do I get a quote?'];
+let history=[], greeted=false, busy=false;
+
+function bubble(text,who){
+  const d=document.createElement('div');
+  d.className='msg '+who;
+  d.textContent=text;
+  log.appendChild(d); log.scrollTop=log.scrollHeight;
+  return d;
+}
+function typing(on){
+  let t=$('#typing');
+  if(on && !t){
+    t=document.createElement('div'); t.id='typing'; t.className='typing';
+    t.innerHTML='<i></i><i></i><i></i>';
+    log.appendChild(t); log.scrollTop=log.scrollHeight;
+  } else if(!on && t) t.remove();
+}
+function localAnswer(q){
+  const s=q.toLowerCase();
+  let best=null, score=0;
+  FALLBACK.forEach(f=>{
+    const hits=f.k.filter(k=>s.includes(k)).length;
+    if(hits>score){score=hits;best=f;}
+  });
+  if(best) return best.a;
+  return "I can help with pipe sizes, pressure classes, our brands, certification, careers and how to reach us. For pricing, stock or anything project-specific, call sales on +855 (0)23 939 399 or email sales@upgpipe.com.";
+}
+async function ask(q){
+  history.push({role:'user',content:q});
+  typing(true); busy=true;
+  let answer=null;
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:1000,
+        system:SYSTEM,
+        messages:history.slice(-10)
+      })
+    });
+    if(res.ok){
+      const data = await res.json();
+      const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+      if(text) answer=text;
+    }
+  }catch(err){ /* offline or no API access — fall back below */ }
+  if(!answer) answer = localAnswer(q);
+  typing(false); busy=false;
+  history.push({role:'assistant',content:answer});
+  bubble(answer,'bot');
+}
+function openChat(){
+  chat.classList.add('open'); fab.classList.add('hidden');
+  if(!greeted){
+    greeted=true;
+    bubble("Hi — I'm the UPG Assistant. Ask me about pipe sizes, pressure classes, our brands or where to find us. For prices and stock I'll point you to the sales team.",'bot');
+    $('#quick').innerHTML = QUICKS.map(q=>`<button type="button">${esc(q)}</button>`).join('');
+  }
+  setTimeout(()=>input.focus(),120);
+}
+fab.addEventListener('click',openChat);
+$('#chatClose').addEventListener('click',()=>{chat.classList.remove('open');fab.classList.remove('hidden');fab.focus();});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && chat.classList.contains('open')) $('#chatClose').click(); });
+$('#quick').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b||busy) return;
+  const q=b.textContent; bubble(q,'me'); $('#quick').innerHTML=''; ask(q);
+});
+$('#chatForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const q=input.value.trim(); if(!q||busy) return;
+  bubble(q,'me'); input.value=''; $('#quick').innerHTML=''; ask(q);
+});
+
+})();
+</script>
+</body>
+</html>

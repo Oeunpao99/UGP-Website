@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Brand tokens — consumed by the component classes below
+   ============================================================ */
+:root{
+  --ink:#07213F;--ink-2:#0C3466;--blue:#0B57A4;--blue-lite:#2BA7E0;
+  --yellow:#FFD100;--yellow-deep:#F2B705;--red:#E4002B;
+  --paper:#F2F5F9;--paper-2:#E7ECF3;--grey:#5C6F8A;--white:#fff;
+  --fg:#07213F;--card:#fff;--row-hover:#FFF8D6;
+  --ok-bg:#E9F7EF;--err-bg:#FDECEC;
+  --line:rgba(7,33,63,.13);--line-strong:rgba(7,33,63,.28);
+  --c-upvc:#2BA7E0;--c-ppr:#12A150;--c-hdpe:#15191F;--c-conduit:#FFC400;--c-corr:#EDF1F6;
+  --display:'Space Grotesk','Arial Narrow',sans-serif;
+  --body:'Space Grotesk',system-ui,sans-serif;
+  --mono:'Space Grotesk',ui-monospace,monospace;
+  --kh:'Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
+  --kh-head:'Khmer OS Moul Light','Khmer OS Moul','Moul','Kantumruy Pro','Noto Sans Khmer',serif;
+  --ease:cubic-bezier(.22,.8,.28,1);
+}
+@keyframes rise{
+  from{transform:translateY(60px) scaleY(.9);opacity:0}
+  to{transform:none;opacity:1}
+}
+
+/* ============================================================
+   Base — reset, typography, section rhythm
+   ============================================================ */
+@layer base {
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    @apply bg-paper text-fg font-body antialiased overflow-x-hidden;
+    margin:0;font-size:16.5px;line-height:1.62;
+    transition:background-color .3s var(--ease),color .3s var(--ease);
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+  ::selection{background:var(--yellow);color:var(--ink)}
+
+  h1,h2,h3,h4{
+    font-family:var(--display);margin:0;line-height:1.04;
+    font-variation-settings:'wdth' 112;letter-spacing:-.018em;
+  }
+  h1{font-weight:800;font-size:clamp(2.6rem,6.4vw,5.1rem)}
+  h2{font-weight:800;font-size:clamp(2rem,4.1vw,3.35rem)}
+  h3{font-weight:700;font-size:clamp(1.25rem,2vw,1.6rem);font-variation-settings:'wdth' 105}
+  p{margin:0 0 1.05em}
+
+  section{padding:clamp(64px,8vw,112px) 0}
+
+  table{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--mono);font-size:.79rem}
+  th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  thead th{background:var(--ink);color:#fff;font-weight:500;letter-spacing:.08em;font-size:.7rem;text-transform:uppercase;position:sticky;top:0}
+  tbody tr:nth-child(even){background:var(--paper)}
+  tbody tr:hover{background:var(--row-hover)}
+  caption{caption-side:bottom;padding:10px 2px;font-size:.75rem;color:var(--grey);text-align:left;font-family:var(--body)}
+}
+
+/* ============================================================
+   Components — only what is genuinely awkward to inline
+   ============================================================ */
+@layer components {
+  .shell{width:min(1240px,calc(100% - 44px));margin-inline:auto}
+  .tight{padding:clamp(48px,5vw,72px) 0}
+  .dark{background:var(--ink);color:#fff}
+  .dark h2,.dark h3{color:#fff}
+  .band{background:var(--card)}
+  .kh{font-family:var(--kh);font-weight:600}
+
+  .eyebrow{
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:.7rem;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--blue);
+    margin:0 0 18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:3px;background:var(--yellow);flex:none;border-radius:2px}
+  .eyebrow .kh{letter-spacing:0;font-size:.92rem;opacity:.65;text-transform:none}
+  .on-dark .eyebrow{color:var(--yellow)}
+
+  .lead{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--grey);max-width:62ch}
+  .on-dark .lead{color:rgba(255,255,255,.76)}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:100px;border:0;cursor:pointer;
+    font-family:var(--display);font-weight:700;font-size:.95rem;
+    font-variation-settings:'wdth' 105;letter-spacing:.01em;
+    background:var(--yellow);color:var(--ink);
+    transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .2s;
+    box-shadow:0 2px 0 rgba(7,33,63,.18);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(7,33,63,.5);background:#FFDC3D}
+  .btn .ar{transition:transform .25s var(--ease)}
+  .btn:hover .ar{transform:translateX(4px)}
+  .btn.ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 2px var(--line-strong)}
+  .btn.ghost:hover{background:var(--paper-2);box-shadow:inset 0 0 0 2px var(--fg)}
+  .on-dark .btn.ghost{color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.36)}
+  .on-dark .btn.ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 2px #fff}
+  .btn.solid{background:var(--blue);color:#fff;box-shadow:0 2px 0 rgba(7,33,63,.3)}
+  .btn.solid:hover{background:var(--ink-2)}
+
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+
+  /* the extruded pipe (gradients + socket lip via pseudo elements) */
+  .pipe{
+    position:relative;flex:none;width:clamp(34px,4.2vw,52px);border-radius:26px 26px 5px 5px;
+    background-color:var(--c);
+    background-image:linear-gradient(90deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.12) 12%,rgba(255,255,255,.42) 34%,rgba(255,255,255,.1) 60%,rgba(0,0,0,.3) 88%,rgba(0,0,0,.45) 100%);
+    box-shadow:0 24px 40px -22px rgba(0,0,0,.9);
+    display:flex;align-items:center;justify-content:center;
+    transform-origin:bottom center;
+    animation:rise .9s var(--ease) both;animation-delay:var(--d);
+  }
+  .pipe::before{
+    content:"";position:absolute;top:0;left:-3px;right:-3px;height:34px;border-radius:26px 26px 8px 8px;
+    background:inherit;filter:brightness(1.06);box-shadow:inset 0 -1px 0 rgba(0,0,0,.25);
+  }
+  .pipe .legend{
+    writing-mode:vertical-rl;text-orientation:mixed;
+    font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;line-height:1;
+    color:rgba(255,255,255,.9);white-space:nowrap;user-select:none;margin-top:26px;
+  }
+  .pipe.on-light .legend{color:rgba(7,33,63,.62)}
+  .pipe .stripe{position:absolute;top:34px;bottom:0;width:5px;background:var(--s);left:7px;opacity:.95}
+  .pipe .stripe.r{left:auto;right:7px}
+  .pipe.no-anim{animation:none}
+
+  .reveal{opacity:0;transform:translateY(22px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+  /* hero background art */
+  .hero{
+    position:relative;overflow:hidden;background:var(--ink);color:#fff;
+    padding:clamp(56px,7vw,96px) 0 0;
+  }
+  .hero::before{ /* concentric bore rings */
+    content:"";position:absolute;inset:-30% -10% auto auto;width:920px;height:920px;
+    background:repeating-radial-gradient(circle at center,rgba(255,255,255,.055) 0 1px,transparent 1px 17px);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero::after{ /* yellow wedge */
+    content:"";position:absolute;top:0;left:0;width:230px;height:230px;
+    background:var(--yellow);clip-path:polygon(0 0,100% 0,0 100%);opacity:.95;pointer-events:none;
+  }
+  .hero .shell{position:relative;z-index:2}
+
+  /* decorative repeating patterns */
+  .ring-circle{
+    position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;
+    background:repeating-radial-gradient(circle,currentColor 0 1px,transparent 1px 12px);opacity:.16;
+  }
+  .ring-inset{position:absolute;inset:-20%;background:repeating-radial-gradient(circle,rgba(7,33,63,.14) 0 1.5px,transparent 1.5px 18px)}
+  .diag{position:absolute;inset:-40%;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.1) 0 10px,transparent 10px 20px)}
+  .map-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:34px 34px;
+  }
+
+  /* product spec visual */
+  .prod-visual{
+    position:relative;overflow:hidden;background:var(--ink);
+    display:flex;align-items:flex-end;justify-content:center;padding:26px 0 0;min-height:230px;
+  }
+  .prod-visual .pipe{animation:none;width:62px;height:88%}
+}
+
+/* ============================================================
+   Khmer language mode — unlayered so it beats utilities
+   ============================================================ */
+body.lang-km{font-family:'Space Grotesk',var(--kh)}
+body.lang-km :is(h1,h2,h3,h4){
+  font-family:'Space Grotesk',var(--kh-head);font-weight:400;
+  font-variation-settings:normal;letter-spacing:0;line-height:1.55;
+}
+body.lang-km h1{font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 3px)}
+body.lang-km h2{font-size:calc(clamp(2rem,4.1vw,3.35rem) - 3px)}
+body.lang-km h3{font-size:calc(clamp(1.25rem,2vw,1.6rem) - 3px)}
+body.lang-km h4{font-size:calc(1em - 3px)}
+body.lang-km .hero h1{font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 14px);line-height:1.65}
+body.lang-km .font-mono,body.lang-km .font-display,body.lang-km .eyebrow,body.lang-km .btn{
+  font-family:'Space Grotesk',var(--kh)
+}
+body.lang-km header nav a{font-size:.82rem;letter-spacing:0;font-weight:500}
+body.lang-km .logo-text{font-family:var(--display)}
+
+/* ============================================================
+   Dark theme — toggled by <html class="theme-dark">
+   ============================================================ */
+html.theme-dark{
+  color-scheme:dark;
+  --ink:#050D1A;--ink-2:#0B1E3A;
+  --fg:#E7EEF7;--grey:#A8B7CC;
+  --paper:#0B1322;--paper-2:#121E33;--card:#111C2F;
+  --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.26);
+  --blue:#1A6FC4;--blue-lite:#4EAFE0;
+  --row-hover:#1B2B47;
+  --ok-bg:#0F2A1E;--err-bg:#331416;
+}
+
+/* ============================================================
+   Responsive leftovers (fine to keep small)
+   ============================================================ */
+@media (max-width:860px){
+  .hero::after{width:150px;height:150px}
+  .prod-visual{min-height:170px;padding-top:20px}
+  .prod-visual .pipe{height:150px}
+}
+@media (max-width:520px){
+  .shell{width:calc(100% - 32px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
