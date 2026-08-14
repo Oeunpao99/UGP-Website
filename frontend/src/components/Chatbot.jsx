@@ -165,35 +165,31 @@ export default function Chatbot() {
       )}
 
       <div className={`fixed right-6 bottom-6 z-[80] max-sm:right-4 max-sm:bottom-4${open ? ' hidden' : ' flex animate-fabFloat'}`}>
-        <div className="rounded-[24px] bg-gradient-to-br from-yellow via-blue-lite to-red p-[2px] shadow-[0_22px_46px_-18px_rgba(7,33,63,.8)] transition-transform duration-300 ease-brand hover:scale-[1.04]">
+        <div className="relative rounded-full bg-gradient-to-br from-yellow via-blue-lite to-red p-[3px] shadow-[0_22px_46px_-18px_rgba(7,33,63,.8)] transition-transform duration-300 ease-brand hover:scale-[1.06]">
           <button
             type="button"
             aria-label={t('chat.fab')}
             onClick={openChat}
-            className="flex cursor-pointer items-center gap-[11px] rounded-[22px] border-0 bg-ink py-[15px] pr-5 pl-[16px] font-display text-[.92rem] font-bold text-white"
+            className="grid h-[64px] w-[64px] cursor-pointer place-items-center rounded-full border-0 bg-ink text-white"
           >
-            <span className="relative grid h-8 w-8 flex-none place-items-center rounded-full bg-yellow text-ink transition-transform duration-300 ease-brand group-hover:-rotate-6">
-              <span aria-hidden="true" className="absolute inset-0 animate-pingSoft rounded-full bg-yellow" />
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="relative h-[18px] w-[18px]"
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />
-                <path d="M8 9h8M8 13h5" />
-              </svg>
-            </span>
-            {t('chat.fab')}
-            <span className="h-[9px] w-[9px] animate-dotPulse rounded-full bg-[#3BD37E]" />
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-[26px] w-[26px] text-yellow"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" />
+              <path d="M8 9h8M8 13h5" />
+            </svg>
           </button>
+          <span aria-hidden="true" className="absolute top-[2px] right-[2px] h-[15px] w-[15px] animate-dotPulse rounded-full border-2 border-ink bg-[#3BD37E]" />
         </div>
       </div>
 
-      <div className={`fixed right-6 bottom-6 z-[90] w-[min(392px,calc(100vw-32px))] h-[min(612px,calc(100vh-48px))] flex-col overflow-hidden rounded-[20px] border border-line bg-card shadow-[0_34px_70px_-22px_rgba(7,33,63,.6)] max-sm:right-0 max-sm:bottom-0 max-sm:h-dvh max-sm:w-screen max-sm:rounded-none${open ? ' flex animate-chatIn' : ' hidden'}`} role="dialog" aria-label={t('chat.fab')}>
+      <div className={`fixed right-6 bottom-6 z-[90] w-[min(460px,calc(100vw-32px))] h-[min(700px,calc(100vh-48px))] flex-col overflow-hidden rounded-[20px] border border-line bg-card shadow-[0_34px_70px_-22px_rgba(7,33,63,.6)] max-sm:right-0 max-sm:bottom-0 max-sm:h-dvh max-sm:w-screen max-sm:rounded-none${open ? ' flex animate-chatIn' : ' hidden'}`} role="dialog" aria-label={t('chat.fab')}>
         <div className="flex items-center gap-[13px] bg-ink px-[18px] py-[17px] text-white">
           <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-yellow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6 text-ink">
