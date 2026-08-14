@@ -138,15 +138,6 @@ export function ProductPreview({ p, pick, lang }) {
           </div>
         </div>
       </section>
-      <section className="dark on-dark tight">
-        <div className="shell max-w-[720px] text-center">
-          <h2 className="text-[1.7rem]">{t('products.catalogue.title')}</h2>
-          <p className="lead mx-auto mb-[28px] mt-5">{t('products.catalogue.lead')}</p>
-          <span className="btn">
-            {t('products.catalogue.cta')} <span className="ar">→</span>
-          </span>
-        </div>
-      </section>
     </>
   )
 }
@@ -199,15 +190,6 @@ export function EventPreview({ e, pick, lang }) {
               <p className="m-0 text-[.95rem] leading-relaxed">{pick(e.outcome, e.outcome_km)}</p>
             </aside>
           )}
-        </div>
-      </section>
-      <section className="dark on-dark tight">
-        <div className="shell max-w-[720px] text-center">
-          <h2 className="text-[1.7rem]">{t('products.catalogue.title')}</h2>
-          <p className="lead mx-auto mb-[28px] mt-5">{t('products.catalogue.lead')}</p>
-          <span className="btn">
-            {t('products.catalogue.cta')} <span className="ar">→</span>
-          </span>
         </div>
       </section>
     </>

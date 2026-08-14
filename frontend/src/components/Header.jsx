@@ -81,18 +81,8 @@ export default function Header() {
     <>
       <header className={`sticky top-0 z-[60] border-b border-line bg-card backdrop-blur-[14px] transition-shadow duration-300${stuck ? ' shadow-[0_14px_34px_-26px_rgba(7,33,63,.7)]' : ''}`}>
         <div className="shell flex h-[74px] items-center gap-[16px]">
-          <Link to={loc(lang, '/home')} className="flex w-[180px] flex-none items-center gap-3" aria-label="UPG PIPE home">
-            <svg className="h-[42px] w-[42px] flex-none" viewBox="0 0 48 48" aria-hidden="true">
-              <rect width="48" height="48" rx="11" fill="#07213F" />
-              <circle cx="24" cy="24" r="14" fill="none" stroke="#FFD100" strokeWidth="2.4" />
-              <circle cx="24" cy="24" r="8" fill="none" stroke="#2BA7E0" strokeWidth="2.4" />
-              <path d="M24 10v28" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" />
-              <path d="M10 24h28" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" opacity=".35" />
-            </svg>
-            <span className="leading-none">
-              <b className="logo-text block font-display text-[1.35rem] font-black tracking-[-.02em]">UPG PIPE</b>
-              <span className="mt-[3px] block font-mono text-[.56rem] uppercase tracking-[.24em] text-grey">{t('brand.tagline')}</span>
-            </span>
+          <Link to={loc(lang, '/home')} className="flex flex-none items-center pl-[6px]" aria-label="UPG PIPE home">
+            <img src="/images/logo.jpg" alt="UPG PIPE CO., LTD" className="h-[58px] w-[58px] flex-none rounded-full border-[3px] border-blue object-cover" />
           </Link>
 
           <nav className="hidden flex-1 items-center justify-center gap-[2px] md:flex" aria-label={t('nav.main')}>

@@ -162,15 +162,6 @@ export default function EventDetail() {
         </div>
       </section>
 
-      <section className="dark on-dark tight">
-        <div className="shell max-w-[720px] text-center">
-          <h2>{t('products.catalogue.title')}</h2>
-          <p className="lead mx-auto mb-[28px] mt-5">{t('products.catalogue.lead')}</p>
-          <Link to={loc(lang, '/contact')} className="btn">
-            {t('products.catalogue.cta')} <span className="ar">→</span>
-          </Link>
-        </div>
-      </section>
     </>
   )
 }

@@ -374,21 +374,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="pt-0 pb-0">
-        <img
-          src="/images/promo/banner-hexagon.png"
-          alt="UPG Pipe Co., Ltd — Cambodia-made uPVC, PPR, HDPE pipe and fittings, ISO 9001:2015 certified"
-          loading="lazy"
-          className="block w-full"
-        />
-        <img
-          src="/images/promo/banner-map.png"
-          alt="UPG Pipe Co., Ltd — quality pipe and fittings supplied nationwide across Cambodia"
-          loading="lazy"
-          className="block w-full"
-        />
-      </section>
-
       <section className="band">
         <div className="shell">
           <p className="eyebrow">{t('about.checks.eyebrow')}</p>

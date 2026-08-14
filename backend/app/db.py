@@ -380,12 +380,26 @@ def delete_client(client_id: int) -> bool:
 # Site meta (single row)
 # ------------------------------------------------------------------
 def get_meta() -> dict:
+    """Stored meta, backfilled with anything missing from data.META.
+
+    The row is only auto-seeded once, the first time the table is empty
+    (see init_db). data.META has grown fields over time (company/contact
+    info, certificate image, team, ...), so an older or previously
+    resaved row can be missing keys that were never part of it — this
+    fills those back in from the current defaults instead of leaving
+    the admin form (and the public site) stuck showing blanks forever.
+    """
     conn = _connect()
     try:
         row = conn.execute("SELECT data_json FROM site_meta WHERE id = 1").fetchone()
-        return json.loads(row["data_json"]) if row else {}
+        stored = json.loads(row["data_json"]) if row else {}
     finally:
         conn.close()
+    merged = {**data.META, **stored}
+    for key in ("head_office", "factory", "certificate"):
+        if isinstance(stored.get(key), dict):
+            merged[key] = {**data.META.get(key, {}), **stored[key]}
+    return merged
 
 
 def update_meta(meta: dict) -> None:

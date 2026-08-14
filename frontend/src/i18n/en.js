@@ -225,10 +225,6 @@ export default {
   'products.fittings.title2': 'turns or ends a run.',
   'products.fittings.lead':
     'Injection-moulded uPVC fittings in class 13.5 (21–165 mm) and class 8.5 (60–165 mm), plus the full conduit accessory range.',
-  'products.catalogue.title': 'Need the printed catalogue?',
-  'products.catalogue.lead':
-    "The 2026 product catalogue carries every dimension table, tolerance and fitting drawing. Ask sales and we'll send the PDF or drop a copy to your office.",
-  'products.catalogue.cta': 'Request the catalogue',
 
   'product.back': 'Back to all products',
   'product.loading': 'Loading product…',
