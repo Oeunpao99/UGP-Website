@@ -51,13 +51,18 @@ export default function ProductDetail() {
   }
 
   const p = product
+  const quoteTo = `${loc(lang, '/contact')}?product=${p.id}`
 
   return (
     <>
-      <section className="dark on-dark tight">
+      <section className="dark on-dark tight relative overflow-hidden">
+        <span className="absolute inset-y-0 left-0 w-[6px] bg-[var(--c)]" style={{ '--c': p.color }} />
+        <span className="pointer-events-none absolute -right-20 -bottom-24 h-[360px] w-[360px] rounded-full border-[44px] border-white/[0.05]" />
         <div className="shell">
           {backLink}
-          <p className="eyebrow text-yellow mt-[22px]">{p.brands.join(' · ')}</p>
+          <p className="eyebrow text-yellow mt-[22px]">
+            {p.id} / {p.brands.join(' · ')}
+          </p>
           <h2 className="max-w-[22ch]">{p.name}</h2>
           <p className="lead mt-[18px] max-w-[62ch]">{p.blurb}</p>
           <div className="mt-[22px] flex flex-wrap gap-[8px]">
@@ -69,6 +74,14 @@ export default function ProductDetail() {
                 {tag}
               </span>
             ))}
+          </div>
+          <div className="mt-[28px] flex flex-wrap gap-[14px]">
+            <Link to={quoteTo} className="btn sm">
+              {t('product.quote')} <span className="ar">→</span>
+            </Link>
+            <Link to={loc(lang, '/contact')} className="btn ghost sm">
+              {t('nav.contact')}
+            </Link>
           </div>
         </div>
       </section>

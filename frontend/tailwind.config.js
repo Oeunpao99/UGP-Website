@@ -50,7 +50,7 @@ export default {
         },
         slide: { to: { transform: 'translateX(-50%)' } },
         pageIn: {
-          from: { opacity: 0, transform: 'translateY(14px)' },
+          from: { opacity: 0, transform: 'translateY(26px) scale(.986)' },
           to: { opacity: 1, transform: 'none' },
         },
         dotPulse: {
@@ -81,8 +81,8 @@ export default {
       },
       animation: {
         rise: 'rise .9s cubic-bezier(.22,.8,.28,1) both',
-        slide: 'slide 46s linear infinite',
-        pageIn: 'pageIn .4s cubic-bezier(.22,.8,.28,1) both',
+        slide: 'slide 90s linear infinite',
+        pageIn: 'pageIn .5s cubic-bezier(.22,.8,.28,1) both',
         dotPulse: 'dotPulse 2.4s infinite',
         dotBounce: 'dotBounce 1.3s infinite',
         chatIn: 'chatIn .34s cubic-bezier(.22,.8,.28,1) both',

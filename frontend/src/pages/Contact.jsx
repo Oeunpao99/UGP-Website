@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { sendQuote } from '../api'
 import { useI18n } from '../i18n'
 
@@ -14,6 +15,17 @@ const PRODUCT_OPTIONS = [
   { v: 'Mixed order / not sure yet', k: 'contact.product.mixed' },
 ]
 
+const PRODUCT_BY_ID = {
+  upvc: 'uPVC pressure pipe',
+  fittings: 'uPVC fittings',
+  ppr: 'PPR pipe (hot & cold)',
+  hdpe: 'HDPE pipe',
+  conduit: 'Electrical conduit',
+  corrugated: 'Corrugated conduit',
+  trunking: 'Trunking',
+  condfit: 'Conduit fittings',
+}
+
 const TOPIC_OPTIONS = [
   { v: 'A price quote', k: 'contact.topic.quote' },
   { v: 'Stock availability', k: 'contact.topic.stock' },
@@ -27,12 +39,14 @@ const FIELD =
 
 export default function Contact() {
   const { t, tAlt } = useI18n()
+  const [params] = useSearchParams()
+  const initialProduct = PRODUCT_BY_ID[params.get('product')] || PRODUCT_OPTIONS[0].v
   const [form, setForm] = useState({
     name: '',
     company: '',
     phone: '',
     email: '',
-    product: PRODUCT_OPTIONS[0].v,
+    product: initialProduct,
     topic: TOPIC_OPTIONS[0].v,
     message: '',
   })

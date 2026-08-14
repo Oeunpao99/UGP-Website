@@ -182,6 +182,7 @@ export default {
   'product.notfound': "Couldn't find that product.",
   'product.specs': 'Specifications',
   'product.viewDetails': 'View details',
+  'product.quote': 'Request a quote',
 
   'events.title': 'Audits, site visits and everything in between.',
   'events.lead':
@@ -201,6 +202,15 @@ export default {
   'events.kind.Customers': 'Customers',
   'events.kind.Supply chain': 'Supply chain',
   'events.kind.Community': 'Community',
+
+  'event.back': 'Back to all updates',
+  'event.loading': 'Loading event…',
+  'event.notfound': "Couldn't find that event.",
+  'event.duration': 'Duration',
+  'event.location': 'Location',
+  'event.team': 'Team',
+  'event.highlights': 'Highlights',
+  'event.outcome': 'Outcome',
 
   'careers.title': 'Come make something that stays in the ground for 50 years.',
   'careers.lead':

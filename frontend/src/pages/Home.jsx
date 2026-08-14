@@ -289,11 +289,13 @@ export default function Home() {
           <ClientMarquee
             title={t('home.clients.local')}
             items={clients.filter((c) => !c.international)}
+            accent="yellow"
           />
           <ClientMarquee
             title={t('home.clients.international')}
             items={clients.filter((c) => c.international)}
             reverse
+            accent="blue"
           />
         </div>
       </section>

@@ -183,6 +183,7 @@ export default {
   'product.notfound': 'រកមិនឃើញផលិតផលនេះទេ។',
   'product.specs': 'ព័ត៌មានលម្អិត',
   'product.viewDetails': 'មើលលម្អិត',
+  'product.quote': 'ស្នើសុំតម្លៃ',
 
   'events.title': 'សវនកម្ម ទស្សនកិច្ចទីតាំង និងអ្វីៗផ្សេងទៀតរវាងពួកវា។',
   'events.lead':
@@ -202,6 +203,15 @@ export default {
   'events.kind.Customers': 'អតិថិជន',
   'events.kind.Supply chain': 'ខ្សែច្រវាក់ផ្គត់ផ្គង់',
   'events.kind.Community': 'សហគមន៍',
+
+  'event.back': 'ត្រឡប់ទៅការអាប់ដេតទាំងអស់',
+  'event.loading': 'កំពុងផ្ទុកព្រឹត្តិការណ៍…',
+  'event.notfound': 'រកមិនឃើញព្រឹត្តិការណ៍នេះទេ។',
+  'event.duration': 'រយៈពេល',
+  'event.location': 'ទីតាំង',
+  'event.team': 'ក្រុមការងារ',
+  'event.highlights': 'ចំណុចសំខាន់',
+  'event.outcome': 'លទ្ធផល',
 
   'careers.title': 'មកបង្កើតអ្វីដែលស្ថិតក្នុងដីអស់រយៈពេល 50 ឆ្នាំ។',
   'careers.lead':

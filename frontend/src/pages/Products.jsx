@@ -36,9 +36,20 @@ export default function Products() {
   }
 
   const card = (p) => {
+    const detail = `${loc(lang, '/products')}/${p.id}`
+    const idx = String(products.indexOf(p) + 1).padStart(2, '0')
     return (
-      <article className="mb-5 grid grid-cols-1 overflow-hidden rounded-[14px] border border-line bg-card scroll-mt-[120px] lg:grid-cols-[200px_1fr]" id={`p-${p.id}`} key={p.id}>
-        <div className="prod-visual">
+      <article
+        className="group relative mb-5 grid grid-cols-1 overflow-hidden rounded-[16px] border border-line bg-card scroll-mt-[120px] transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:border-transparent hover:shadow-[0_32px_56px_-30px_rgba(7,33,63,.62)] lg:grid-cols-[220px_1fr]"
+        id={`p-${p.id}`}
+        key={p.id}
+        style={{ '--c': p.color }}
+      >
+        <span className="absolute inset-y-0 left-0 z-[2] w-[6px] bg-[var(--c)]" />
+        <div className="prod-visual relative overflow-hidden">
+          <span className="pointer-events-none absolute -right-6 -bottom-6 h-[140px] w-[140px] rounded-full border-[20px] border-white/[0.07]" />
+          <span className="pointer-events-none absolute -right-1 -bottom-1 h-[72px] w-[72px] rounded-full border-[11px] border-white/[0.07]" />
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[5px] bg-[var(--c)]" />
           <Pipe
             color={p.color}
             stripe={p.stripe}
@@ -47,33 +58,57 @@ export default function Products() {
             height="88%"
           />
         </div>
-        <div className="px-8 py-[30px] pb-8">
-          <div className="mb-[14px] font-mono text-[.72rem] uppercase tracking-[.13em] text-blue">{p.brands.join(' · ')}</div>
-          <h3 className="mb-[6px]">
+        <div className="relative flex flex-col px-8 py-7 sm:px-9">
+          <span
+            className="pointer-events-none absolute top-[14px] right-[20px] select-none font-display text-[3.3rem] font-extrabold leading-none text-paper-2 transition-colors duration-300 ease-brand group-hover:text-[var(--c)]"
+            aria-hidden="true"
+          >
+            {idx}
+          </span>
+          <div className="mb-3 flex flex-wrap items-center gap-2 pr-12">
+            {p.brands.map((b) => {
+              const br = BRANDS.find((x) => x.label === b)
+              return (
+                <span
+                  className="inline-flex items-center gap-[7px] rounded-full border border-line bg-paper px-[10px] py-[5px] font-mono text-[.66rem] font-semibold uppercase tracking-[.08em]"
+                  key={b}
+                >
+                  <span className="h-[6px] w-[6px] rounded-full" style={{ background: br ? br.color : 'var(--c)' }} />
+                  {b}
+                </span>
+              )
+            })}
+          </div>
+          <h3>
             <Link
-              to={`${loc(lang, '/products')}/${p.id}`}
-              className="inline-block transition-transform duration-150 ease-brand hover:text-blue active:scale-[0.97]"
+              to={detail}
+              className="inline-block pr-12 transition-transform duration-150 ease-brand hover:text-blue active:scale-[0.98]"
             >
               {p.name}
             </Link>
           </h3>
-          <p className="text-[.94rem] text-grey">{p.blurb}</p>
-          <div className="flex flex-wrap gap-[7px]">
-            {p.tags.map((tag) => (
+          <p className="mt-[8px] mb-0 max-w-[62ch] text-[.94rem] text-grey">{p.blurb}</p>
+          <div className="mt-[16px] flex flex-wrap gap-[7px]">
+            {p.tags.slice(0, 4).map((tag) => (
               <span className="rounded-full border border-line bg-paper px-[10px] py-[5px] font-mono text-[.68rem] tracking-[.06em] text-fg" key={tag}>
                 {tag}
               </span>
             ))}
           </div>
-          <Link
-            to={`${loc(lang, '/products')}/${p.id}`}
-            className="group/spec mt-[6px] inline-flex items-center gap-[10px] font-display text-[.92rem] font-bold text-fg transition-transform duration-150 ease-brand active:scale-[0.97]"
-          >
-            <span className="grid h-[22px] w-[22px] place-items-center rounded-full bg-yellow text-[.9rem] transition-transform duration-200 ease-brand group-hover/spec:translate-x-[3px] group-active/spec:scale-90">
-              →
-            </span>{' '}
-            {p.specTitle}
-          </Link>
+          <div className="mt-[24px] flex flex-wrap items-center gap-[14px] border-t border-line pt-[18px]">
+            <Link
+              to={detail}
+              className="group/spec inline-flex items-center gap-[10px] font-display text-[.92rem] font-bold transition-transform duration-150 ease-brand active:scale-[0.97]"
+            >
+              <span className="grid h-[22px] w-[22px] place-items-center rounded-full bg-yellow text-[.9rem] transition-transform duration-200 ease-brand group-hover/spec:translate-x-[3px]">
+                →
+              </span>{' '}
+              {p.specTitle}
+            </Link>
+            <Link to={detail} className="btn solid sm ml-auto">
+              {t('product.viewDetails')} <span className="ar">→</span>
+            </Link>
+          </div>
         </div>
       </article>
     )

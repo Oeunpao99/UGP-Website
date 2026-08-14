@@ -8,6 +8,7 @@ import About from './pages/About'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Events from './pages/Events'
+import EventDetail from './pages/EventDetail'
 import Careers from './pages/Careers'
 import Contact from './pages/Contact'
 import { useI18n } from './i18n'
@@ -65,6 +66,7 @@ export default function App() {
             <Route path="products" element={<Products />} />
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="events" element={<Events />} />
+            <Route path="events/:id" element={<EventDetail />} />
             <Route path="careers" element={<Careers />} />
             <Route path="contact" element={<Contact />} />
           </Route>

@@ -190,6 +190,12 @@ export default function Events() {
                       </div>
                     </>
                   )}
+                  <Link
+                    to={`${loc(lang, '/events')}/${e.id}`}
+                    className="mt-auto inline-flex w-full items-center justify-center gap-[9px] rounded-full border border-line-strong bg-paper px-[16px] py-[10px] font-display text-[.86rem] font-bold transition-all duration-200 ease-brand hover:border-ink hover:bg-yellow"
+                  >
+                    {t('product.viewDetails')} <span className="ar">→</span>
+                  </Link>
                 </div>
               </article>
             ))}

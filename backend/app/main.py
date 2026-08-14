@@ -7,13 +7,28 @@ import os
 from pathlib import Path
 from urllib.parse import quote
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import chatbot, data, db
-from .schemas import ChatRequest, ChatResponse, QuoteRequest, QuoteResponse
+from . import auth, chatbot, data, db
+from .schemas import (
+    AdminLoginRequest,
+    AdminMeResponse,
+    ChatRequest,
+    ChatResponse,
+    ClientIn,
+    EventIn,
+    GoogleAuthRequest,
+    JobIn,
+    MetaIn,
+    ProductIn,
+    QuoteRequest,
+    QuoteResponse,
+)
+
+COOKIE_SECURE = os.getenv("COOKIE_SECURE", "false").lower() == "true"
 
 app = FastAPI(
     title="UPG PIPE CO., LTD — Website API",
@@ -53,7 +68,7 @@ def health() -> dict:
 
 @app.get("/api/meta")
 def get_meta() -> dict:
-    return data.META
+    return db.get_meta()
 
 
 # ------------------------------------------------------------------
@@ -93,7 +108,7 @@ def _events_loc(e: dict, lang: str) -> dict:
     if lang != "km":
         return e
     out = dict(e)
-    for f in ("t", "d", "loc", "dur", "team"):
+    for f in ("t", "d", "detail", "outcome", "loc", "dur", "team"):
         km = e.get(f + "_km")
         if km:
             out[f] = km
@@ -105,18 +120,19 @@ def _events_loc(e: dict, lang: str) -> dict:
 
 @app.get("/api/products")
 def get_products(brand: str | None = Query(default=None), lang: str = Query(default="en")) -> dict:
-    items = [_product_loc(p, lang) for p in data.PRODUCTS]
+    all_items = db.list_products()
+    items = [_product_loc(p, lang) for p in all_items]
     if brand and brand != "all":
         items = [p for p in items if brand in p["brands"]]
-    return {"items": items, "brands": sorted({b for p in data.PRODUCTS for b in p["brands"]})}
+    return {"items": items, "brands": sorted({b for p in all_items for b in p["brands"]})}
 
 
 @app.get("/api/products/{product_id}")
 def get_product(product_id: str, lang: str = Query(default="en")) -> dict:
-    for p in data.PRODUCTS:
-        if p["id"] == product_id:
-            return _product_loc(p, lang)
-    raise HTTPException(status_code=404, detail="Product not found")
+    p = db.get_product(product_id)
+    if not p:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return _product_loc(p, lang)
 
 
 @app.get("/api/fittings")
@@ -130,25 +146,34 @@ def get_fittings(lang: str = Query(default="en")) -> dict:
 
 @app.get("/api/events")
 def get_events(kind: str | None = Query(default=None), lang: str = Query(default="en")) -> dict:
-    items = data.EVENTS
+    all_items = db.list_events()
+    items = all_items
     if kind and kind != "all":
         items = [e for e in items if e["kind"] == kind]
     items = [_events_loc(e, lang) for e in items]
     return {
         "items": items,
-        "kinds": sorted({e["kind"] for e in data.EVENTS}),
+        "kinds": sorted({e["kind"] for e in all_items}),
     }
+
+
+@app.get("/api/events/{event_id}")
+def get_event(event_id: str, lang: str = Query(default="en")) -> dict:
+    e = db.get_event(event_id)
+    if not e:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return _events_loc(e, lang)
 
 
 @app.get("/api/jobs")
 def get_jobs(lang: str = Query(default="en")) -> dict:
-    return {"items": [_jobs_loc(j, lang) for j in data.JOBS]}
+    return {"items": [_jobs_loc(j, lang) for j in db.list_jobs()]}
 
 
 @app.get("/api/clients")
 def get_clients() -> dict:
     return {
-        "items": [{"name": name, "international": bool(intl)} for name, intl in data.CLIENTS]
+        "items": [{"name": c["name"], "international": bool(c["international"])} for c in db.list_clients()]
     }
 
 
@@ -179,12 +204,200 @@ async def submit_quote(req: QuoteRequest) -> QuoteResponse:
 
 
 @app.post("/api/chat", response_model=ChatResponse)
-async def chat(req: ChatRequest) -> ChatResponse:
+async def chat(req: ChatRequest, chat_user: dict = Depends(auth.get_current_chat_user)) -> ChatResponse:
     question = req.message.strip()
     if not question:
         raise HTTPException(status_code=422, detail="Message cannot be empty")
+    db.log_chat_message(chat_user["sub"], "user", question)
     reply, source, links = await chatbot.answer(question, req.history)
+    db.log_chat_message(chat_user["sub"], "bot", reply)
     return ChatResponse(reply=reply, source=source, links=links)
+
+
+# ------------------------------------------------------------------
+# Google Sign-In (chat visitors)
+# ------------------------------------------------------------------
+@app.post("/api/auth/google")
+def google_auth(req: GoogleAuthRequest, response: Response) -> dict:
+    claims = auth.verify_google_credential(req.credential)
+    user = db.get_or_create_chat_user(claims["sub"], claims["email"], claims["name"], claims["picture"])
+    token = auth.create_token({"sub": claims["sub"]}, auth.CHAT_TOKEN_TTL)
+    response.set_cookie(
+        auth.CHAT_COOKIE, token, httponly=True, samesite="lax", secure=COOKIE_SECURE,
+        max_age=auth.CHAT_TOKEN_TTL, path="/",
+    )
+    return {"ok": True, "name": user["name"], "picture": user["picture"]}
+
+
+@app.get("/api/auth/me")
+def auth_me(chat_user: dict = Depends(auth.get_current_chat_user)) -> dict:
+    return {"signedIn": True, "sub": chat_user["sub"]}
+
+
+# ------------------------------------------------------------------
+# Admin auth
+# ------------------------------------------------------------------
+@app.post("/api/admin/login")
+def admin_login(req: AdminLoginRequest, response: Response) -> AdminMeResponse:
+    admin = db.get_admin_by_username(req.username)
+    if not admin or not auth.verify_password(req.password, admin["password_hash"]):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    token = auth.create_token({"sub": admin["username"]}, auth.ADMIN_TOKEN_TTL)
+    response.set_cookie(
+        auth.ADMIN_COOKIE, token, httponly=True, samesite="lax", secure=COOKIE_SECURE,
+        max_age=auth.ADMIN_TOKEN_TTL, path="/",
+    )
+    return AdminMeResponse(username=admin["username"])
+
+
+@app.post("/api/admin/logout")
+def admin_logout(response: Response) -> dict:
+    response.delete_cookie(auth.ADMIN_COOKIE, path="/")
+    return {"ok": True}
+
+
+@app.get("/api/admin/me", response_model=AdminMeResponse)
+def admin_me(admin: dict = Depends(auth.get_current_admin)) -> AdminMeResponse:
+    return AdminMeResponse(username=admin["sub"])
+
+
+# ------------------------------------------------------------------
+# Admin CMS — products / events / jobs (all behind admin auth)
+# ------------------------------------------------------------------
+@app.get("/api/admin/products")
+def admin_list_products(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_products()}
+
+
+@app.post("/api/admin/products")
+def admin_create_product(item: ProductIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if db.get_product(item.id):
+        raise HTTPException(status_code=409, detail="A product with that id already exists")
+    db.upsert_product(item.id, item.model_dump())
+    return db.get_product(item.id)
+
+
+@app.put("/api/admin/products/{product_id}")
+def admin_update_product(product_id: str, item: ProductIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.get_product(product_id):
+        raise HTTPException(status_code=404, detail="Product not found")
+    db.upsert_product(product_id, item.model_dump())
+    return db.get_product(product_id)
+
+
+@app.delete("/api/admin/products/{product_id}")
+def admin_delete_product(product_id: str, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.delete_product(product_id):
+        raise HTTPException(status_code=404, detail="Product not found")
+    return {"ok": True}
+
+
+@app.get("/api/admin/events")
+def admin_list_events(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_events()}
+
+
+@app.post("/api/admin/events")
+def admin_create_event(item: EventIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    event_id = item.id or item.model_dump().get("t", "event").lower().replace(" ", "-")[:40]
+    if db.get_event(event_id):
+        raise HTTPException(status_code=409, detail="An event with that id already exists")
+    payload = {**item.model_dump(), "id": event_id}
+    db.upsert_event(event_id, payload)
+    return db.get_event(event_id)
+
+
+@app.put("/api/admin/events/{event_id}")
+def admin_update_event(event_id: str, item: EventIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.get_event(event_id):
+        raise HTTPException(status_code=404, detail="Event not found")
+    db.upsert_event(event_id, {**item.model_dump(), "id": event_id})
+    return db.get_event(event_id)
+
+
+@app.delete("/api/admin/events/{event_id}")
+def admin_delete_event(event_id: str, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.delete_event(event_id):
+        raise HTTPException(status_code=404, detail="Event not found")
+    return {"ok": True}
+
+
+@app.get("/api/admin/jobs")
+def admin_list_jobs(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_jobs()}
+
+
+@app.post("/api/admin/jobs")
+def admin_create_job(item: JobIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    job_id = item.id or item.model_dump().get("t", "job").lower().replace(" ", "-")[:40]
+    if db.get_job(job_id):
+        raise HTTPException(status_code=409, detail="A job with that id already exists")
+    payload = {**item.model_dump(), "id": job_id}
+    db.upsert_job(job_id, payload)
+    return db.get_job(job_id)
+
+
+@app.put("/api/admin/jobs/{job_id}")
+def admin_update_job(job_id: str, item: JobIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.get_job(job_id):
+        raise HTTPException(status_code=404, detail="Job not found")
+    db.upsert_job(job_id, {**item.model_dump(), "id": job_id})
+    return db.get_job(job_id)
+
+
+@app.delete("/api/admin/jobs/{job_id}")
+def admin_delete_job(job_id: str, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.delete_job(job_id):
+        raise HTTPException(status_code=404, detail="Job not found")
+    return {"ok": True}
+
+
+@app.get("/api/admin/clients")
+def admin_list_clients(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_clients()}
+
+
+@app.post("/api/admin/clients")
+def admin_create_client(item: ClientIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return db.create_client(item.name, item.international)
+
+
+@app.put("/api/admin/clients/{client_id}")
+def admin_update_client(client_id: int, item: ClientIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.update_client(client_id, item.name, item.international):
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"ok": True}
+
+
+@app.delete("/api/admin/clients/{client_id}")
+def admin_delete_client(client_id: int, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    if not db.delete_client(client_id):
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"ok": True}
+
+
+@app.get("/api/admin/meta")
+def admin_get_meta(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return db.get_meta()
+
+
+@app.put("/api/admin/meta")
+def admin_update_meta(item: MetaIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    db.update_meta(item.model_dump())
+    return db.get_meta()
+
+
+# ------------------------------------------------------------------
+# Admin — chat conversation review
+# ------------------------------------------------------------------
+@app.get("/api/admin/chats")
+def admin_list_chats(admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_chat_users()}
+
+
+@app.get("/api/admin/chats/{user_id}")
+def admin_get_chat(user_id: str, admin: dict = Depends(auth.get_current_admin)) -> dict:
+    return {"items": db.list_chat_messages(user_id)}
 
 
 # ------------------------------------------------------------------

@@ -26,6 +26,8 @@ export const getProduct = (id, lang) =>
 export const getFittings = (lang) => api('/api/fittings' + qs({ lang }))
 export const getEvents = (kind, lang) =>
   api('/api/events' + qs({ kind, lang }))
+export const getEvent = (id, lang) =>
+  api(`/api/events/${encodeURIComponent(id)}` + qs({ lang }))
 export const getJobs = (lang) => api('/api/jobs' + qs({ lang }))
 export const getClients = () => api('/api/clients')
 export const sendQuote = (payload) =>
