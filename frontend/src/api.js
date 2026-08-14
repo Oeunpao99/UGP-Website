@@ -3,10 +3,13 @@ const BASE = import.meta.env.VITE_API_BASE || ''
 async function api(path, options = {}) {
   const res = await fetch(BASE + path, {
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     ...options,
   })
   if (!res.ok) {
-    throw new Error(`Request failed: ${res.status} ${res.statusText}`)
+    const err = new Error(`Request failed: ${res.status} ${res.statusText}`)
+    err.status = res.status
+    throw err
   }
   return res.json()
 }
@@ -34,3 +37,6 @@ export const sendQuote = (payload) =>
   api('/api/quote', { method: 'POST', body: JSON.stringify(payload) })
 export const sendChat = (message, history = []) =>
   api('/api/chat', { method: 'POST', body: JSON.stringify({ message, history }) })
+export const authMe = () => api('/api/auth/me')
+export const googleSignIn = (credential) =>
+  api('/api/auth/google', { method: 'POST', body: JSON.stringify({ credential }) })

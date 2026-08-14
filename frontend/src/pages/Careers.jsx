@@ -67,7 +67,7 @@ export default function Careers() {
             </p>
           </div>
           {error && <p className="lead">{t('careers.err')}: {error}</p>}
-          <div className="overflow-hidden rounded-[14px] border border-line bg-card">
+          <div className="job-row overflow-hidden rounded-[14px] border border-line bg-card">
             {jobs.map((j, i) => {
               const isOpen = !!open[i]
               return (
@@ -81,9 +81,9 @@ export default function Careers() {
                     <span className="w-[26px] flex-none font-mono text-[.76rem] text-grey">{String(i + 1).padStart(2, '0')}</span>
                     <span className="flex-1">
                       <b className="block font-display text-[1.08rem] font-bold">{j.t}</b>
-                      <span className="text-[.84rem] text-grey">{j.dept}</span>
+                      <span className="job-dept text-[.84rem] text-grey">{j.dept}</span>
                     </span>
-                    <span className="whitespace-nowrap rounded-full bg-paper px-3 py-[6px] font-mono text-[.7rem] uppercase tracking-[.1em] text-blue">{j.loc}</span>
+                    <span className="job-loc whitespace-nowrap rounded-full bg-paper px-3 py-[6px] font-mono text-[.7rem] uppercase tracking-[.1em] text-blue">{j.loc}</span>
                     <span className="grid h-[26px] w-[26px] flex-none place-items-center rounded-full bg-yellow font-bold transition-transform duration-300 ease-brand group-aria-expanded:rotate-45">+</span>
                   </button>
                   <div className={`px-[26px] pb-7 lg:pl-[72px]${isOpen ? ' block animate-pageIn' : ' hidden'}`} id={`j-${i}`}>

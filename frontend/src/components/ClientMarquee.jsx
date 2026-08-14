@@ -7,9 +7,10 @@ function slugify(s) {
     .replace(/^-+|-+$/g, '')
 }
 
-function Cell({ name, i, accent }) {
+function Cell({ name, logo, i, accent }) {
   const [err, setErr] = useState(false)
   const dot = accent === 'blue' ? 'bg-blue' : 'bg-yellow'
+  const src = logo || `/images/clients/${slugify(name)}.png`
 
   return (
     <div className="group/card relative flex h-[148px] w-[290px] flex-none items-center justify-center overflow-hidden border-r border-dashed border-line bg-white px-[24px]">
@@ -21,7 +22,7 @@ function Cell({ name, i, accent }) {
         <span className="whitespace-nowrap px-2 text-center font-display text-[.9rem] font-bold opacity-70">{name}</span>
       ) : (
         <img
-          src={`/images/clients/${slugify(name)}.png`}
+          src={src}
           alt={name}
           loading="lazy"
           className="relative z-[1] h-[92px] w-auto max-w-[252px] object-contain transition-transform duration-300 ease-brand group-hover/card:scale-[1.12]"
@@ -33,7 +34,7 @@ function Cell({ name, i, accent }) {
 }
 
 export default function ClientMarquee({ title, items, reverse, accent }) {
-  const cells = items.map((c, i) => <Cell name={c.name} i={i} accent={accent} key={i} />)
+  const cells = items.map((c, i) => <Cell name={c.name} logo={c.logo} i={i} accent={accent} key={i} />)
   const dur = Math.max(45, Math.round((items.length * 290) / 22))
 
   return (

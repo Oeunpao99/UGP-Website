@@ -47,5 +47,18 @@ export const deleteClient = (id) => api(`/api/admin/clients/${encodeURIComponent
 export const getAdminMeta = () => api('/api/admin/meta')
 export const updateAdminMeta = (item) => api('/api/admin/meta', { method: 'PUT', body: JSON.stringify(item) })
 
+export const uploadImage = (file) => {
+  const fd = new FormData()
+  fd.append('file', file)
+  return fetch(BASE + '/api/admin/upload', {
+    method: 'POST',
+    body: fd,
+    credentials: 'include',
+  }).then((res) => {
+    if (!res.ok) throw new Error(`Upload failed: ${res.status} ${res.statusText}`)
+    return res.json()
+  })
+}
+
 export const listChats = () => api('/api/admin/chats')
 export const getChatMessages = (userId) => api(`/api/admin/chats/${encodeURIComponent(userId)}`)

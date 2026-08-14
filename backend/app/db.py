@@ -69,10 +69,14 @@ def init_db() -> None:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 international INTEGER NOT NULL DEFAULT 0,
+                logo TEXT NOT NULL DEFAULT '',
                 sort_order INTEGER NOT NULL
             )
             """
         )
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(clients)")]
+        if "logo" not in cols:
+            conn.execute("ALTER TABLE clients ADD COLUMN logo TEXT NOT NULL DEFAULT ''")
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS site_meta (
@@ -335,26 +339,26 @@ def list_clients() -> list[dict]:
         conn.close()
 
 
-def create_client(name: str, international: bool) -> dict:
+def create_client(name: str, international: bool, logo: str = "") -> dict:
     conn = _connect()
     try:
         next_order = conn.execute("SELECT COALESCE(MAX(sort_order), -1) + 1 n FROM clients").fetchone()["n"]
         cur = conn.execute(
-            "INSERT INTO clients (name, international, sort_order) VALUES (?, ?, ?)",
-            (name, int(international), next_order),
+            "INSERT INTO clients (name, international, logo, sort_order) VALUES (?, ?, ?, ?)",
+            (name, int(international), logo, next_order),
         )
         conn.commit()
-        return {"id": cur.lastrowid, "name": name, "international": int(international), "sort_order": next_order}
+        return {"id": cur.lastrowid, "name": name, "international": int(international), "logo": logo, "sort_order": next_order}
     finally:
         conn.close()
 
 
-def update_client(client_id: int, name: str, international: bool) -> bool:
+def update_client(client_id: int, name: str, international: bool, logo: str = "") -> bool:
     conn = _connect()
     try:
         cur = conn.execute(
-            "UPDATE clients SET name = ?, international = ? WHERE id = ?",
-            (name, int(international), client_id),
+            "UPDATE clients SET name = ?, international = ?, logo = ? WHERE id = ?",
+            (name, int(international), logo, client_id),
         )
         conn.commit()
         return cur.rowcount > 0

@@ -43,9 +43,7 @@ export default function Events() {
   const [events, setEvents] = useState([])
   const [kind, setKind] = useState('all')
   const [error, setError] = useState(null)
-  const [open, setOpen] = useState({})
 
-  const toggle = (i) => setOpen((o) => ({ ...o, [i]: !o[i] }))
   const imgSrc = (t) => `/images/events/${slugify(t)}.jpg`
 
   useEffect(() => {
@@ -132,7 +130,7 @@ export default function Events() {
                     {e.m} {e.y}
                   </b>
                   <img
-                    src={imgSrc(e.t)}
+                    src={e.img || imgSrc(e.t)}
                     alt={e.t}
                     loading="lazy"
                     onError={(ev) => (ev.currentTarget.style.display = 'none')}
@@ -165,31 +163,6 @@ export default function Events() {
                       </div>
                     )}
                   </div>
-                  {e.highlights?.length > 0 && (
-                    <>
-                      <button
-                        onClick={() => toggle(i)}
-                        aria-expanded={!!open[i]}
-                        aria-controls={`ev-details-${i}`}
-                        className="group mt-[16px] inline-flex cursor-pointer items-center gap-[10px] border-0 bg-transparent p-0 font-display text-[.92rem] font-bold text-fg transition-colors duration-200 ease-brand hover:text-blue"
-                      >
-                        <span className="grid h-[22px] w-[22px] place-items-center rounded-full bg-yellow text-[.95rem] leading-none text-ink transition-transform duration-300 ease-brand group-aria-expanded:rotate-45">
-                          +
-                        </span>
-                        {t('events.more')}
-                      </button>
-                      <div id={`ev-details-${i}`} className={`mt-[14px]${open[i] ? ' block' : ' hidden'}`}>
-                        <ul className="m-0 space-y-[8px] border-l border-line-strong pl-[14px]">
-                          {e.highlights.map((h, j) => (
-                            <li key={j} className="flex gap-[10px] text-[.88rem] leading-snug text-grey">
-                              <span className="mt-[8px] h-[6px] w-[6px] flex-none rounded-full bg-blue-lite" />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )}
                   <Link
                     to={`${loc(lang, '/events')}/${e.id}`}
                     className="mt-auto inline-flex w-full items-center justify-center gap-[9px] rounded-full border border-line-strong bg-paper px-[16px] py-[10px] font-display text-[.86rem] font-bold transition-all duration-200 ease-brand hover:border-ink hover:bg-yellow"

@@ -55,6 +55,7 @@ class JobIn(BaseModel):
 class ClientIn(BaseModel):
     name: str
     international: bool = False
+    logo: str = ""
 
 
 class MetaIn(BaseModel):

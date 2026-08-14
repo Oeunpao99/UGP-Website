@@ -4,6 +4,7 @@ frontend/dist/
 *.py[cod]
 backend/data/
 data/
+backend/uploads/
 .venv/
 .env
 .DS_Store

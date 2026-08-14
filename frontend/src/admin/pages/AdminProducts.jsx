@@ -1,6 +1,89 @@
 import { useEffect, useState } from 'react'
 import { listProducts, createProduct, updateProduct, deleteProduct } from '../adminApi'
-import { Field, TextInput, TextArea, Card, PageHeader, BTN, BTN_GHOST, TABLE, TH, TD } from '../ui'
+import { usePageLang } from '../lang'
+import { PreviewModal, ProductPreview } from '../preview'
+import { Field, TextInput, TextArea, Section, Alert, ActionBar, PageHeader, BTN, BTN_GHOST, Checkbox, SwatchInput, Card, RowActions, TABLE, TH, TD } from '../ui'
+
+const T = {
+  en: {
+    'new': 'New product',
+    'newTitle': 'New product',
+    'editTitle': 'Edit product',
+    'backLabel': 'Products',
+    'save': 'Save product',
+    'delete': 'Delete product',
+    'identity': 'Identity',
+    'identity.d': 'How this product is named and linked on the site.',
+    'id': 'ID',
+    'id.hint': 'Used in the URL, e.g. upvc',
+    'brands': 'Brands',
+    'brands.hint': 'Comma-separated, e.g. Eagle, Lion Head, Smart',
+    'name': 'Name',
+    'meta': 'Meta line',
+    'meta.hint': 'e.g. Class 13.5 & 8.5 · 1/2"–12" · 4 m lengths',
+    'desc': 'Description & tags',
+    'desc.d': 'Shown on the product card and product page.',
+    'blurb': 'Description',
+    'tags': 'Tags',
+    'onePerLine': 'One per line',
+    'spec': 'Specification table',
+    'spec.d': 'The technical table on the product page.',
+    'specTitle': 'Table title',
+    'caption': 'Caption',
+    'cols': 'Column headers',
+    'rows': 'Rows',
+    'rows.hint': 'One row per line, cells separated by | — e.g. 21 | 22 | 1/2" | 22.4 ± 0.2',
+    'appear': 'Appearance',
+    'appear.d': 'The graphic and colours used across the site.',
+    'color': 'Color token',
+    'color.hint': 'A var(--c-…) token or hex value',
+    'stripe': 'Stripe color',
+    'stripe.hint': 'Optional accent stripe on the graphic',
+    'legend': 'Legend',
+    'legend.hint': 'Text printed on the pipe graphic',
+    'graphic': 'Graphic',
+    'light': 'Use the light version of the pipe graphic',
+  },
+  km: {
+    'new': 'ផលិតផលថ្មី',
+    'newTitle': 'ផលិតផលថ្មី',
+    'editTitle': 'កែសម្រួលផលិតផល',
+    'backLabel': 'ផលិតផល',
+    'save': 'រក្សាទុកផលិតផល',
+    'delete': 'លុបផលិតផល',
+    'identity': 'អត្តសញ្ញាណ',
+    'identity.d': 'របៀបដាក់ឈ្មោះ និងភ្ជាប់ផលិតផលនេះនៅលើគេហទំព័រ។',
+    'id': 'លេខសម្គាល់',
+    'id.hint': 'ប្រើក្នុង URL ឧ. upvc',
+    'brands': 'ម៉ាក',
+    'brands.hint': 'បំបែកដោយក្បៀស ឧ. Eagle, Lion Head, Smart',
+    'name': 'ឈ្មោះ',
+    'meta': 'បន្ទាត់ Meta',
+    'meta.hint': 'ឧ. Class 13.5 & 8.5 · 1/2"–12" · 4 m lengths',
+    'desc': 'ការពិពណ៌នា និងស្លាក',
+    'desc.d': 'បង្ហាញលើកាតផលិតផល និងទំព័រផលិតផល។',
+    'blurb': 'ការពិពណ៌នា',
+    'tags': 'ស្លាក',
+    'onePerLine': 'មួយក្នុងមួយជួរ',
+    'spec': 'តារាងលក្ខណៈបច្ចេកទេស',
+    'spec.d': 'តារាងបច្ចេកទេសនៅលើទំព័រផលិតផល។',
+    'specTitle': 'ចំណងជើងតារាង',
+    'caption': 'ចំណងជើងរង',
+    'cols': 'ចំណងជើងជួរឈរ',
+    'rows': 'ជួរដេក',
+    'rows.hint': 'មួយជួរក្នុងមួយជួរដេក បំបែកក្រឡាដោយ | — ឧ. 21 | 22 | 1/2" | 22.4 ± 0.2',
+    'appear': 'រូបរាង',
+    'appear.d': 'ក្រាហ្វិក និងពណ៌ដែលប្រើលើគេហទំព័រ។',
+    'color': 'តម្លៃពណ៌',
+    'color.hint': 'token var(--c-…) ឬតម្លៃ hex',
+    'stripe': 'ពណ៌ Stripe',
+    'stripe.hint': 'ស្រេចចិត្ត — ឆ្នូតពណ៌លើក្រាហ្វិក',
+    'legend': 'អត្ថបទលើបំពង់',
+    'legend.hint': 'អត្ថបទបោះពុម្ពលើក្រាហ្វិកបំពង់',
+    'graphic': 'ក្រាហ្វិក',
+    'light': 'ប្រើក្រាហ្វិកបំពង់កំណែស្រាល',
+  },
+}
 
 const BLANK = {
   id: '', name: '', name_km: '', brands: '', color: 'var(--c-upvc)', stripe: '', light: false,
@@ -33,11 +116,13 @@ function toPayload(f) {
 }
 
 export default function AdminProducts() {
+  const { t, fmt, pick, lang } = usePageLang(T)
   const [items, setItems] = useState([])
   const [editing, setEditing] = useState(null) // null | 'new' | product object
   const [form, setForm] = useState(BLANK)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [preview, setPreview] = useState(false)
 
   function load() {
     listProducts().then((r) => setItems(r.items)).catch((e) => setError(String(e)))
@@ -77,97 +162,125 @@ export default function AdminProducts() {
   }
 
   async function remove(p) {
-    if (!confirm(`Delete "${p.name}"? This can't be undone.`)) return
+    if (!confirm(fmt('deleteConfirm', { name: p.name }))) return
     try {
       await deleteProduct(p.id)
+      setEditing(null)
       load()
     } catch (err) {
       setError(String(err))
     }
   }
 
+  const set = (key) => (e) => setForm({ ...form, [key]: e.target.value })
+  const setChecked = (key) => (e) => setForm({ ...form, [key]: e.target.checked })
+
   if (editing) {
     return (
-      <div className="max-w-[760px]">
-        <PageHeader title={editing === 'new' ? 'New product' : `Edit — ${editing.name}`} />
-        {error && <p className="mb-4 rounded-[8px] bg-[#FDECEC] px-3 py-2 text-[.85rem] text-[#C0392B]">{error}</p>}
+      <div className="w-full">
+        <PageHeader
+          title={editing === 'new' ? t('newTitle') : `${t('editTitle')} — ${pick(editing.name, editing.name_km)}`}
+          onBack={cancel}
+          backLabel={t('backLabel')}
+        />
+        {error && <Alert kind="error">{error}</Alert>}
         <form onSubmit={save} className="space-y-5">
-          <Card className="grid grid-cols-2 gap-4">
-            <Field label="ID (used in URLs, e.g. upvc)">
-              <TextInput
-                value={form.id}
-                onChange={(e) => setForm({ ...form, id: e.target.value })}
-                disabled={editing !== 'new'}
-                required
-              />
+          <Section step={1} title={t('identity')} desc={t('identity.d')}>
+            <Field label={t('id')} hint={t('id.hint')} required>
+              <TextInput value={form.id} onChange={set('id')} disabled={editing !== 'new'} required />
             </Field>
-            <Field label="Brands (comma-separated: Eagle, Lion Head, Smart)">
-              <TextInput value={form.brands} onChange={(e) => setForm({ ...form, brands: e.target.value })} required />
+            <Field label={t('brands')} hint={t('brands.hint')} required>
+              <TextInput value={form.brands} onChange={set('brands')} required />
             </Field>
-            <Field label="Name (English)">
-              <TextInput value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
+            <Field label={t('name')} lang="EN" required>
+              <TextInput value={form.name} onChange={set('name')} required />
             </Field>
-            <Field label="Name (Khmer)">
-              <TextInput value={form.name_km} onChange={(e) => setForm({ ...form, name_km: e.target.value })} />
+            <Field label={t('name')} lang="KM">
+              <TextInput value={form.name_km} onChange={set('name_km')} />
             </Field>
-            <Field label="Meta line (English)" hint='e.g. Class 13.5 & 8.5 · 1/2"–12" · 4 m lengths'>
-              <TextInput value={form.meta} onChange={(e) => setForm({ ...form, meta: e.target.value })} />
+            <Field label={t('meta')} lang="EN" hint={t('meta.hint')}>
+              <TextInput value={form.meta} onChange={set('meta')} />
             </Field>
-            <Field label="Meta line (Khmer)">
-              <TextInput value={form.meta_km} onChange={(e) => setForm({ ...form, meta_km: e.target.value })} />
+            <Field label={t('meta')} lang="KM">
+              <TextInput value={form.meta_km} onChange={set('meta_km')} />
             </Field>
-          </Card>
+          </Section>
 
-          <Card className="grid grid-cols-2 gap-4">
-            <Field label="Description (English)">
-              <TextArea rows={4} value={form.blurb} onChange={(e) => setForm({ ...form, blurb: e.target.value })} />
+          <Section step={2} title={t('desc')} desc={t('desc.d')}>
+            <Field label={t('blurb')} lang="EN">
+              <TextArea rows={4} value={form.blurb} onChange={set('blurb')} />
             </Field>
-            <Field label="Description (Khmer)">
-              <TextArea rows={4} value={form.blurb_km} onChange={(e) => setForm({ ...form, blurb_km: e.target.value })} />
+            <Field label={t('blurb')} lang="KM">
+              <TextArea rows={4} value={form.blurb_km} onChange={set('blurb_km')} />
             </Field>
-            <Field label="Tags (English, one per line)">
-              <TextArea rows={4} value={form.tags} onChange={(e) => setForm({ ...form, tags: e.target.value })} />
+            <Field label={t('tags')} lang="EN" hint={t('onePerLine')}>
+              <TextArea rows={4} value={form.tags} onChange={set('tags')} />
             </Field>
-            <Field label="Tags (Khmer, one per line)">
-              <TextArea rows={4} value={form.tags_km} onChange={(e) => setForm({ ...form, tags_km: e.target.value })} />
+            <Field label={t('tags')} lang="KM" hint={t('onePerLine')}>
+              <TextArea rows={4} value={form.tags_km} onChange={set('tags_km')} />
             </Field>
-          </Card>
+          </Section>
 
-          <Card className="grid grid-cols-2 gap-4">
-            <Field label="Spec table title (English)">
-              <TextInput value={form.specTitle} onChange={(e) => setForm({ ...form, specTitle: e.target.value })} />
+          <Section step={3} title={t('spec')} desc={t('spec.d')}>
+            <Field label={t('specTitle')} lang="EN">
+              <TextInput value={form.specTitle} onChange={set('specTitle')} />
             </Field>
-            <Field label="Spec table title (Khmer)">
-              <TextInput value={form.specTitle_km} onChange={(e) => setForm({ ...form, specTitle_km: e.target.value })} />
+            <Field label={t('specTitle')} lang="KM">
+              <TextInput value={form.specTitle_km} onChange={set('specTitle_km')} />
             </Field>
-            <Field label="Caption (English)">
-              <TextInput value={form.caption} onChange={(e) => setForm({ ...form, caption: e.target.value })} />
+            <Field label={t('caption')} lang="EN">
+              <TextInput value={form.caption} onChange={set('caption')} />
             </Field>
-            <Field label="Caption (Khmer)">
-              <TextInput value={form.caption_km} onChange={(e) => setForm({ ...form, caption_km: e.target.value })} />
+            <Field label={t('caption')} lang="KM">
+              <TextInput value={form.caption_km} onChange={set('caption_km')} />
             </Field>
-            <Field label="Columns (one header per line)">
-              <TextArea rows={4} value={form.cols} onChange={(e) => setForm({ ...form, cols: e.target.value })} />
+            <Field label={t('cols')} hint={t('onePerLine')}>
+              <TextArea rows={4} value={form.cols} onChange={set('cols')} />
             </Field>
-            <Field label="Rows (one row per line, cells separated by |)" hint='e.g. 21 | 22 | 1/2" | 22.4 ± 0.2'>
-              <TextArea rows={4} value={form.rows} onChange={(e) => setForm({ ...form, rows: e.target.value })} />
+            <Field label={t('rows')} hint={t('rows.hint')}>
+              <TextArea rows={4} value={form.rows} onChange={set('rows')} />
             </Field>
-          </Card>
+          </Section>
 
-          <Card className="grid grid-cols-2 gap-4">
-            <Field label="Color token" hint="e.g. var(--c-upvc) or a hex value">
-              <TextInput value={form.color} onChange={(e) => setForm({ ...form, color: e.target.value })} />
+          <Section step={4} title={t('appear')} desc={t('appear.d')}>
+            <Field label={t('color')} hint={t('color.hint')}>
+              <SwatchInput value={form.color} onChange={set('color')} />
             </Field>
-            <Field label="Legend text (printed on the pipe graphic)">
-              <TextInput value={form.legend} onChange={(e) => setForm({ ...form, legend: e.target.value })} />
+            <Field label={t('stripe')} hint={t('stripe.hint')}>
+              <SwatchInput value={form.stripe} onChange={set('stripe')} />
             </Field>
-          </Card>
+            <Field label={t('legend')} hint={t('legend.hint')}>
+              <TextInput value={form.legend} onChange={set('legend')} />
+            </Field>
+            <div>
+              <span className="mb-2 block text-[.8rem] font-semibold text-fg/90">{t('graphic')}</span>
+              <Checkbox label={t('light')} checked={form.light} onChange={setChecked('light')} />
+            </div>
+          </Section>
 
-          <div className="flex gap-3">
-            <button type="submit" disabled={busy} className={BTN}>{busy ? 'Saving…' : 'Save'}</button>
-            <button type="button" className={BTN_GHOST} onClick={cancel}>Cancel</button>
-          </div>
+          <ActionBar left={editing !== 'new' && (
+            <button
+              type="button"
+              onClick={() => remove(editing)}
+              className="cursor-pointer border-0 bg-transparent px-2 text-[.84rem] font-semibold text-[#C0392B] hover:underline"
+            >
+              {t('delete')}
+            </button>
+          )}>
+            <button type="button" className={BTN_GHOST} onClick={() => setPreview(true)}>{t('preview')}</button>
+            <button type="button" className={BTN_GHOST} onClick={cancel}>{t('cancel')}</button>
+            <button type="submit" disabled={busy} className={BTN}>{busy ? t('saving') : t('save')}</button>
+          </ActionBar>
         </form>
+        {preview && (
+          <PreviewModal
+            title={editing === 'new' ? t('newTitle') : pick(editing.name, editing.name_km)}
+            subtitle={t('preview')}
+            onClose={() => setPreview(false)}
+          >
+            <ProductPreview p={toPayload(form)} pick={pick} lang={lang} />
+          </PreviewModal>
+        )}
       </div>
     )
   }
@@ -175,29 +288,29 @@ export default function AdminProducts() {
   return (
     <div>
       <PageHeader
-        title="Products"
-        action={<button type="button" className={BTN} onClick={startNew}>New product</button>}
+        title={t('nav.products')}
+        eyebrow={t('eyebrow')}
+        action={<button type="button" className={BTN} onClick={startNew}>{t('new')}</button>}
       />
-      {error && <p className="mb-4 rounded-[8px] bg-[#FDECEC] px-3 py-2 text-[.85rem] text-[#C0392B]">{error}</p>}
+      {error && <Alert kind="error">{error}</Alert>}
       <Card>
         <table className={TABLE}>
           <thead>
             <tr>
-              <th className={TH}>Name</th>
-              <th className={TH}>ID</th>
-              <th className={TH}>Brands</th>
+              <th className={TH}>{t('th.name')}</th>
+              <th className={TH}>{t('th.id')}</th>
+              <th className={TH}>{t('th.brands')}</th>
               <th className={TH}></th>
             </tr>
           </thead>
           <tbody>
             {items.map((p) => (
-              <tr key={p.id}>
-                <td className={TD}>{p.name}</td>
+              <tr key={p.id} className="transition-colors hover:bg-paper-2">
+                <td className={TD}>{pick(p.name, p.name_km)}</td>
                 <td className={TD}>{p.id}</td>
                 <td className={TD}>{(p.brands || []).join(', ')}</td>
-                <td className={`${TD} whitespace-nowrap text-right`}>
-                  <button type="button" className="mr-3 cursor-pointer border-0 bg-transparent text-blue" onClick={() => startEdit(p)}>Edit</button>
-                  <button type="button" className="cursor-pointer border-0 bg-transparent text-[#C0392B]" onClick={() => remove(p)}>Delete</button>
+                <td className={`${TD} whitespace-nowrap`}>
+                  <RowActions onEdit={() => startEdit(p)} onDelete={() => remove(p)} />
                 </td>
               </tr>
             ))}

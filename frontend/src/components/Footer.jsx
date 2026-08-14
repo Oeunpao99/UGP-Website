@@ -1,10 +1,29 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getMeta } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
 
 export default function Footer() {
   const { t, lang } = useI18n()
+  const [meta, setMeta] = useState(null)
   const year = new Date().getFullYear()
+
+  useEffect(() => {
+    let alive = true
+    getMeta()
+      .then((m) => alive && setMeta(m))
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  const phone = meta?.phone || '+855 (0)23 939 399'
+  const phoneTel = meta?.phone_tel || '+85523939399'
+  const email = meta?.email || 'sales@upgpipe.com'
+  const ho1 = meta?.head_office?.line1 || 'Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh'
+  const ho2 = meta?.head_office?.line2
   return (
     <footer className="bg-ink pt-[clamp(56px,6vw,80px)] text-white/[0.68]">
       <div className="shell">
@@ -23,6 +42,23 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-[18px] max-w-[34ch] text-[.92rem]">{t('footer.tagline')}</p>
+            <div className="mt-[18px] max-w-[34ch] space-y-[8px] text-[.9rem]">
+              <a className="block transition-colors hover:text-yellow" href={`tel:${phoneTel}`}>
+                {phone}
+              </a>
+              <a className="block transition-colors hover:text-yellow" href={`mailto:${email}`}>
+                {email}
+              </a>
+              <span className="block leading-snug">
+                {ho1}
+                {ho2 && (
+                  <>
+                    <br />
+                    {ho2}
+                  </>
+                )}
+              </span>
+            </div>
             <div className="mt-[18px] flex gap-[10px]">
               <Link to={loc(lang, '/contact')} aria-label="Website" className="grid h-[38px] w-[38px] place-items-center rounded-[10px] border border-white/[0.18] transition-all duration-200 hover:border-yellow hover:bg-yellow hover:text-ink">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-[17px] w-[17px]">

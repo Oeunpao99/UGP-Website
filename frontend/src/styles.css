@@ -17,7 +17,7 @@
   --body:'Space Grotesk',system-ui,sans-serif;
   --mono:'Space Grotesk',ui-monospace,monospace;
   --kh:'Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
-  --kh-head:'Khmer OS Moul Light','Khmer OS Moul','Moul','Kantumruy Pro','Noto Sans Khmer',serif;
+  --kh-head:'Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
   --ease:cubic-bezier(.22,.8,.28,1);
 }
 @keyframes rise{
@@ -79,7 +79,7 @@
     margin:0 0 18px;
   }
   .eyebrow::before{content:"";width:26px;height:3px;background:var(--yellow);flex:none;border-radius:2px}
-  .eyebrow .kh{letter-spacing:0;font-size:.92rem;opacity:.65;text-transform:none}
+  .eyebrow .kh{letter-spacing:0;font-size:.68rem;opacity:.65;text-transform:none}
   .on-dark .eyebrow{color:var(--yellow)}
 
   .lead{font-size:clamp(1.02rem,1.5vw,1.16rem);color:var(--grey);max-width:62ch}
@@ -189,6 +189,16 @@ body.lang-km .font-mono,body.lang-km .font-display,body.lang-km .eyebrow,body.la
 }
 body.lang-km header nav a{font-size:.82rem;letter-spacing:0;font-weight:500}
 body.lang-km .logo-text{font-family:var(--display)}
+
+/* Admin page titles must keep their compact size in Khmer mode (public h1 clamp shouldn't apply) */
+body.lang-km h1.admin-h1{font-size:1.55rem;font-weight:700;letter-spacing:-.025em;line-height:1.2}
+
+/* Khmer glyphs run larger than Latin at the same px — tighten Careers text */
+body.lang-km .job-row b{font-size:.8rem;font-weight:600;line-height:1.6}
+body.lang-km .job-row .job-dept{font-size:.64rem}
+body.lang-km .job-row .job-loc{font-size:.57rem}
+body.lang-km .job-row h4{font-size:.72rem}
+body.lang-km .job-row li{font-size:.72rem;line-height:1.75}
 
 /* ============================================================
    Dark theme — toggled by <html class="theme-dark">

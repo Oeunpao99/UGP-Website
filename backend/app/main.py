@@ -4,10 +4,12 @@ FastAPI application. In production the built React app is served from
 FRONTEND_DIST; in development this runs API-only and Vite proxies /api.
 """
 import os
+import shutil
+import uuid
 from pathlib import Path
 from urllib.parse import quote
 
-from fastapi import Depends, FastAPI, HTTPException, Query, Response
+from fastapi import Depends, FastAPI, File, HTTPException, Query, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -48,9 +50,36 @@ cors_origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ------------------------------------------------------------------
+# Uploaded images (client logos, event covers, team portraits).
+# Mounted unconditionally so /uploads works in dev (Vite proxy) and prod.
+# ------------------------------------------------------------------
+UPLOAD_DIR = Path(
+    os.getenv("UPLOAD_DIR", os.path.join(os.path.dirname(__file__), "..", "uploads"))
+).resolve()
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+_ALLOWED_IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+
+@app.post("/api/admin/upload")
+async def admin_upload(file: UploadFile = File(...), admin: dict = Depends(auth.get_current_admin)) -> dict:
+    ext = Path(file.filename or "").suffix.lower()
+    if ext not in _ALLOWED_IMAGE_EXTS:
+        raise HTTPException(
+            status_code=415,
+            detail="Only image files are allowed: png, jpg, jpeg, webp, gif, svg",
+        )
+    name = f"{uuid.uuid4().hex}{ext}"
+    dest = UPLOAD_DIR / name
+    with dest.open("wb") as fh:
+        shutil.copyfileobj(file.file, fh)
+    return {"url": f"/uploads/{name}", "name": name}
 
 
 @app.on_event("startup")
@@ -173,7 +202,14 @@ def get_jobs(lang: str = Query(default="en")) -> dict:
 @app.get("/api/clients")
 def get_clients() -> dict:
     return {
-        "items": [{"name": c["name"], "international": bool(c["international"])} for c in db.list_clients()]
+        "items": [
+            {
+                "name": c["name"],
+                "international": bool(c["international"]),
+                "logo": c.get("logo") or "",
+            }
+            for c in db.list_clients()
+        ]
     }
 
 
@@ -359,12 +395,12 @@ def admin_list_clients(admin: dict = Depends(auth.get_current_admin)) -> dict:
 
 @app.post("/api/admin/clients")
 def admin_create_client(item: ClientIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
-    return db.create_client(item.name, item.international)
+    return db.create_client(item.name, item.international, item.logo)
 
 
 @app.put("/api/admin/clients/{client_id}")
 def admin_update_client(client_id: int, item: ClientIn, admin: dict = Depends(auth.get_current_admin)) -> dict:
-    if not db.update_client(client_id, item.name, item.international):
+    if not db.update_client(client_id, item.name, item.international, item.logo):
         raise HTTPException(status_code=404, detail="Client not found")
     return {"ok": True}
 

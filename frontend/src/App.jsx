@@ -9,8 +9,11 @@ import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
+import FactDetail from './pages/FactDetail'
+import FeatureDetail from './pages/FeatureDetail'
 import Careers from './pages/Careers'
 import Contact from './pages/Contact'
+import AdminApp from './admin/AdminApp'
 import { useI18n } from './i18n'
 
 function RootRedirect() {
@@ -51,7 +54,7 @@ function PageEffects() {
   return null
 }
 
-export default function App() {
+function PublicSite() {
   return (
     <>
       <PageEffects />
@@ -67,6 +70,8 @@ export default function App() {
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="events" element={<Events />} />
             <Route path="events/:id" element={<EventDetail />} />
+            <Route path="facts/:id" element={<FactDetail />} />
+            <Route path="features/:id" element={<FeatureDetail />} />
             <Route path="careers" element={<Careers />} />
             <Route path="contact" element={<Contact />} />
           </Route>
@@ -77,4 +82,17 @@ export default function App() {
       <Chatbot />
     </>
   )
+}
+
+export default function App() {
+  const { pathname } = useLocation()
+
+  // Resolved before any <Routes> tree is built, so the admin area never
+  // competes with the public "/:locale" pattern in React Router's route
+  // ranking — "/admin/products" would otherwise also match ":locale=admin"
+  // + "products" and (depending on ranking) could beat "/admin/*".
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return <AdminApp />
+  }
+  return <PublicSite />
 }

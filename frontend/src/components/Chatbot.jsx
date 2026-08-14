@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { sendChat } from '../api'
+import { authMe, googleSignIn, sendChat } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
 
 const QUICK_KEYS = ['chat.q1', 'chat.q2', 'chat.q3', 'chat.q4']
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || ''
 
 const PAGE_KEY = {
   '/products': 'nav.products',
@@ -24,8 +25,16 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([])
   const [teaser, setTeaser] = useState(false)
   const [teaserGone, setTeaserGone] = useState(false)
+  const [signedIn, setSignedIn] = useState('unknown') // 'unknown' | 'no' | 'yes'
   const logRef = useRef(null)
   const inputRef = useRef(null)
+  const signinRef = useRef(null)
+
+  useEffect(() => {
+    authMe()
+      .then(() => setSignedIn('yes'))
+      .catch(() => setSignedIn('no'))
+  }, [])
 
   useEffect(() => {
     const t1 = setTimeout(() => setTeaser(true), 2200)
@@ -42,6 +51,43 @@ export default function Chatbot() {
   useEffect(() => {
     if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight
   }, [messages, busy])
+
+  // Render the Google sign-in button once the panel is open, the visitor
+  // isn't signed in yet, and the GSI script has finished loading.
+  useEffect(() => {
+    if (!open || signedIn !== 'no' || !GOOGLE_CLIENT_ID) return
+    let cancelled = false
+    let tries = 0
+    const tryRender = () => {
+      if (cancelled) return
+      if (window.google?.accounts?.id && signinRef.current) {
+        window.google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleCredential })
+        signinRef.current.innerHTML = ''
+        window.google.accounts.id.renderButton(signinRef.current, { theme: 'outline', size: 'large', width: 260 })
+        return
+      }
+      if (tries++ < 40) setTimeout(tryRender, 150)
+    }
+    tryRender()
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, signedIn])
+
+  async function handleCredential(response) {
+    try {
+      await googleSignIn(response.credential)
+      setSignedIn('yes')
+      if (!greeted) {
+        setGreeted(true)
+        push(t('chat.greet'), 'bot')
+      }
+      setTimeout(() => inputRef.current?.focus(), 120)
+    } catch {
+      // leave signedIn as 'no' — the sign-in button stays available to retry
+    }
+  }
 
   const push = (text, who, links = []) => setMessages((m) => [...m, { text, who, links }])
 
@@ -66,7 +112,7 @@ export default function Chatbot() {
     setOpen(true)
     setTeaser(false)
     setTeaserGone(true)
-    if (!greeted) {
+    if (signedIn === 'yes' && !greeted) {
       setGreeted(true)
       push(t('chat.greet'), 'bot')
     }
@@ -166,92 +212,108 @@ export default function Chatbot() {
           </button>
         </div>
 
-        <div className="flex flex-1 scroll-smooth flex-col gap-[13px] overflow-y-auto bg-paper px-[18px] py-5" ref={logRef} aria-live="polite">
-          {messages.map((m, i) => (
-            <div
-              className={`max-w-[84%] rounded-[15px] px-[15px] py-3 text-[.92rem] leading-[1.55] break-words whitespace-pre-wrap ${
-                m.who === 'me'
-                  ? 'self-end rounded-br-[5px] bg-blue text-white'
-                  : 'self-start rounded-bl-[5px] border border-line bg-card'
-              }`}
-              key={i}
-            >
-              {m.text}
-              {m.who === 'bot' && m.links?.length > 0 && (
-                <span className="mt-[10px] flex flex-wrap gap-[7px]">
-                  {m.links.map((l, j) => (
-                    <button
-                      type="button"
-                      key={j}
-                      onClick={() => go(l.to)}
-                      className="cursor-pointer rounded-full border border-line-strong bg-paper px-[11px] py-[6px] text-[.78rem] font-semibold text-ink transition-colors duration-150 hover:border-ink hover:bg-ink hover:text-white"
-                    >
-                      {PAGE_KEY[l.to] ? t(PAGE_KEY[l.to]) : l.label}
-                      <span className="ar"> →</span>
-                    </button>
-                  ))}
-                </span>
+        {signedIn !== 'yes' ? (
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 bg-paper px-[28px] py-8 text-center">
+            <h3 className="m-0 font-display text-[1.05rem] font-bold">{t('chat.signin.title')}</h3>
+            <p className="m-0 text-[.88rem] leading-snug text-grey">{t('chat.signin.body')}</p>
+            {GOOGLE_CLIENT_ID ? (
+              <div ref={signinRef} />
+            ) : (
+              <p className="m-0 rounded-[10px] border border-line bg-card px-4 py-3 text-[.82rem] text-grey">
+                {t('chat.signin.unavailable')}
+              </p>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-1 scroll-smooth flex-col gap-[13px] overflow-y-auto bg-paper px-[18px] py-5" ref={logRef} aria-live="polite">
+              {messages.map((m, i) => (
+                <div
+                  className={`max-w-[84%] rounded-[15px] px-[15px] py-3 text-[.92rem] leading-[1.55] break-words whitespace-pre-wrap ${
+                    m.who === 'me'
+                      ? 'self-end rounded-br-[5px] bg-blue text-white'
+                      : 'self-start rounded-bl-[5px] border border-line bg-card'
+                  }`}
+                  key={i}
+                >
+                  {m.text}
+                  {m.who === 'bot' && m.links?.length > 0 && (
+                    <span className="mt-[10px] flex flex-wrap gap-[7px]">
+                      {m.links.map((l, j) => (
+                        <button
+                          type="button"
+                          key={j}
+                          onClick={() => go(l.to)}
+                          className="cursor-pointer rounded-full border border-line-strong bg-paper px-[11px] py-[6px] text-[.78rem] font-semibold text-ink transition-colors duration-150 hover:border-ink hover:bg-ink hover:text-white"
+                        >
+                          {PAGE_KEY[l.to] ? t(PAGE_KEY[l.to]) : l.label}
+                          <span className="ar"> →</span>
+                        </button>
+                      ))}
+                    </span>
+                  )}
+                </div>
+              ))}
+              {busy && (
+                <div className="self-start flex gap-[5px] rounded-[15px] rounded-bl-[5px] border border-line bg-card px-4 py-[14px]">
+                  <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" />
+                  <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" style={{ animationDelay: '.15s' }} />
+                  <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" style={{ animationDelay: '.3s' }} />
+                </div>
               )}
             </div>
-          ))}
-          {busy && (
-            <div className="self-start flex gap-[5px] rounded-[15px] rounded-bl-[5px] border border-line bg-card px-4 py-[14px]">
-              <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" />
-              <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" style={{ animationDelay: '.15s' }} />
-              <i className="h-[7px] w-[7px] animate-dotBounce rounded-full bg-grey" style={{ animationDelay: '.3s' }} />
-            </div>
-          )}
-        </div>
 
-        {greeted && messages.length === 1 && (
-          <div className="flex flex-wrap gap-2 bg-paper px-[18px] pb-3">
-            {QUICK_KEYS.map((k) => {
-              const q = t(k)
-              return (
-                <button
-                  type="button"
-                  key={k}
-                  onClick={() => {
-                    push(q, 'me')
-                    ask(q)
-                  }}
-                  className="cursor-pointer rounded-full border border-line-strong bg-card px-[13px] py-2 text-[.79rem] transition-all duration-150 hover:border-ink hover:bg-ink hover:text-white"
+            {greeted && messages.length === 1 && (
+              <div className="flex flex-wrap gap-2 bg-paper px-[18px] pb-3">
+                {QUICK_KEYS.map((k) => {
+                  const q = t(k)
+                  return (
+                    <button
+                      type="button"
+                      key={k}
+                      onClick={() => {
+                        push(q, 'me')
+                        ask(q)
+                      }}
+                      className="cursor-pointer rounded-full border border-line-strong bg-card px-[13px] py-2 text-[.79rem] transition-all duration-150 hover:border-ink hover:bg-ink hover:text-white"
+                    >
+                      {q}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+
+            <form className="flex gap-[9px] border-t border-line bg-card p-[13px]" onSubmit={submit}>
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t('chat.ph')}
+                autoComplete="off"
+                aria-label={t('chat.ph')}
+                className="flex-1 rounded-full border border-line-strong bg-paper px-[15px] py-3 text-[.92rem] focus:border-blue focus:bg-card focus:outline-none"
+              />
+              <button
+                type="submit"
+                aria-label="Send"
+                className="grid h-[46px] w-[46px] flex-none cursor-pointer place-items-center rounded-full border-0 bg-yellow transition-all duration-200 hover:scale-105 hover:bg-ink hover:text-white"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-[19px] w-[19px]"
                 >
-                  {q}
-                </button>
-              )
-            })}
-          </div>
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" />
+                </svg>
+              </button>
+            </form>
+          </>
         )}
-
-        <form className="flex gap-[9px] border-t border-line bg-card p-[13px]" onSubmit={submit}>
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={t('chat.ph')}
-            autoComplete="off"
-            aria-label={t('chat.ph')}
-            className="flex-1 rounded-full border border-line-strong bg-paper px-[15px] py-3 text-[.92rem] focus:border-blue focus:bg-card focus:outline-none"
-          />
-          <button
-            type="submit"
-            aria-label="Send"
-            className="grid h-[46px] w-[46px] flex-none cursor-pointer place-items-center rounded-full border-0 bg-yellow transition-all duration-200 hover:scale-105 hover:bg-ink hover:text-white"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-[19px] w-[19px]"
-            >
-              <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" />
-            </svg>
-          </button>
-        </form>
       </div>
     </>
   )

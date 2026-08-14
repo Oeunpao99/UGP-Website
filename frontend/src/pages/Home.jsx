@@ -8,6 +8,7 @@ import ClientMarquee from '../components/ClientMarquee'
 import { getClients, getProducts } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
+import { FACTS, FEATURES } from './homeDetails'
 
 const HERO_PIPES = [
   { color: 'var(--c-hdpe)', stripe: '#FFD100', h: '62%', d: 0.05, legend: 'EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA' },
@@ -57,22 +58,6 @@ const BRANDS = [
       </>
     ),
   },
-]
-
-const FEATS = [
-  { tKey: 'home.feat1.t', bKey: 'home.feat1.b', svg: <path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z" /> },
-  { tKey: 'home.feat2.t', bKey: 'home.feat2.b', svg: <path d="M12 21s-7-4.4-7-10a7 7 0 0 1 14 0c0 5.6-7 10-7 10Z" /> },
-  { tKey: 'home.feat3.t', bKey: 'home.feat3.b', svg: <circle cx="12" cy="12" r="4" /> },
-  { tKey: 'home.feat4.t', bKey: 'home.feat4.b', svg: <path d="M8.5 14.5A5 5 0 0 1 12 6a5 5 0 0 1 3.5 8.5" /> },
-  { tKey: 'home.feat5.t', bKey: 'home.feat5.b', svg: <path d="M3 7h18M3 12h18M3 17h18" /> },
-  { tKey: 'home.feat6.t', bKey: 'home.feat6.b', svg: <path d="M3 3h18v18H3z" /> },
-]
-
-const STATS = [
-  { n: '2016', kKey: 'home.stat1.k', dKey: 'home.stat1.d' },
-  { n: '177', kKey: 'home.stat2.k', dKey: 'home.stat2.d' },
-  { n: '1st', kKey: 'home.stat3.k', dKey: 'home.stat3.d' },
-  { n: '400mm', kKey: 'home.stat4.k', dKey: 'home.stat4.d' },
 ]
 
 export default function Home() {
@@ -249,29 +234,70 @@ export default function Home() {
             }
             lead={t('home.why.lead')}
           />
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(238px,1fr))] gap-[2px] overflow-hidden rounded-[14px] bg-line">
-            {FEATS.map((f, i) => (
-              <Reveal className="bg-ink-2 px-[26px] py-[30px]" key={i}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="mb-4 h-[30px] w-[30px] text-yellow">
-                  {f.svg}
-                </svg>
-                <h4 className="mb-2 font-display text-[1.06rem] font-bold">{t(f.tKey)}</h4>
-                <p className="m-0 text-[.9rem] text-white/[0.66]">{t(f.bKey)}</p>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(238px,1fr))] gap-[2px] overflow-hidden rounded-[14px] bg-white/[0.16]">
+            {FEATURES.map((f, i) => (
+              <Reveal className="bg-ink-2 transition-colors duration-300 ease-brand hover:bg-ink" key={f.id} as="div">
+                <Link to={loc(lang, `/features/${f.id}`)} className="group block h-full">
+                  <div className="relative h-[128px] overflow-hidden">
+                    <img
+                      src={f.img}
+                      alt={f.t[lang]}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-ink-2 to-transparent" />
+                    <span className="absolute right-3 bottom-2 font-mono text-[.66rem] tracking-[.14em] text-white/50">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <div className="px-[26px] pt-5 pb-[30px]">
+                    <h4 className="mb-2 font-display text-[1.06rem] font-bold">{f.t[lang]}</h4>
+                    <p className="m-0 text-[.9rem] text-white/[0.66]">{f.b[lang]}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 font-mono text-[.7rem] uppercase tracking-[.16em] text-yellow">
+                      {t('info.detail')} <span className="ar">→</span>
+                    </span>
+                  </div>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="grid grid-cols-1 gap-[1px] bg-white/[0.16] sm:grid-cols-2 lg:grid-cols-4">
-        {STATS.map((s, i) => (
-          <div className="bg-ink px-[26px] py-[34px]" key={i}>
-            <b className="block font-display text-[clamp(1.75rem,3vw,2.3rem)] font-extrabold leading-none text-yellow">{s.n}</b>
-            <span className="font-mono text-[.7rem] uppercase tracking-[.14em] text-white/60">{t(s.kKey)}</span>
-            <p className="mb-0 mt-[10px] text-[.88rem] text-white/[0.68]">{t(s.dKey)}</p>
+      <section>
+        <div className="shell">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {FACTS.map((f) => (
+              <Link
+                to={loc(lang, `/facts/${f.id}`)}
+                className="group relative block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
+                key={f.id}
+              >
+                <div className="relative h-[150px] overflow-hidden">
+                  <img
+                    src={f.img}
+                    alt={f.k[lang]}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
+                  />
+                  <span className="absolute top-3 right-3 rounded-[6px] bg-ink/70 px-2 py-1 font-mono text-[.62rem] tracking-[.14em] text-white/70 backdrop-blur">
+                    {t('info.detail')}
+                  </span>
+                </div>
+                <div className="px-[22px] py-5">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <b className="font-display text-[1.9rem] font-extrabold leading-none" style={{ color: f.color }}>
+                      {f.n}
+                    </b>
+                    <span className="font-mono text-[.68rem] uppercase tracking-[.14em] text-grey">{f.k[lang]}</span>
+                  </div>
+                  <p className="mb-0 mt-2 text-[.9rem] text-grey">{f.d[lang]}</p>
+                </div>
+              </Link>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
 
       <section className="band">
         <div className="shell">

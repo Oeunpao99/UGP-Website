@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { sendQuote } from '../api'
+import { sendQuote, getMeta } from '../api'
 import { useI18n } from '../i18n'
 
 const PRODUCT_OPTIONS = [
@@ -52,6 +52,25 @@ export default function Contact() {
   })
   const [sent, setSent] = useState(null) // {ok, mailto, errorText}
   const [busy, setBusy] = useState(false)
+  const [meta, setMeta] = useState(null)
+
+  useEffect(() => {
+    let alive = true
+    getMeta()
+      .then((m) => alive && setMeta(m))
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  const phone = meta?.phone || '+855 (0)23 939 399'
+  const phoneTel = meta?.phone_tel || '+85523939399'
+  const email = meta?.email || 'sales@upgpipe.com'
+  const ho1 = meta?.head_office?.line1 || 'Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh'
+  const ho2 = meta?.head_office?.line2
+  const fac1 = meta?.factory?.line1 || 'Phoum Por Mongkoul, Sangkat Prek Phnov, Khan Prek Phnov, Phnom Penh'
+  const fac2 = meta?.factory?.line2
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
@@ -212,8 +231,8 @@ export default function Contact() {
                   </svg>
                   <div>
                     <span className="mb-[3px] block font-mono text-[.66rem] uppercase tracking-[.15em] text-white/55">{t('contact.info.sales')}</span>
-                    <a className="text-[.96rem] leading-[1.5] hover:text-yellow" href="tel:+85523939399">
-                      +855 (0)23 939 399
+                    <a className="text-[.96rem] leading-[1.5] hover:text-yellow" href={`tel:${phoneTel}`}>
+                      {phone}
                     </a>
                   </div>
                 </div>
@@ -224,8 +243,8 @@ export default function Contact() {
                   </svg>
                   <div>
                     <span className="mb-[3px] block font-mono text-[.66rem] uppercase tracking-[.15em] text-white/55">{t('contact.info.email')}</span>
-                    <a className="text-[.96rem] leading-[1.5] hover:text-yellow" href="mailto:sales@upgpipe.com">
-                      sales@upgpipe.com
+                    <a className="text-[.96rem] leading-[1.5] hover:text-yellow" href={`mailto:${email}`}>
+                      {email}
                     </a>
                   </div>
                 </div>
@@ -236,10 +255,16 @@ export default function Contact() {
                   </svg>
                   <div>
                     <span className="mb-[3px] block font-mono text-[.66rem] uppercase tracking-[.15em] text-white/55">{t('contact.info.hours')}</span>
-                    <span className="text-[.96rem] leading-[1.5]">
-                      {t('contact.info.hours.v1')}
-                      <br />
-                      {t('contact.info.hours.v2')}
+                    <span className="whitespace-pre-line text-[.96rem] leading-[1.5]">
+                      {meta?.office_hours ? (
+                        meta.office_hours
+                      ) : (
+                        <>
+                          {t('contact.info.hours.v1')}
+                          <br />
+                          {t('contact.info.hours.v2')}
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -254,7 +279,13 @@ export default function Contact() {
                   <div>
                     <span className="mb-[3px] block font-mono text-[.66rem] uppercase tracking-[.15em] text-white/55">{t('contact.info.ho')}</span>
                     <span className="text-[.96rem] leading-[1.5]">
-                      Building #6, St. 289, Sangkat Boeung Kak 2, Khan Toul Kork, Phnom Penh
+                      {ho1}
+                      {ho2 && (
+                        <>
+                          <br />
+                          {ho2}
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -265,7 +296,13 @@ export default function Contact() {
                   <div>
                     <span className="mb-[3px] block font-mono text-[.66rem] uppercase tracking-[.15em] text-white/55">{t('contact.info.factory')}</span>
                     <span className="text-[.96rem] leading-[1.5]">
-                      Phoum Por Mongkoul, Sangkat Prek Phnov, Khan Prek Phnov, Phnom Penh
+                      {fac1}
+                      {fac2 && (
+                        <>
+                          <br />
+                          {fac2}
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>

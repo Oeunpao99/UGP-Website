@@ -122,6 +122,16 @@ export default function EventDetail() {
         </div>
       </section>
 
+      {e.img && (
+        <section className="pt-0">
+          <div className="shell">
+            <div className="overflow-hidden rounded-[14px] border border-line">
+              <img src={e.img} alt={e.t} loading="lazy" className="max-h-[420px] w-full object-cover" />
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="tight">
         <div className="shell grid grid-cols-1 gap-[26px] lg:grid-cols-[1.4fr_.6fr]">
           <div>
