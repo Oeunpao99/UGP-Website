@@ -449,7 +449,13 @@ if _STATIC and Path(_STATIC).exists():
         # Client-side routes (e.g. /products, /about) have no server-side
         # file, so any non-API path falls back to the SPA shell and React
         # Router takes it from there. Unmatched /api/* calls fall through
-        # to a real 404 instead of the HTML shell.
+        # to a real 404 instead of the HTML shell. Anything else that
+        # matches a real file under the build output (images, favicon,
+        # etc. — everything Vite copied from frontend/public) is served
+        # as that file instead of the SPA shell.
         if full_path.startswith("api/"):
             raise HTTPException(status_code=404, detail="Not found")
+        candidate = (_root / full_path).resolve()
+        if candidate.is_file() and _root in candidate.parents:
+            return FileResponse(candidate)
         return FileResponse(_root / "index.html")
