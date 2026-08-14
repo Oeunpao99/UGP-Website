@@ -26,7 +26,7 @@ export default function Careers() {
 
   return (
     <>
-      <section className="dark on-dark tight">
+      <section className="dark on-dark tight page-hero" style={{ '--hero-img': "url('/images/heroes/careers.jpg')" }}>
         <div className="shell">
           <p className="eyebrow text-yellow">
             {t('nav.careers')} <span className="kh">{tAlt('nav.careers')}</span>

@@ -93,7 +93,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="tight">
+      <section className="dark on-dark tight page-hero" style={{ '--hero-img': "url('/images/heroes/contact.jpg')" }}>
         <div className="shell">
           <p className="eyebrow">
             {t('nav.contact')} <span className="kh">{tAlt('nav.contact')}</span>

@@ -640,4 +640,16 @@ META = {
         "expires": "21 March 2027",
         "first_certified": "2017",
     },
+    "team": [
+        {"name": "Rin Sokha", "name_km": "រិន សុខា", "role": "Chief Executive Officer", "role_km": "នាយកប្រតិបត្តិ", "color": "#0B57A4", "img": "/images/team/p1.png"},
+        {"name": "Ly Channarith", "name_km": "លី ចន្នីរិទ្ធ", "role": "Executive Assistant to the CEO", "role_km": "ជំនួយការនាយកប្រតិបត្តិ", "color": "#12A150", "img": "/images/team/p2.png"},
+        {"name": "Sao Sokheng", "name_km": "សាវ សុខេង", "role": "Head of Sales", "role_km": "ប្រធានផ្នែកលក់", "color": "#E0A106", "img": "/images/team/p3.png"},
+        {"name": "Khun Kimheng", "name_km": "ខុន គឹមហេង", "role": "Head of Quality", "role_km": "ប្រធានផ្នែកគុណភាព", "color": "#2278CA", "img": "/images/team/p4.png"},
+        {"name": "Chan Sreyroth", "name_km": "ចាន់ ស្រីរតន៍", "role": "Head of HR", "role_km": "ប្រធានផ្នែកធនធានមនុស្ស", "color": "#E4002B", "img": ""},
+        {"name": "Heng Dara", "name_km": "ហេង ដារា", "role": "Head of Warehouse & Logistics", "role_km": "ប្រធានផ្នែកឃ្លាំង និងភស្តុភារ", "color": "#0C3466", "img": ""},
+        {"name": "Chea Sovannara", "name_km": "ជា សុវណ្ណារ៉ា", "role": "Head of R&D & Technical", "role_km": "ប្រធានផ្នែកបច្ចេកទេស និងស្រាវជ្រាវ", "color": "#2BA7E0", "img": ""},
+        {"name": "Kong Sopheak", "name_km": "គង់ សុភ័ក្ត្រ", "role": "Head of Finance", "role_km": "ប្រធានផ្នែកហិរញ្ញវត្ថុ", "color": "#F2B705", "img": ""},
+        {"name": "Meng Sopheap", "name_km": "ម៉េង សុភាព", "role": "Head of Marketing", "role_km": "ប្រធានផ្នែកទីផ្សារ", "color": "#07213F", "img": ""},
+        {"name": "Thoun Vibol", "name_km": "ធន់ វិបុល", "role": "Head of Production", "role_km": "ប្រធានផ្នែកផលិតកម្ម", "color": "#C70F2D", "img": ""},
+    ],
 }

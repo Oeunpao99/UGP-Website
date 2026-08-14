@@ -136,8 +136,10 @@
 
   /* hero background art */
   .hero{
-    position:relative;overflow:hidden;background:var(--ink);color:#fff;
-    padding:clamp(56px,7vw,96px) 0 0;
+    position:relative;overflow:hidden;background-color:var(--ink);color:#fff;
+    background-image:linear-gradient(90deg,rgba(7,33,63,.97) 0%,rgba(7,33,63,.93) 26%,rgba(7,33,63,.68) 46%,rgba(7,33,63,.28) 68%,rgba(7,33,63,.04) 90%),var(--hero-img,none);
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    padding:clamp(76px,9vw,128px) 0 clamp(24px,3vw,36px);
   }
   .hero::before{ /* concentric bore rings */
     content:"";position:absolute;inset:-30% -10% auto auto;width:920px;height:920px;
@@ -149,6 +151,20 @@
     background:var(--yellow);clip-path:polygon(0 0,100% 0,0 100%);opacity:.95;pointer-events:none;
   }
   .hero .shell{position:relative;z-index:2}
+
+  /* page-top hero background image slot — pass a photo via
+     style={{ '--hero-img': "url('/images/heroes/x.jpg')" }}; with no
+     image set it falls back to the plain dark scrim (no broken-image state) */
+  .page-hero{
+    position:relative;background-color:var(--ink);
+    background-image:linear-gradient(90deg,rgba(7,33,63,.97) 0%,rgba(7,33,63,.93) 30%,rgba(7,33,63,.7) 50%,rgba(7,33,63,.3) 72%,rgba(7,33,63,.06) 92%),var(--hero-img,none);
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    min-height:clamp(360px,36vw,500px);display:flex;align-items:center;
+  }
+  @media (max-width:760px){
+    /* on narrow screens the text block spans the full width, so keep the whole photo dimmed for legibility */
+    .page-hero,.hero{background-image:linear-gradient(90deg,rgba(7,33,63,.94),rgba(7,33,63,.86)),var(--hero-img,none)}
+  }
 
   /* decorative repeating patterns */
   .ring-circle{
@@ -176,7 +192,7 @@
    ============================================================ */
 body.lang-km{font-family:'Space Grotesk',var(--kh)}
 body.lang-km :is(h1,h2,h3,h4){
-  font-family:'Space Grotesk',var(--kh-head);font-weight:400;
+  font-family:'Space Grotesk',var(--kh-head);font-weight:700;
   font-variation-settings:normal;letter-spacing:0;line-height:1.55;
 }
 body.lang-km h1{font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 3px)}

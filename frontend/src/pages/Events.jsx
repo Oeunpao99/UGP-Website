@@ -59,7 +59,7 @@ export default function Events() {
 
   return (
     <>
-      <section className="tight">
+      <section className="dark on-dark tight page-hero" style={{ '--hero-img': "url('/images/heroes/events.jpg')" }}>
         <div className="shell">
           <p className="eyebrow">
             {t('nav.events')} <span className="kh">{tAlt('nav.events')}</span>

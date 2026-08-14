@@ -32,6 +32,10 @@ const T = {
     'onePerLine': 'One per line',
     'cert': 'Certificate',
     'cert.d': 'The ISO / TÜV certificate details.',
+    'certImage': 'Certificate photo',
+    'certImage.hint': 'A clear scan or photo of the certificate — shown large on the About page.',
+    'certDescription': 'Description',
+    'certDescription.hint': 'Shown as the intro paragraph above the certificate on the About page.',
     'certStandard': 'Standard',
     'certNumber': 'Number',
     'certRegistrar': 'Registrar',
@@ -80,6 +84,10 @@ const T = {
     'onePerLine': 'មួយក្នុងមួយជួរ',
     'cert': 'វិញ្ញាបនបត្រ',
     'cert.d': 'ព័ត៌មានលម្អិតវិញ្ញាបនបត្រ ISO / TÜV។',
+    'certImage': 'រូបភាពវិញ្ញាបនបត្រ',
+    'certImage.hint': 'រូបថត ឬស្កេនច្បាស់នៃវិញ្ញាបនបត្រ — បង្ហាញធំនៅលើទំព័រអំពីយើង។',
+    'certDescription': 'ការពិពណ៌នា',
+    'certDescription.hint': 'បង្ហាញជាកថាខណ្ឌណែនាំខាងលើវិញ្ញាបនបត្រនៅលើទំព័រអំពីយើង។',
     'certStandard': 'ស្តង់ដារ',
     'certNumber': 'លេខ',
     'certRegistrar': 'Registrar',
@@ -107,6 +115,7 @@ const BLANK = {
   ho_line1: '', ho_line2: '', factory_line1: '', factory_line2: '',
   staff_head_office: '', staff_factory: '', staff_total: '', founded: '',
   sizes_rail: '',
+  cert_image: '', cert_description: '', cert_description_km: '',
   cert_standard: '', cert_number: '', cert_registrar: '', cert_scope: '', cert_issued: '', cert_expires: '', cert_first: '',
   team: [],
 }
@@ -140,6 +149,8 @@ function toForm(meta) {
     staff_head_office: meta.staff_head_office ?? '', staff_factory: meta.staff_factory ?? '',
     staff_total: meta.staff_total ?? '', founded: meta.founded || '',
     sizes_rail: (meta.sizes_rail || []).join('\n'),
+    cert_image: meta.certificate?.image || '',
+    cert_description: meta.certificate?.description || '', cert_description_km: meta.certificate?.description_km || '',
     cert_standard: meta.certificate?.standard || '', cert_number: meta.certificate?.number || '',
     cert_registrar: meta.certificate?.registrar || '', cert_scope: meta.certificate?.scope || '',
     cert_issued: meta.certificate?.issued || '', cert_expires: meta.certificate?.expires || '',
@@ -160,6 +171,7 @@ function toPayload(f) {
     founded: f.founded,
     sizes_rail: f.sizes_rail.split('\n').map((s) => s.trim()).filter(Boolean),
     certificate: {
+      image: f.cert_image, description: f.cert_description, description_km: f.cert_description_km,
       standard: f.cert_standard, number: f.cert_number, registrar: f.cert_registrar,
       scope: f.cert_scope, issued: f.cert_issued, expires: f.cert_expires, first_certified: f.cert_first,
     },
@@ -238,6 +250,15 @@ export default function AdminSettings() {
         </Section>
 
         <Section step={3} title={t('cert')} desc={t('cert.d')}>
+          <Field label={t('certImage')} hint={t('certImage.hint')} className="md:col-span-2">
+            <ImagePicker value={form.cert_image} onChange={(url) => setForm({ ...form, cert_image: url })} labels={imgLabels} />
+          </Field>
+          <Field label={t('certDescription')} lang="EN" hint={t('certDescription.hint')} className="md:col-span-2">
+            <TextArea rows={3} value={form.cert_description} onChange={set('cert_description')} />
+          </Field>
+          <Field label={t('certDescription')} lang="KM" className="md:col-span-2">
+            <TextArea rows={3} value={form.cert_description_km} onChange={set('cert_description_km')} />
+          </Field>
           <Field label={t('certStandard')}><TextInput value={form.cert_standard} onChange={set('cert_standard')} /></Field>
           <Field label={t('certNumber')}><TextInput value={form.cert_number} onChange={set('cert_number')} /></Field>
           <Field label={t('certRegistrar')}><TextInput value={form.cert_registrar} onChange={set('cert_registrar')} /></Field>

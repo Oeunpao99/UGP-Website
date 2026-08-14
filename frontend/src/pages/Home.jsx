@@ -82,7 +82,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="hero">
+      <div className="hero" style={{ '--hero-img': "url('/images/heroes/home.jpg')" }}>
         <div className="shell">
           <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
             <div>
@@ -194,28 +194,50 @@ export default function Home() {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
             {error && <p className="lead">{t('home.family.err')}: {error}</p>}
             {products.map((p, i) => (
-              <div
-                className="group relative w-full cursor-pointer overflow-hidden rounded-[14px] border border-line bg-card px-[26px] pt-7 pb-6 text-left transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
+              <Link
+                to={`${loc(lang, '/products')}/${p.id}`}
+                className="group relative flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card p-[26px] text-left transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
                 style={{ '--c': p.color }}
                 key={p.id}
               >
-                <span className="absolute top-0 bottom-0 left-0 w-[6px] bg-[var(--c)]" />
-                <span className="font-mono text-[.7rem] tracking-[.14em] text-grey">
-                  {String(i + 1).padStart(2, '0')} / {p.brands.join(' · ')}
+                <span className="absolute inset-y-0 left-0 w-[4px] bg-[var(--c)]" />
+                <span
+                  className="pointer-events-none absolute top-[18px] right-[22px] select-none font-display text-[2.5rem] font-extrabold leading-none text-paper-2 transition-colors duration-300 ease-brand group-hover:text-[var(--c)]"
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-3 mb-2">{p.name}</h3>
-                <p className="mb-4 text-[.92rem] text-grey">{p.meta}</p>
-                <span className="flex flex-wrap gap-[7px]">
-                  {p.tags.slice(0, 3).map((t) => (
-                    <span className="rounded-full border border-line bg-paper px-[10px] py-[5px] font-mono text-[.68rem] tracking-[.06em] text-fg" key={t}>
-                      {t}
+
+                <div className="mb-4 flex flex-wrap items-center gap-[7px] pr-16">
+                  {p.brands.map((b) => (
+                    <span
+                      className="inline-flex items-center gap-[6px] rounded-full border border-line bg-paper px-[9px] py-[4px] font-mono text-[.62rem] font-semibold uppercase tracking-[.08em]"
+                      key={b}
+                    >
+                      <span className="h-[5px] w-[5px] rounded-full bg-[var(--c)]" />
+                      {b}
+                    </span>
+                  ))}
+                </div>
+
+                <h3 className="mb-2 transition-colors duration-200 ease-brand group-hover:text-blue">{p.name}</h3>
+                <p className="mb-0 text-[.92rem] text-grey">{p.meta}</p>
+
+                <span className="mt-4 flex flex-wrap gap-[7px]">
+                  {p.tags.slice(0, 3).map((tag) => (
+                    <span className="rounded-full border border-line bg-paper px-[10px] py-[5px] font-mono text-[.68rem] tracking-[.06em] text-fg" key={tag}>
+                      {tag}
                     </span>
                   ))}
                 </span>
-                <Link to={`${loc(lang, '/products')}/${p.id}`} className="mt-[18px] inline-flex items-center gap-2 text-[.9rem] font-semibold text-blue">
-                  {t('home.family.go')} →
-                </Link>
-              </div>
+
+                <span className="mt-auto flex items-center gap-[10px] border-t border-line pt-5 font-display text-[.88rem] font-bold">
+                  <span className="grid h-[22px] w-[22px] flex-none place-items-center rounded-full bg-yellow text-[.82rem] transition-transform duration-200 ease-brand group-hover:translate-x-[3px]">
+                    →
+                  </span>
+                  {t('home.family.go')}
+                </span>
+              </Link>
             ))}
           </div>
         </div>

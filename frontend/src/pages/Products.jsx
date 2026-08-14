@@ -116,7 +116,7 @@ export default function Products() {
 
   return (
     <>
-      <section className="dark on-dark tight">
+      <section className="dark on-dark tight page-hero" style={{ '--hero-img': "url('/images/heroes/products.jpg')" }}>
         <div className="shell">
           <p className="eyebrow text-yellow">
             {t('products.eyebrow')} <span className="kh">{tAlt('products.eyebrow')}</span>
