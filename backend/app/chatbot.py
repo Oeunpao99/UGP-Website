@@ -1,9 +1,9 @@
 """UPG Assistant — the site chatbot.
 
-Tries the Anthropic Messages API when ANTHROPIC_API_KEY is configured;
-otherwise (or on any failure) it falls back to a deterministic keyword
-matcher built from the published product facts, so the widget always
-answers even fully offline.
+Tries Azure OpenAI (Chat Completions) when AZURE_OPENAI_API_KEY and
+AZURE_OPENAI_ENDPOINT are configured; otherwise (or on any failure) it
+falls back to a deterministic keyword matcher built from the published
+product facts, so the widget always answers even fully offline.
 
 Reply text is plain text; the frontend renders it with white-space:pre.
 """
@@ -171,7 +171,9 @@ def site_links(question: str) -> list[dict]:
     return out
 
 
-MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-5")
+AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
+AZURE_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4o")
+AZURE_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-08-01-preview")
 
 
 def local_answer(question: str) -> str:
@@ -188,31 +190,25 @@ def local_answer(question: str) -> str:
 async def answer(question: str, history: list) -> tuple[str, str, list]:
     """Return (reply, source, links). source is 'ai' or 'local'."""
     links = site_links(question)
-    api_key = os.getenv("ANTHROPIC_API_KEY")
-    if api_key:
+    api_key = os.getenv("AZURE_OPENAI_API_KEY")
+    if api_key and AZURE_ENDPOINT:
         try:
-            messages = [m for m in history[-10:] if m.get("role") in ("user", "assistant")]
+            messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+            messages += [m for m in history[-10:] if m.get("role") in ("user", "assistant")]
             messages.append({"role": "user", "content": question})
+            url = (
+                f"{AZURE_ENDPOINT}/openai/deployments/{AZURE_DEPLOYMENT}"
+                f"/chat/completions?api-version={AZURE_API_VERSION}"
+            )
             async with httpx.AsyncClient(timeout=30) as client:
                 res = await client.post(
-                    "https://api.anthropic.com/v1/messages",
-                    headers={
-                        "Content-Type": "application/json",
-                        "x-api-key": api_key,
-                        "anthropic-version": "2023-06-01",
-                    },
-                    json={
-                        "model": MODEL,
-                        "max_tokens": 1000,
-                        "system": SYSTEM_PROMPT,
-                        "messages": messages,
-                    },
+                    url,
+                    headers={"Content-Type": "application/json", "api-key": api_key},
+                    json={"messages": messages, "max_tokens": 1000},
                 )
                 if res.status_code == 200:
                     data = res.json()
-                    text = "".join(
-                        b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"
-                    ).strip()
+                    text = data["choices"][0]["message"]["content"].strip()
                     if text:
                         return text, "ai", links
         except Exception:

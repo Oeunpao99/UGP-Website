@@ -17,10 +17,11 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set — see .env.example}
       # Optional: enables the "Sign in with Google" chat gate.
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
-      # Optional: enables the real AI answers in the chatbot.
-      # Without it the assistant uses its offline fallback answers.
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
+      # Optional: enables the real AI answers in the chatbot (Azure OpenAI).
+      # Without them the assistant uses its offline fallback answers.
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+      AZURE_OPENAI_DEPLOYMENT: ${AZURE_OPENAI_DEPLOYMENT:-gpt-4o}
       WEB_WORKERS: ${WEB_WORKERS:-4}
       QUOTE_DB: /app/data/quotes.db
       UPLOAD_DIR: /app/uploads

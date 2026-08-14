@@ -60,7 +60,7 @@ docker compose up --build
 
 Everything is served on `http://localhost:8090`. The build compiles the React app and serves it alongside the API from one container. `SECRET_KEY`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD` are required — compose refuses to start without them (see `.env.example`). Uploaded images and the SQLite database both persist in named volumes across rebuilds.
 
-Optional: enable real AI answers in the chatbot by setting `ANTHROPIC_API_KEY`, and the Google sign-in chat gate by setting `GOOGLE_CLIENT_ID` (see `.env.example`). Without them, the assistant uses offline fallback answers and the chat gate shows a graceful "not available" message.
+Optional: enable real AI answers in the chatbot by setting `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`, and the Google sign-in chat gate by setting `GOOGLE_CLIENT_ID` (see `.env.example`). Without them, the assistant uses offline fallback answers and the chat gate shows a graceful "not available" message.
 
 ## Useful frontend scripts
 
