@@ -15,6 +15,12 @@ WORKDIR /build
 COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend/ ./
+# Vite bakes VITE_* vars into the JS bundle at build time (not read at
+# runtime), so it has to arrive as a build arg here, not a container
+# env var. Pass it via `docker compose build --build-arg` or the
+# top-level VITE_GOOGLE_CLIENT_ID in docker-compose.yml's build.args.
+ARG VITE_GOOGLE_CLIENT_ID=""
+ENV VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID
 RUN npm run build
 
 # ---- Stage 2: runtime image ----
