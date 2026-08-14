@@ -51,7 +51,10 @@
   h3{font-weight:700;font-size:clamp(1.25rem,2vw,1.6rem);font-variation-settings:'wdth' 105}
   p{margin:0 0 1.05em}
 
-  section{padding:clamp(64px,8vw,112px) 0}
+  /* Public marketing-page rhythm — scoped away from the admin panel,
+     whose Section component also uses a semantic <section> tag but
+     manages its own internal spacing. */
+  section:not(.admin-shell *){padding:clamp(64px,8vw,112px) 0}
 
   table{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--mono);font-size:.79rem}
   th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -197,10 +200,13 @@ body.lang-km :is(h1,h2,h3,h4){
   font-family:'Space Grotesk',var(--kh-head);font-weight:700;
   font-variation-settings:normal;letter-spacing:0;line-height:1.55;
 }
-body.lang-km h1{font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 3px)}
-body.lang-km h2{font-size:calc(clamp(2rem,4.1vw,3.35rem) - 3px)}
-body.lang-km h3{font-size:calc(clamp(1.25rem,2vw,1.6rem) - 3px)}
-body.lang-km h4{font-size:calc(1em - 3px)}
+/* These hardcode public marketing-page proportions, so they're scoped
+   away from the admin panel — its headings already carry their own
+   explicit, much smaller Tailwind size utilities. */
+body.lang-km h1:not(.admin-shell *){font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 3px)}
+body.lang-km h2:not(.admin-shell *){font-size:calc(clamp(2rem,4.1vw,3.35rem) - 3px)}
+body.lang-km h3:not(.admin-shell *){font-size:calc(clamp(1.25rem,2vw,1.6rem) - 3px)}
+body.lang-km h4:not(.admin-shell *){font-size:calc(1em - 3px)}
 body.lang-km .hero h1{font-size:calc(clamp(2.6rem,6.4vw,5.1rem) - 14px);line-height:1.65}
 body.lang-km .font-mono,body.lang-km .font-display,body.lang-km .eyebrow,body.lang-km .btn{
   font-family:'Space Grotesk',var(--kh)

@@ -82,7 +82,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="hero" style={{ '--hero-img': "url('/images/heroes/home.jpg')" }}>
+      <div className="hero on-dark" style={{ '--hero-img': "url('/images/heroes/home.jpg')" }}>
         <div className="shell">
           <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
             <div>

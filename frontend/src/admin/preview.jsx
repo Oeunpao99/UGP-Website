@@ -83,7 +83,7 @@ export function ProductPreview({ p, pick, lang }) {
           <p className="eyebrow mt-[22px] text-yellow">
             {p.id} / {(p.brands || []).join(' · ')}
           </p>
-          <h2 className="max-w-[22ch]">{pick(p.name, p.name_km)}</h2>
+          <h2 className="max-w-[22ch] text-[1.7rem]">{pick(p.name, p.name_km)}</h2>
           <p className="lead mt-[18px] max-w-[62ch]">{pick(p.blurb, p.blurb_km)}</p>
           <div className="mt-[22px] flex flex-wrap gap-[8px]">
             {tags.map((tag) => (
@@ -139,7 +139,7 @@ export function ProductPreview({ p, pick, lang }) {
       </section>
       <section className="dark on-dark tight">
         <div className="shell max-w-[720px] text-center">
-          <h2>{t('products.catalogue.title')}</h2>
+          <h2 className="text-[1.7rem]">{t('products.catalogue.title')}</h2>
           <p className="lead mx-auto mb-[28px] mt-5">{t('products.catalogue.lead')}</p>
           <span className="btn">
             {t('products.catalogue.cta')} <span className="ar">→</span>
@@ -168,7 +168,7 @@ export function EventPreview({ e, pick, lang }) {
               {t(`events.kind.${e.kind}`)}
             </span>
           </div>
-          <h2 className="mt-[22px] max-w-[24ch]">{pick(e.t, e.t_km)}</h2>
+          <h2 className="mt-[22px] max-w-[24ch] text-[1.7rem]">{pick(e.t, e.t_km)}</h2>
           <p className="lead mt-[18px] max-w-[64ch]">{pick(e.d, e.d_km)}</p>
           <div className="mt-[24px] grid grid-cols-1 gap-[12px] sm:grid-cols-3">
             {e.loc && <Fact icon={PIN} label={t('event.location')} value={pick(e.loc, e.loc_km)} />}
@@ -202,7 +202,7 @@ export function EventPreview({ e, pick, lang }) {
       </section>
       <section className="dark on-dark tight">
         <div className="shell max-w-[720px] text-center">
-          <h2>{t('products.catalogue.title')}</h2>
+          <h2 className="text-[1.7rem]">{t('products.catalogue.title')}</h2>
           <p className="lead mx-auto mb-[28px] mt-5">{t('products.catalogue.lead')}</p>
           <span className="btn">
             {t('products.catalogue.cta')} <span className="ar">→</span>
@@ -261,7 +261,7 @@ export function ClientPreview({ c, t }) {
     <section className="tight">
       <div className="shell">
         <p className="eyebrow">{t('eyebrow')}</p>
-        <h2 className="mb-[26px]">{c.name}</h2>
+        <h2 className="mb-[26px] text-[1.7rem]">{c.name}</h2>
         <div className="flex flex-wrap items-center gap-[14px]">
           {c.logo ? (
             <span className="grid h-[110px] w-[240px] place-items-center rounded-[12px] border border-line bg-card px-5">

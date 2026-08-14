@@ -46,7 +46,7 @@ export default function AdminLayout({ username, onLogout, children }) {
   const { t, lang, setLang } = usePageLang(T)
 
   return (
-    <div className="flex h-screen overflow-hidden bg-paper text-fg">
+    <div className="admin-shell flex h-screen overflow-hidden bg-paper text-fg">
       <aside className="flex w-[248px] flex-none flex-col bg-ink text-white">
         <div className="border-b border-white/[0.08] px-5 py-6">
           <div className="flex items-center gap-3">

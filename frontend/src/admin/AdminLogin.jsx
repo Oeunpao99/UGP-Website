@@ -48,7 +48,7 @@ export default function AdminLogin({ onSuccess }) {
   }
 
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-ink px-4">
+    <div className="admin-shell relative grid min-h-screen place-items-center overflow-hidden bg-ink px-4">
       <span className="pointer-events-none absolute -top-32 -right-24 h-[440px] w-[440px] rounded-full border-[56px] border-white/[0.04]" />
       <span className="pointer-events-none absolute -bottom-40 -left-24 h-[440px] w-[440px] rounded-full border-[56px] border-white/[0.04]" />
 
