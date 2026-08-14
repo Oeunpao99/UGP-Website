@@ -46,7 +46,7 @@ COPY --from=frontend-build /build/dist ./frontend-dist
 # Run as a non-root user.
 RUN addgroup --system --gid 10001 appuser \
     && adduser --system --uid 10001 --ingroup appuser appuser \
-    && mkdir -p /app/data \
+    && mkdir -p /app/data /app/uploads \
     && chown -R appuser:appuser /app
 USER appuser
 
