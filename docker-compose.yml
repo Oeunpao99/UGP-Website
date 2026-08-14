@@ -4,7 +4,7 @@ services:
     image: upg-pipe-website:latest
     container_name: upg-pipe-website
     ports:
-      - "8080:8000"
+      - "8090:8000"
     environment:
       # Optional: enables the real AI answers in the chatbot.
       # Without it the assistant uses its offline fallback answers.
