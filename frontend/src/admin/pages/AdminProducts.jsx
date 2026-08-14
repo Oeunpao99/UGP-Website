@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { listProducts, createProduct, updateProduct, deleteProduct } from '../adminApi'
 import { usePageLang } from '../lang'
 import { PreviewModal, ProductPreview } from '../preview'
-import { Field, TextInput, TextArea, Section, Alert, ActionBar, PageHeader, BTN, BTN_GHOST, Checkbox, SwatchInput, Card, RowActions, TABLE, TH, TD } from '../ui'
+import { Field, TextInput, TextArea, Section, Alert, ActionBar, PageHeader, BTN, BTN_GHOST, Checkbox, SwatchInput, SpecTableEditor, Card, RowActions, TABLE, TH, TD } from '../ui'
+import RichTextEditor from '../RichTextEditor'
 
 const T = {
   en: {
@@ -30,9 +31,12 @@ const T = {
     'spec.d': 'The technical table on the product page.',
     'specTitle': 'Table title',
     'caption': 'Caption',
-    'cols': 'Column headers',
-    'rows': 'Rows',
-    'rows.hint': 'One row per line, cells separated by | — e.g. 21 | 22 | 1/2" | 22.4 ± 0.2',
+    'table': 'Table columns & rows',
+    'table.col': 'Column',
+    'table.addCol': '+ Column',
+    'table.addRow': '+ Add row',
+    'table.removeCol': 'Remove column',
+    'table.removeRow': 'Remove row',
     'appear': 'Appearance',
     'appear.d': 'The graphic and colours used across the site.',
     'color': 'Color token',
@@ -69,9 +73,12 @@ const T = {
     'spec.d': 'តារាងបច្ចេកទេសនៅលើទំព័រផលិតផល។',
     'specTitle': 'ចំណងជើងតារាង',
     'caption': 'ចំណងជើងរង',
-    'cols': 'ចំណងជើងជួរឈរ',
-    'rows': 'ជួរដេក',
-    'rows.hint': 'មួយជួរក្នុងមួយជួរដេក បំបែកក្រឡាដោយ | — ឧ. 21 | 22 | 1/2" | 22.4 ± 0.2',
+    'table': 'ជួរឈរ និងជួរដេកតារាង',
+    'table.col': 'ជួរឈរ',
+    'table.addCol': '+ ជួរឈរ',
+    'table.addRow': '+ បន្ថែមជួរដេក',
+    'table.removeCol': 'ដកជួរឈរចេញ',
+    'table.removeRow': 'ដកជួរដេកចេញ',
     'appear': 'រូបរាង',
     'appear.d': 'ក្រាហ្វិក និងពណ៌ដែលប្រើលើគេហទំព័រ។',
     'color': 'តម្លៃពណ៌',
@@ -88,7 +95,7 @@ const T = {
 const BLANK = {
   id: '', name: '', name_km: '', brands: '', color: 'var(--c-upvc)', stripe: '', light: false,
   meta: '', meta_km: '', legend: '', blurb: '', blurb_km: '', tags: '', tags_km: '',
-  specTitle: '', specTitle_km: '', caption: '', caption_km: '', cols: '', rows: '',
+  specTitle: '', specTitle_km: '', caption: '', caption_km: '', cols: [], rows: [],
 }
 
 function toForm(p) {
@@ -99,8 +106,8 @@ function toForm(p) {
     brands: (p.brands || []).join(', '),
     tags: (p.tags || []).join('\n'),
     tags_km: (p.tags_km || []).join('\n'),
-    cols: (p.cols || []).join('\n'),
-    rows: (p.rows || []).map((r) => r.join(' | ')).join('\n'),
+    cols: p.cols?.length ? p.cols : ['', ''],
+    rows: p.rows?.length ? p.rows : [],
   }
 }
 
@@ -110,8 +117,8 @@ function toPayload(f) {
     brands: f.brands.split(',').map((s) => s.trim()).filter(Boolean),
     tags: f.tags.split('\n').map((s) => s.trim()).filter(Boolean),
     tags_km: f.tags_km.split('\n').map((s) => s.trim()).filter(Boolean),
-    cols: f.cols.split('\n').map((s) => s.trim()).filter(Boolean),
-    rows: f.rows.split('\n').map((s) => s.trim()).filter(Boolean).map((line) => line.split('|').map((c) => c.trim())),
+    cols: f.cols.map((c) => c.trim()).filter(Boolean),
+    rows: f.rows.map((r) => r.map((c) => c.trim())).filter((r) => r.some(Boolean)),
   }
 }
 
@@ -208,10 +215,10 @@ export default function AdminProducts() {
 
           <Section step={2} title={t('desc')} desc={t('desc.d')}>
             <Field label={t('blurb')} lang="EN">
-              <TextArea rows={4} value={form.blurb} onChange={set('blurb')} />
+              <RichTextEditor value={form.blurb} onChange={(html) => setForm({ ...form, blurb: html })} />
             </Field>
             <Field label={t('blurb')} lang="KM">
-              <TextArea rows={4} value={form.blurb_km} onChange={set('blurb_km')} />
+              <RichTextEditor value={form.blurb_km} onChange={(html) => setForm({ ...form, blurb_km: html })} />
             </Field>
             <Field label={t('tags')} lang="EN" hint={t('onePerLine')}>
               <TextArea rows={4} value={form.tags} onChange={set('tags')} />
@@ -234,11 +241,19 @@ export default function AdminProducts() {
             <Field label={t('caption')} lang="KM">
               <TextInput value={form.caption_km} onChange={set('caption_km')} />
             </Field>
-            <Field label={t('cols')} hint={t('onePerLine')}>
-              <TextArea rows={4} value={form.cols} onChange={set('cols')} />
-            </Field>
-            <Field label={t('rows')} hint={t('rows.hint')}>
-              <TextArea rows={4} value={form.rows} onChange={set('rows')} />
+            <Field label={t('table')} className="md:col-span-2">
+              <SpecTableEditor
+                cols={form.cols}
+                rows={form.rows}
+                onChange={(cols, rows) => setForm({ ...form, cols, rows })}
+                labels={{
+                  colPh: t('table.col'),
+                  addCol: t('table.addCol'),
+                  addRow: t('table.addRow'),
+                  removeCol: t('table.removeCol'),
+                  removeRow: t('table.removeRow'),
+                }}
+              />
             </Field>
           </Section>
 

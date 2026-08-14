@@ -25,9 +25,14 @@ export default {
         'c-corr': 'var(--c-corr)',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', '"Arial Narrow"', 'sans-serif'],
-        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-        mono: ['"Space Grotesk"', 'ui-monospace', 'monospace'],
+        // Kantumruy Pro / Noto Sans Khmer inserted before the generic
+        // fallback keyword — Space Grotesk has no Khmer glyphs, so
+        // without this, any Khmer text styled with font-display/body/mono
+        // (admin table headers, textareas, buttons, etc.) falls back to
+        // whatever generic Unicode font the OS provides instead.
+        display: ['"Space Grotesk"', '"Arial Narrow"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'sans-serif'],
+        body: ['"Space Grotesk"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'system-ui', 'sans-serif'],
+        mono: ['"Space Grotesk"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'ui-monospace', 'monospace'],
         kh: ['"Kantumruy Pro"', '"Noto Sans Khmer"', '"Space Grotesk"', 'sans-serif'],
         'kh-head': ['"Khmer OS Moul"', '"Moul"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'serif'],
       },

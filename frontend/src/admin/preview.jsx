@@ -1,6 +1,7 @@
 import enDict from '../i18n/en'
 import kmDict from '../i18n/km'
 import Pipe from '../components/Pipe'
+import RichText from '../components/RichText'
 
 function pubT(lang, key) {
   const table = lang === 'km' ? kmDict : enDict
@@ -84,7 +85,7 @@ export function ProductPreview({ p, pick, lang }) {
             {p.id} / {(p.brands || []).join(' · ')}
           </p>
           <h2 className="max-w-[22ch] text-[1.7rem]">{pick(p.name, p.name_km)}</h2>
-          <p className="lead mt-[18px] max-w-[62ch]">{pick(p.blurb, p.blurb_km)}</p>
+          <RichText html={pick(p.blurb, p.blurb_km)} className="lead mt-[18px] max-w-[62ch]" />
           <div className="mt-[22px] flex flex-wrap gap-[8px]">
             {tags.map((tag) => (
               <span

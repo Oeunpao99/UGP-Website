@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pipe from '../components/Pipe'
 import Reveal from '../components/Reveal'
+import RichText from '../components/RichText'
 import { getFittings, getProducts } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
@@ -87,7 +88,7 @@ export default function Products() {
               {p.name}
             </Link>
           </h3>
-          <p className="mt-[8px] mb-0 max-w-[62ch] text-[.94rem] text-grey">{p.blurb}</p>
+          <RichText html={p.blurb} className="mt-[8px] max-h-[4.6em] max-w-[62ch] overflow-hidden text-[.94rem] text-grey" />
           <div className="mt-[16px] flex flex-wrap gap-[7px]">
             {p.tags.slice(0, 4).map((tag) => (
               <span className="rounded-full border border-line bg-paper px-[10px] py-[5px] font-mono text-[.68rem] tracking-[.06em] text-fg" key={tag}>

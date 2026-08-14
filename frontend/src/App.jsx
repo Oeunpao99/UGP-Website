@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -13,8 +13,12 @@ import FactDetail from './pages/FactDetail'
 import FeatureDetail from './pages/FeatureDetail'
 import Careers from './pages/Careers'
 import Contact from './pages/Contact'
-import AdminApp from './admin/AdminApp'
 import { useI18n } from './i18n'
+
+// The admin panel (and its rich-text editor) is a separate chunk so public
+// site visitors never download it — only fetched when someone actually
+// navigates to /admin.
+const AdminApp = lazy(() => import('./admin/AdminApp'))
 
 function RootRedirect() {
   const { lang } = useI18n()
@@ -92,7 +96,11 @@ export default function App() {
   // ranking — "/admin/products" would otherwise also match ":locale=admin"
   // + "products" and (depending on ranking) could beat "/admin/*".
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {
-    return <AdminApp />
+    return (
+      <Suspense fallback={null}>
+        <AdminApp />
+      </Suspense>
+    )
   }
   return <PublicSite />
 }

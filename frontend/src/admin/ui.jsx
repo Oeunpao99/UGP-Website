@@ -106,6 +106,109 @@ export function TextArea(props) {
   return <textarea {...props} className={areaCls + (props.className ? ' ' + props.className : '')} />
 }
 
+// A small spreadsheet-like editor for a { cols: string[], rows: string[][] }
+// spec table — every cell is its own input, columns/rows can be added or
+// removed with a click, and the shape (cell count per row) can't drift out
+// of sync the way a hand-typed "one row per line, cells separated by |"
+// textarea can.
+export function SpecTableEditor({ cols, rows, onChange, labels = {} }) {
+  const L = {
+    colPh: labels.colPh || 'Column',
+    cellPh: labels.cellPh || '',
+    addCol: labels.addCol || '+ Column',
+    addRow: labels.addRow || '+ Add row',
+    removeCol: labels.removeCol || 'Remove column',
+    removeRow: labels.removeRow || 'Remove row',
+  }
+
+  const setCol = (i, value) => {
+    onChange(cols.map((c, j) => (j === i ? value : c)), rows)
+  }
+  const addCol = () => onChange([...cols, ''], rows.map((r) => [...r, '']))
+  const removeCol = (i) => onChange(cols.filter((_, j) => j !== i), rows.map((r) => r.filter((_, j) => j !== i)))
+
+  const setCell = (ri, ci, value) => {
+    onChange(cols, rows.map((r, i) => (i === ri ? r.map((c, j) => (j === ci ? value : c)) : r)))
+  }
+  const addRow = () => onChange(cols, [...rows, cols.map(() => '')])
+  const removeRow = (ri) => onChange(cols, rows.filter((_, i) => i !== ri))
+
+  return (
+    <div className="space-y-2.5">
+      <div className="tablewrap">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-paper-2">
+              {cols.map((c, i) => (
+                <th key={i} className="border-b border-line p-1.5 text-left">
+                  <div className="flex items-center gap-1">
+                    <input
+                      value={c}
+                      onChange={(e) => setCol(i, e.target.value)}
+                      placeholder={`${L.colPh} ${i + 1}`}
+                      className="w-full min-w-[110px] rounded-[6px] border border-line bg-card px-2 py-1.5 text-[.82rem] font-semibold text-fg focus:border-blue focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeCol(i)}
+                      aria-label={L.removeCol}
+                      className="flex-none cursor-pointer rounded-[6px] border-0 bg-transparent px-1.5 py-1 text-grey transition-colors hover:text-[#C0392B]"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </th>
+              ))}
+              <th className="w-[1%] border-b border-line p-1.5">
+                <button
+                  type="button"
+                  onClick={addCol}
+                  className="cursor-pointer rounded-[6px] border border-dashed border-line-strong bg-card px-2.5 py-1.5 text-[.78rem] font-semibold whitespace-nowrap text-grey transition-colors hover:border-blue hover:text-blue"
+                >
+                  {L.addCol}
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, ri) => (
+              <tr key={ri}>
+                {cols.map((_, ci) => (
+                  <td key={ci} className="border-b border-line p-1">
+                    <input
+                      value={r[ci] ?? ''}
+                      onChange={(e) => setCell(ri, ci, e.target.value)}
+                      placeholder={L.cellPh}
+                      className="w-full min-w-[110px] rounded-[6px] border border-line bg-paper-2 px-2 py-1.5 text-[.84rem] text-fg focus:border-blue focus:bg-card focus:outline-none"
+                    />
+                  </td>
+                ))}
+                <td className="border-b border-line p-1 text-center">
+                  <button
+                    type="button"
+                    onClick={() => removeRow(ri)}
+                    aria-label={L.removeRow}
+                    className="cursor-pointer rounded-[6px] border-0 bg-transparent px-1.5 py-1 text-grey transition-colors hover:text-[#C0392B]"
+                  >
+                    ✕
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <button
+        type="button"
+        onClick={addRow}
+        className="w-full cursor-pointer rounded-[8px] border border-dashed border-line-strong bg-paper-2/40 px-3 py-2.5 text-[.82rem] font-semibold text-grey transition-colors duration-200 hover:border-blue hover:text-blue"
+      >
+        {L.addRow}
+      </button>
+    </div>
+  )
+}
+
 export function Select({ children, className = '', ...props }) {
   return (
     <select {...props} className={inputCls + ' cursor-pointer ' + className}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Pipe from '../components/Pipe'
+import RichText from '../components/RichText'
 import { getProduct } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
@@ -64,7 +65,7 @@ export default function ProductDetail() {
             {p.id} / {p.brands.join(' · ')}
           </p>
           <h2 className="max-w-[22ch]">{p.name}</h2>
-          <p className="lead mt-[18px] max-w-[62ch]">{p.blurb}</p>
+          <RichText html={p.blurb} className="lead mt-[18px] max-w-[62ch]" />
           <div className="mt-[22px] flex flex-wrap gap-[8px]">
             {p.tags.map((tag) => (
               <span
