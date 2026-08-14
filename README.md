@@ -54,12 +54,13 @@ Open `http://localhost:5173` in your browser. Vite proxies `/api` calls to the b
 ## Running with Docker (single container, production-like)
 
 ```sh
+cp .env.example .env   # then fill in SECRET_KEY, ADMIN_USERNAME, ADMIN_PASSWORD
 docker compose up --build
 ```
 
-Everything is served on `http://localhost:8080`. The build compiles the React app and serves it alongside the API from one container.
+Everything is served on `http://localhost:8090`. The build compiles the React app and serves it alongside the API from one container. `SECRET_KEY`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD` are required — compose refuses to start without them (see `.env.example`). Uploaded images and the SQLite database both persist in named volumes across rebuilds.
 
-Optional: enable real AI answers in the chatbot by setting `ANTHROPIC_API_KEY` (see `docker-compose.yml`). Without it, the assistant uses offline fallback answers.
+Optional: enable real AI answers in the chatbot by setting `ANTHROPIC_API_KEY`, and the Google sign-in chat gate by setting `GOOGLE_CLIENT_ID` (see `.env.example`). Without them, the assistant uses offline fallback answers and the chat gate shows a graceful "not available" message.
 
 ## Useful frontend scripts
 

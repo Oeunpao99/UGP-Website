@@ -6,14 +6,27 @@ services:
     ports:
       - "8090:8000"
     environment:
+      # Required in any real deployment — signs admin/chat session cookies.
+      # Generate one with: python -c "import secrets; print(secrets.token_hex(32))"
+      SECRET_KEY: ${SECRET_KEY:?SECRET_KEY must be set — see .env.example}
+      # Set true once served over HTTPS so cookies get the Secure flag.
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      # Bootstraps the first admin user on first startup only — after that,
+      # these are read once and can be left set or removed.
+      ADMIN_USERNAME: ${ADMIN_USERNAME:?ADMIN_USERNAME must be set — see .env.example}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set — see .env.example}
+      # Optional: enables the "Sign in with Google" chat gate.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       # Optional: enables the real AI answers in the chatbot.
       # Without it the assistant uses its offline fallback answers.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-5}
       WEB_WORKERS: ${WEB_WORKERS:-4}
       QUOTE_DB: /app/data/quotes.db
+      UPLOAD_DIR: /app/uploads
     volumes:
       - upg-data:/app/data
+      - upg-uploads:/app/uploads
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
@@ -24,3 +37,4 @@ services:
 
 volumes:
   upg-data:
+  upg-uploads:
