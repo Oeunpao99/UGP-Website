@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import HeadRow from '../components/HeadRow'
@@ -17,18 +17,7 @@ const CHECKS = [
   { tKey: 'about.check6.t', bKey: 'about.check6.b', svg: <path d="M8 10h8M8 14h5" /> },
 ]
 
-const TEAM = [
-  { img: '/images/team/p1.png', nameKey: 'about.team.m1.name', roleKey: 'about.team.m1.role', color: '#0B57A4' },
-  { img: '/images/team/p2.png', nameKey: 'about.team.m2.name', roleKey: 'about.team.m2.role', color: '#12A150' },
-  { img: '/images/team/p3.png', nameKey: 'about.team.m3.name', roleKey: 'about.team.m3.role', color: '#E0A106' },
-  { img: '/images/team/p4.png', nameKey: 'about.team.m4.name', roleKey: 'about.team.m4.role', color: '#2278CA' },
-  { img: '', nameKey: 'about.team.m5.name', roleKey: 'about.team.m5.role', color: '#E4002B' },
-  { img: '', nameKey: 'about.team.m6.name', roleKey: 'about.team.m6.role', color: '#0C3466' },
-  { img: '', nameKey: 'about.team.m7.name', roleKey: 'about.team.m7.role', color: '#2BA7E0' },
-  { img: '', nameKey: 'about.team.m8.name', roleKey: 'about.team.m8.role', color: '#F2B705' },
-  { img: '', nameKey: 'about.team.m9.name', roleKey: 'about.team.m9.role', color: '#07213F' },
-  { img: '', nameKey: 'about.team.m10.name', roleKey: 'about.team.m10.role', color: '#C70F2D' },
-]
+
 
 const FAMILIES = [
   { img: '/images/family/upvc.png', placeholder: 'uPVC Pipes', tKey: 'nav.products.upvc', bKey: 'about.family.upvc.b', color: '#3A84C9' },
@@ -48,6 +37,8 @@ export default function About() {
   const [clients, setClients] = useState([])
   const [meta, setMeta] = useState(null)
   const [certOpen, setCertOpen] = useState(false)
+  const [teamInView, setTeamInView] = useState(false)
+  const teamRef = useRef(null)
 
   useEffect(() => {
     let alive = true
@@ -62,19 +53,16 @@ export default function About() {
     }
   }, [])
 
-  const team = meta?.team
-  const members =
-    team && team.length
-      ? team.map((m, i) => {
-          const fb = TEAM[i]
-          return {
-            img: m.img || fb?.img,
-            color: m.color || fb?.color || '#0B57A4',
-            name: (lang === 'km' ? m.name_km || m.name : m.name) || (fb ? t(fb.nameKey) : ''),
-            role: (lang === 'km' ? m.role_km || m.role : m.role) || (fb ? t(fb.roleKey) : ''),
-          }
-        })
-      : TEAM
+  useEffect(() => {
+    const el = teamRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setTeamInView(true); io.unobserve(el) } },
+      { threshold: 0.15 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   const cert = meta?.certificate || {}
   const certImage = cert.image || '/images/cert.png'
@@ -201,83 +189,19 @@ export default function About() {
         <div className="shell">
           <HeadRow eyebrow={t('about.team.eyebrow')} title={t('about.team.title')} lead={t('about.team.lead')} />
 
-          {(() => {
-            const card = (m, i, size = 'head') => (
-              <div
-                className={`group overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)] ${
-                  size === 'ceo' ? 'mx-auto w-full max-w-[300px]' : size === 'assistant' ? 'mx-auto w-full max-w-[260px]' : ''
-                }`}
-                key={m.nameKey || `m${i}`}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  {m.img ? (
-                    <img
-                      src={m.img}
-                      alt={m.nameKey ? t(m.nameKey) : m.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.05]"
-                    />
-                  ) : (
-                    <div className="grid h-full w-full place-items-center" style={{ background: `linear-gradient(160deg, ${m.color}26, ${m.color}0d)` }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke={m.color} strokeWidth="1.4" className="h-[34%] w-[34%] opacity-70">
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M4 20c1-4.2 4-6.4 8-6.4s7 2.2 8 6.4" />
-                      </svg>
-                    </div>
-                  )}
-                  <span className="absolute bottom-0 right-0 h-[52px] w-[52px] rounded-tl-[14px]" style={{ background: m.color }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" className="h-full w-full p-[13px]">
-                      <circle cx="12" cy="8" r="3.5" />
-                      <path d="M5 20c.8-3.6 3.4-5.5 7-5.5s6.2 1.9 7 5.5" />
-                    </svg>
-                  </span>
-                </div>
-                <div className="px-[22px] py-5">
-                  <h3 className="mb-1 text-[1.06rem]">{m.nameKey ? t(m.nameKey) : m.name}</h3>
-                  <span className="font-mono text-[.68rem] uppercase tracking-[.14em]" style={{ color: m.color }}>
-                    {m.roleKey ? t(m.roleKey) : m.role}
-                  </span>
-                </div>
+          <div className={`team-reveal${teamInView ? ' in' : ''}`} ref={teamRef}>
+            <h2 className="mb-4 text-center">Management Team</h2>
+            <div className="group overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]">
+              <div className="team-reveal-img overflow-hidden">
+                <img
+                  src="/images/image_2026-08-18_16-46-00.png"
+                  alt="Management Team"
+                  loading="lazy"
+                  className="w-full h-auto object-cover"
+                />
               </div>
-            )
-
-            const ceo = members[0]
-            const assistant = members[1]
-            const heads = members.slice(2)
-
-            return (
-              <div className="flex flex-col items-center gap-[10px]">
-                {ceo && (
-                  <div className="w-full text-center">
-                    <p className="mb-4 font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.exec')}</p>
-                    {card(ceo, 0, 'ceo')}
-                  </div>
-                )}
-
-                {assistant && (
-                  <>
-                    <span className="h-[26px] w-px bg-line-strong" />
-                    <div className="w-full text-center">
-                      <p className="mb-4 font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.assistant')}</p>
-                      {card(assistant, 1, 'assistant')}
-                    </div>
-                  </>
-                )}
-
-                {heads.length > 0 && (
-                  <>
-                    <span className="h-[26px] w-px bg-line-strong" />
-                    <div className="w-full">
-                      <p className="mb-4 text-center font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.heads')}</p>
-                      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                        {heads.map((m, i) => card(m, i + 2))}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            )
-          })()}
+            </div>
+          </div>
         </div>
       </section>
 

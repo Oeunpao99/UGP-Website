@@ -35,8 +35,8 @@ export default {
         display: ['"Space Grotesk"', '"Arial Narrow"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'sans-serif'],
         body: ['"Space Grotesk"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'system-ui', 'sans-serif'],
         mono: ['"Space Grotesk"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'ui-monospace', 'monospace'],
-        kh: ['"Kantumruy Pro"', '"Noto Sans Khmer"', '"Space Grotesk"', 'sans-serif'],
-        'kh-head': ['"Khmer OS Moul"', '"Moul"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'serif'],
+        kh: ['"Khmer MN"', '"Kantumruy Pro"', '"Noto Sans Khmer"', '"Space Grotesk"', 'sans-serif'],
+        'kh-head': ['"Khmer MN"', '"Kantumruy Pro"', '"Noto Sans Khmer"', 'serif'],
       },
       maxWidth: {
         shell: '1240px',

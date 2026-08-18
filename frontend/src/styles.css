@@ -6,14 +6,14 @@
    Brand tokens — consumed by the component classes below
    ============================================================ */
 :root{
-  --ink:#07213F;--ink-2:#0C3466;--blue:#0B57A4;--blue-lite:#2BA7E0;
-  --yellow:#FFD100;--yellow-deep:#F2B705;--red:#E4002B;
+  --ink:#07213F;--ink-2:#1b449c;--blue:#1b449c;--blue-lite:#2BA7E0;
+  --yellow:#ffd000;--yellow-deep:#F2B705;--red:#ff0000;
   --paper:#F2F5F9;--paper-2:#E7ECF3;--grey:#5C6F8A;--white:#fff;
   --fg:#07213F;--card:#fff;--row-hover:#FFF8D6;
   --ok-bg:#E9F7EF;--err-bg:#FDECEC;
   /* RGB-channel companions so Tailwind's /NN opacity modifiers (bg-ink/85 etc) can apply — see tailwind.config.js */
-  --ink-rgb:7 33 63;--ink-2-rgb:12 52 102;--blue-rgb:11 87 164;--blue-lite-rgb:43 167 224;
-  --yellow-rgb:255 209 0;--yellow-deep-rgb:242 183 5;--red-rgb:228 0 43;
+  --ink-rgb:7 33 63;--ink-2-rgb:27 68 156;--blue-rgb:27 68 156;--blue-lite-rgb:43 167 224;
+  --yellow-rgb:255 208 0;--yellow-deep-rgb:242 183 5;--red-rgb:255 0 0;
   --paper-rgb:242 245 249;--paper-2-rgb:231 236 243;--grey-rgb:92 111 138;
   --fg-rgb:7 33 63;--card-rgb:255 255 255;
   --line:rgba(7,33,63,.13);--line-strong:rgba(7,33,63,.28);
@@ -21,8 +21,8 @@
   --display:'Space Grotesk','Arial Narrow','Kantumruy Pro','Noto Sans Khmer',sans-serif;
   --body:'Space Grotesk','Kantumruy Pro','Noto Sans Khmer',system-ui,sans-serif;
   --mono:'Space Grotesk','Kantumruy Pro','Noto Sans Khmer',ui-monospace,monospace;
-  --kh:'Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
-  --kh-head:'Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
+  --kh:'Khmer MN','Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
+  --kh-head:'Khmer MN','Kantumruy Pro','Noto Sans Khmer','Space Grotesk',sans-serif;
   --ease:cubic-bezier(.22,.8,.28,1);
 }
 @keyframes rise{
@@ -148,6 +148,11 @@
 
   .reveal{opacity:0;transform:translateY(22px)}
   .reveal.in{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+  .team-reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+  .team-reveal.in{opacity:1;transform:none}
+  .team-reveal-img{transform:translateY(100%);transition:transform .9s cubic-bezier(.22,1,.36,1) .15s}
+  .team-reveal.in .team-reveal-img{transform:translateY(0)}
 
   /* hero background art */
   .hero{
