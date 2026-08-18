@@ -4,18 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: 'var(--ink)',
-        'ink-2': 'var(--ink-2)',
-        fg: 'var(--fg)',
-        blue: 'var(--blue)',
-        'blue-lite': 'var(--blue-lite)',
-        yellow: 'var(--yellow)',
-        'yellow-deep': 'var(--yellow-deep)',
-        red: 'var(--red)',
-        paper: 'var(--paper)',
-        'paper-2': 'var(--paper-2)',
-        card: 'var(--card)',
-        grey: 'var(--grey)',
+        // rgb(var(--x-rgb) / <alpha-value>) lets Tailwind apply /NN opacity modifiers
+        // (bg-ink/85 etc); a plain var(--ink) reference cannot support those.
+        ink: 'rgb(var(--ink-rgb) / <alpha-value>)',
+        'ink-2': 'rgb(var(--ink-2-rgb) / <alpha-value>)',
+        fg: 'rgb(var(--fg-rgb) / <alpha-value>)',
+        blue: 'rgb(var(--blue-rgb) / <alpha-value>)',
+        'blue-lite': 'rgb(var(--blue-lite-rgb) / <alpha-value>)',
+        yellow: 'rgb(var(--yellow-rgb) / <alpha-value>)',
+        'yellow-deep': 'rgb(var(--yellow-deep-rgb) / <alpha-value>)',
+        red: 'rgb(var(--red-rgb) / <alpha-value>)',
+        paper: 'rgb(var(--paper-rgb) / <alpha-value>)',
+        'paper-2': 'rgb(var(--paper-2-rgb) / <alpha-value>)',
+        card: 'rgb(var(--card-rgb) / <alpha-value>)',
+        grey: 'rgb(var(--grey-rgb) / <alpha-value>)',
         line: 'var(--line)',
         'line-strong': 'var(--line-strong)',
         'c-upvc': 'var(--c-upvc)',

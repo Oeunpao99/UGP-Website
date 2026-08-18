@@ -5,6 +5,7 @@ import Pipe from '../components/Pipe'
 import Rail from '../components/Rail'
 import Reveal from '../components/Reveal'
 import ClientMarquee from '../components/ClientMarquee'
+import PlaceholderImage from '../components/PlaceholderImage'
 import { getClients, getProducts } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
@@ -21,42 +22,25 @@ const HERO_PIPES = [
 
 const BRANDS = [
   {
-    roleKey: 'home.brand.smart.role',
-    bodyKey: 'home.brand.smart.body',
-    name: 'SMART PIPE',
-    dark: false,
-    svg: (
-      <>
-        <circle cx="32" cy="32" r="15" />
-        <path d="M32 17v-6M32 53v-6M17 32h-6M53 32h-6M21.4 21.4l-4.3-4.3M46.6 46.6l4.3 4.3M42.6 21.4l4.3-4.3M21.4 42.6l-4.3 4.3" />
-        <circle cx="32" cy="32" r="6" />
-      </>
-    ),
-  },
-  {
     roleKey: 'home.brand.eagle.role',
     bodyKey: 'home.brand.eagle.body',
     name: 'EAGLE PIPE',
     dark: true,
-    svg: (
-      <>
-        <path d="M8 34c8-3 14-9 18-16 3 6 8 10 14 11 6 1 12 5 16 11-6-2-11-1-15 2-5 4-11 6-17 5S12 42 8 34Z" />
-        <path d="M26 18c2 5 6 9 11 11M18 30c5 2 9 6 11 11" />
-      </>
-    ),
+    img: '/images/eagle.png',
   },
   {
     roleKey: 'home.brand.lion.role',
     bodyKey: 'home.brand.lion.body',
     name: 'LION HEAD PIPE',
     dark: false,
-    svg: (
-      <>
-        <circle cx="32" cy="33" r="13" />
-        <path d="M32 20c0-6 5-9 9-7-2 4 0 7 3 8M32 20c0-6-5-9-9-7 2 4 0 7-3 8" />
-        <path d="M26 31h.01M38 31h.01M27 40c3 2 7 2 10 0" />
-      </>
-    ),
+    img: '/images/lionhead.png',
+  },
+  {
+    roleKey: 'home.brand.smart.role',
+    bodyKey: 'home.brand.smart.body',
+    name: 'SMART PIPE',
+    dark: false,
+    img: '/images/smart.png',
   },
 ]
 
@@ -156,18 +140,12 @@ export default function Home() {
                 key={i}
               >
                 <span className="ring-circle" />
-                <svg
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="relative h-[56px] w-[56px]"
+                <img
+                  src={b.img}
+                  alt={b.name}
+                  className="relative h-[56px] w-[56px] rounded-full object-cover"
                   aria-hidden="true"
-                >
-                  {b.svg}
-                </svg>
+                />
                 <div className="font-mono text-[.7rem] uppercase tracking-[.16em] opacity-72">{t(b.roleKey)}</div>
                 <h3>{b.name}</h3>
                 <p className="mb-0 mt-[14px] text-[.93rem] opacity-85">{t(b.bodyKey)}</p>
@@ -201,14 +179,8 @@ export default function Home() {
                 key={p.id}
               >
                 <span className="absolute inset-y-0 left-0 w-[4px] bg-[var(--c)]" />
-                <span
-                  className="pointer-events-none absolute top-[18px] right-[22px] select-none font-display text-[2.5rem] font-extrabold leading-none text-paper-2 transition-colors duration-300 ease-brand group-hover:text-[var(--c)]"
-                  aria-hidden="true"
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
 
-                <div className="mb-4 flex flex-wrap items-center gap-[7px] pr-16">
+                <div className="mb-3 flex flex-wrap items-center gap-[7px]">
                   {p.brands.map((b) => (
                     <span
                       className="inline-flex items-center gap-[6px] rounded-full border border-line bg-paper px-[9px] py-[4px] font-mono text-[.62rem] font-semibold uppercase tracking-[.08em]"
@@ -220,8 +192,8 @@ export default function Home() {
                   ))}
                 </div>
 
-                <h3 className="mb-2 transition-colors duration-200 ease-brand group-hover:text-blue">{p.name}</h3>
-                <p className="mb-0 text-[.92rem] text-grey">{p.meta}</p>
+                <h3 className="mb-1 transition-colors duration-200 ease-brand group-hover:text-blue">{p.name}</h3>
+                <p className="mb-0 text-[.88rem] leading-relaxed text-grey">{p.meta}</p>
 
                 <span className="mt-4 flex flex-wrap gap-[7px]">
                   {p.tags.slice(0, 3).map((tag) => (
@@ -261,11 +233,10 @@ export default function Home() {
               <Reveal className="bg-ink-2 transition-colors duration-300 ease-brand hover:bg-ink" key={f.id} as="div">
                 <Link to={loc(lang, `/features/${f.id}`)} className="group block h-full">
                   <div className="relative h-[128px] overflow-hidden">
-                    <img
-                      src={f.img}
-                      alt={f.t[lang]}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
+                    <PlaceholderImage
+                      label={f.placeholder}
+                      color={f.color}
+                      className="h-full w-full transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
                     />
                     <span className="absolute inset-0 bg-gradient-to-t from-ink-2 to-transparent" />
                     <span className="absolute right-3 bottom-2 font-mono text-[.66rem] tracking-[.14em] text-white/50">
@@ -296,11 +267,10 @@ export default function Home() {
                 key={f.id}
               >
                 <div className="relative h-[150px] overflow-hidden">
-                  <img
-                    src={f.img}
-                    alt={f.k[lang]}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
+                  <PlaceholderImage
+                    label={f.placeholder}
+                    color={f.color}
+                    className="h-full w-full transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
                   />
                   <span className="absolute top-3 right-3 rounded-[6px] bg-ink/70 px-2 py-1 font-mono text-[.62rem] tracking-[.14em] text-white/70 backdrop-blur">
                     {t('info.detail')}

@@ -1,8 +1,9 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Chatbot from './components/Chatbot'
+import ProgressBar from './components/ProgressBar'
 import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
@@ -62,6 +63,7 @@ function PublicSite() {
   return (
     <>
       <PageEffects />
+      <ProgressBar />
       <Header />
       <main>
         <Routes>

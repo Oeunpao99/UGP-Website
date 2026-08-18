@@ -118,60 +118,82 @@ export default function Events() {
             ))}
           </div>
           {error && <p className="lead">{t('events.err')}: {error}</p>}
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(288px,1fr))] gap-5">
-            {visible.map((e, i) => (
-              <article
-                className="flex flex-col overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.7)]"
-                key={i}
-              >
-                <div className="relative grid h-[190px] place-items-center overflow-hidden bg-[var(--c)]">
-                  <span className="diag" />
-                  <b className="relative font-display text-[clamp(1.8rem,2.4vw,2.4rem)] font-extrabold leading-none text-white opacity-92">
-                    {e.m} {e.y}
-                  </b>
-                  <img
-                    src={e.img || imgSrc(e.t)}
-                    alt={e.t}
-                    loading="lazy"
-                    onError={(ev) => (ev.currentTarget.style.display = 'none')}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col px-6 pt-[20px] pb-[24px]">
-                  <div className="mb-[9px] font-mono text-[.7rem] uppercase tracking-[.13em] text-blue">
-                    {t(`events.kind.${e.kind}`)}
-                  </div>
-                  <h3 className="mb-[9px] text-[1.12rem]">{e.t}</h3>
-                  <p className="m-0 text-[.9rem] text-grey">{e.d}</p>
-                  <div className="mt-[16px] space-y-[8px]">
-                    {e.loc && (
-                      <div className="flex items-center gap-[10px] text-[.84rem] text-fg">
-                        {PIN}
-                        <span>{e.loc}</span>
-                      </div>
-                    )}
-                    {e.dur && (
-                      <div className="flex items-center gap-[10px] text-[.84rem] text-fg">
-                        {CLOCK}
-                        <span>{e.dur}</span>
-                      </div>
-                    )}
-                    {e.team && (
-                      <div className="flex items-center gap-[10px] text-[.84rem] text-fg">
-                        {TEAM}
-                        <span>{e.team}</span>
-                      </div>
-                    )}
-                  </div>
+          <div className="space-y-5">
+            {visible.map((e, i) => {
+              const kindColors = {
+                Quality: 'bg-blue text-white',
+                Customers: 'bg-yellow text-ink',
+                'Supply chain': 'bg-green-600 text-white',
+                Community: 'bg-red text-white',
+              }
+              const kindColor = kindColors[e.kind] || 'bg-paper-2 text-fg'
+              const imgPath = e.img || imgSrc(e.t)
+              return (
+                <Reveal key={i}>
                   <Link
                     to={`${loc(lang, '/events')}/${e.id}`}
-                    className="mt-auto inline-flex w-full items-center justify-center gap-[9px] rounded-full border border-line-strong bg-paper px-[16px] py-[10px] font-display text-[.86rem] font-bold transition-all duration-200 ease-brand hover:border-ink hover:bg-yellow"
+                    className="group block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 hover:border-blue/30 hover:shadow-[0_12px_40px_-12px_rgba(11,87,164,.25)]"
                   >
-                    {t('product.viewDetails')} <span className="ar">→</span>
+                    <div className="grid lg:grid-cols-[200px_1fr]">
+                      <div className="relative flex flex-col items-center justify-center bg-ink p-8">
+                        <span className="absolute inset-0 opacity-10">
+                          <span className="absolute inset-0 bg-[repeating-linear-gradient(-45deg,transparent,transparent_10px,rgba(255,255,255,.05)_10px,rgba(255,255,255,.05)_20px)]" />
+                        </span>
+                        <span className="relative font-display text-[2.6rem] font-extrabold leading-none text-yellow">{e.m}</span>
+                        <span className="relative font-display text-[1.6rem] font-bold text-white/80">{e.y}</span>
+                        <span className={`relative mt-3 inline-flex rounded-full px-3 py-1 font-mono text-[.62rem] font-semibold uppercase tracking-[.1em] ${kindColor}`}>
+                          {t(`events.kind.${e.kind}`)}
+                        </span>
+                      </div>
+                      <div className="relative min-h-[220px] overflow-hidden">
+                        <img
+                          src={imgPath}
+                          alt={e.t}
+                          loading="lazy"
+                          onError={(ev) => { ev.currentTarget.style.display = 'none' }}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <span className="absolute inset-0 bg-ink/85" />
+                        <div className="relative z-10 flex h-full flex-col justify-end gap-3 p-7 lg:p-9">
+                          <h3 className="font-display text-[1.35rem] font-bold leading-tight text-white transition-colors duration-200 group-hover:text-yellow">{e.t}</h3>
+                          <p className="m-0 max-w-[55ch] text-[.92rem] leading-relaxed text-white">{e.d}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line px-7 py-5 lg:px-9">
+                      <div className="flex flex-wrap gap-x-5 gap-y-2 text-[.82rem]">
+                        {e.loc && (
+                          <span className="inline-flex items-center gap-1.5 text-grey">
+                            {PIN}
+                            {e.loc}
+                          </span>
+                        )}
+                        {e.dur && (
+                          <span className="inline-flex items-center gap-1.5 text-grey">
+                            {CLOCK}
+                            {e.dur}
+                          </span>
+                        )}
+                        {e.team && (
+                          <span className="inline-flex items-center gap-1.5 text-grey">
+                            {TEAM}
+                            {e.team}
+                          </span>
+                        )}
+                      </div>
+                      <span className="inline-flex items-center gap-2 font-display text-[.86rem] font-bold text-blue">
+                        {t('product.viewDetails')}
+                        <span className="grid h-7 w-7 place-items-center rounded-full bg-yellow text-ink transition-transform duration-200 group-hover:translate-x-1">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-4 w-4">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </span>
+                    </div>
                   </Link>
-                </div>
-              </article>
-            ))}
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>

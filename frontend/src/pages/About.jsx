@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import HeadRow from '../components/HeadRow'
 import ClientMarquee from '../components/ClientMarquee'
+import PlaceholderImage from '../components/PlaceholderImage'
 import { getClients, getMeta } from '../api'
 import { useI18n } from '../i18n'
 import { loc } from '../links'
@@ -30,16 +31,16 @@ const TEAM = [
 ]
 
 const FAMILIES = [
-  { img: '/images/family/upvc.png', tKey: 'nav.products.upvc', bKey: 'about.family.upvc.b', color: '#3A84C9' },
-  { img: '/images/family/hdpe.png', tKey: 'nav.products.hdpe', bKey: 'about.family.hdpe.b', color: '#E0A106' },
-  { img: '/images/family/ppr.png', tKey: 'nav.products.ppr', bKey: 'about.family.ppr.b', color: '#12A150' },
-  { img: '/images/family/conduit.png', tKey: 'nav.products.electrical', bKey: 'about.family.electrical.b', color: '#C70F2D' },
+  { img: '/images/family/upvc.png', placeholder: 'uPVC Pipes', tKey: 'nav.products.upvc', bKey: 'about.family.upvc.b', color: '#3A84C9' },
+  { img: '/images/family/hdpe.png', placeholder: 'HDPE Pipes', tKey: 'nav.products.hdpe', bKey: 'about.family.hdpe.b', color: '#E0A106' },
+  { img: '/images/family/ppr.png', placeholder: 'PPR Pipes', tKey: 'nav.products.ppr', bKey: 'about.family.ppr.b', color: '#12A150' },
+  { img: '/images/family/conduit.png', placeholder: 'Electrical Conduit', tKey: 'nav.products.electrical', bKey: 'about.family.electrical.b', color: '#C70F2D' },
 ]
 
 const QUALITY = [
-  { img: '/images/process/test.png', tKey: 'about.quality.test.t', bKey: 'about.quality.test.b' },
-  { img: '/images/process/customer.png', tKey: 'about.quality.customer.t', bKey: 'about.quality.customer.b' },
-  { img: '/images/process/supplier.png', tKey: 'about.quality.supplier.t', bKey: 'about.quality.supplier.b' },
+  { img: '/images/process/test.png', placeholder: 'Quality Lab', tKey: 'about.quality.test.t', bKey: 'about.quality.test.b' },
+  { img: '/images/process/customer.png', placeholder: 'Customer Visit', tKey: 'about.quality.customer.t', bKey: 'about.quality.customer.b' },
+  { img: '/images/process/supplier.png', placeholder: 'Supplier Audit', tKey: 'about.quality.supplier.t', bKey: 'about.quality.supplier.b' },
 ]
 
 export default function About() {
@@ -220,7 +221,7 @@ export default function About() {
               <div className="flex flex-col items-center gap-[10px]">
                 {ceo && (
                   <div className="w-full text-center">
-                    <p className="mb-4 font-mono text-[.7rem] uppercase tracking-[.18em] text-grey">{t('about.team.tier.exec')}</p>
+                    <p className="mb-4 font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.exec')}</p>
                     {card(ceo, 0, 'ceo')}
                   </div>
                 )}
@@ -229,7 +230,7 @@ export default function About() {
                   <>
                     <span className="h-[26px] w-px bg-line-strong" />
                     <div className="w-full text-center">
-                      <p className="mb-4 font-mono text-[.7rem] uppercase tracking-[.18em] text-grey">{t('about.team.tier.assistant')}</p>
+                      <p className="mb-4 font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.assistant')}</p>
                       {card(assistant, 1, 'assistant')}
                     </div>
                   </>
@@ -239,7 +240,7 @@ export default function About() {
                   <>
                     <span className="h-[26px] w-px bg-line-strong" />
                     <div className="w-full">
-                      <p className="mb-4 text-center font-mono text-[.7rem] uppercase tracking-[.18em] text-grey">{t('about.team.tier.heads')}</p>
+                      <p className="mb-4 text-center font-mono text-[.8rem] uppercase tracking-[.14em] text-grey">{t('about.team.tier.heads')}</p>
                       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                         {heads.map((m, i) => card(m, i + 2))}
                       </div>
@@ -272,11 +273,10 @@ export default function About() {
                 key={f.tKey}
               >
                 <div className="relative h-[150px] overflow-hidden">
-                  <img
-                    src={f.img}
-                    alt={t(f.tKey)}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
+                  <PlaceholderImage
+                    label={f.placeholder}
+                    color={f.color}
+                    className="h-full w-full transition-transform duration-500 ease-brand group-hover:scale-[1.06]"
                   />
                   <span className="absolute inset-x-0 bottom-0 h-[4px]" style={{ background: f.color }} />
                 </div>
@@ -360,7 +360,7 @@ export default function About() {
                     key={q.tKey}
                   >
                     <div className="h-[110px] overflow-hidden">
-                      <img src={q.img} alt={t(q.tKey)} loading="lazy" className="h-full w-full object-cover" />
+                      <PlaceholderImage label={q.placeholder} color="#1a2744" className="h-full w-full" />
                     </div>
                     <div className="px-[22px] py-5">
                       <h3 className="mb-2 font-display text-[1.05rem] font-bold text-white">{t(q.tKey)}</h3>
@@ -380,20 +380,7 @@ export default function About() {
           <h2 className="mb-10">{t('about.checks.title')}</h2>
           <div className="flex flex-col gap-[14px] lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
             <div className="relative min-h-[260px] overflow-hidden rounded-[14px] border border-line bg-paper-2 lg:min-h-0">
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-grey">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-[44px] w-[44px]">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <path d="m21 15-5-5L5 21" />
-                </svg>
-                <span className="font-mono text-[.72rem] uppercase tracking-[.16em]">{t('about.checks.photo')}</span>
-              </div>
-              <img
-                src="/images/process/test.png"
-                alt={t('about.checks.photoAlt')}
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = 'none' }}
-              />
+              <PlaceholderImage label={t('about.checks.photo')} color="#1a2744" className="h-full w-full" />
             </div>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(238px,1fr))] gap-[2px] overflow-hidden rounded-[14px] bg-line">
               {CHECKS.map((f, i) => (

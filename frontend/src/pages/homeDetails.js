@@ -5,6 +5,7 @@ export const FACTS = [
     k: { en: 'Established', km: 'បង្កើតឡើង' },
     d: { en: 'Founded in June 2016 as a Cambodian manufacturer.', km: 'បង្កើតឡើងនៅខែមិថុនា ឆ្នាំ២០១៦ ជាអ្នកផលិតកម្ពុជា។' },
     img: '/images/stats/stat1.png',
+    placeholder: 'Factory Est. 2016',
     color: '#0B57A4',
     bullets: [
       { en: 'Started production in June 2016 with a single uPVC line at Prek Phnov.', km: 'ចាប់ផ្តើមផលិតកម្មនៅខែមិថុនា ឆ្នាំ២០១៦ ជាមួយខ្សែផលិត uPVC តែមួយនៅព្រែកភ្នៅ។' },
@@ -22,6 +23,7 @@ export const FACTS = [
     k: { en: 'Total staff', km: 'បុគ្គលិកសរុប' },
     d: { en: '30 at the head office, 147 at the Prek Phnov factory.', km: '30 នាក់នៅទីស្នាក់ការកណ្តាល 147 នាក់នៅរោងចក្រព្រែកភ្នៅ។' },
     img: '/images/stats/stat2.png',
+    placeholder: '177 Staff',
     color: '#12A150',
     bullets: [
       { en: '147 people run production, warehousing and logistics at the Prek Phnov factory.', km: '147 នាក់ប្រតិបត្តិការផលិតកម្ម ឃ្លាំង និងភស្តុភារនៅរោងចក្រព្រែកភ្នៅ។' },
@@ -39,6 +41,7 @@ export const FACTS = [
     k: { en: 'ISO certified', km: 'វិញ្ញាបនបត្រ ISO' },
     d: { en: 'First factory of its kind in Cambodia to be certified.', km: 'រោងចក្រដំបូងគេនៅកម្ពុជាដែលទទួលបានវិញ្ញាបនបត្រ។' },
     img: '/images/stats/stat3.png',
+    placeholder: 'ISO 9001:2015',
     color: '#E0A106',
     bullets: [
       { en: 'Certified to ISO 9001:2015 since 2017 — the first pipe factory in Cambodia.', km: 'បានទទួលវិញ្ញាបនបត្រ ISO 9001:2015 តាំងពីឆ្នាំ២០១៧ — រោងចក្របំពង់ដំបូងគេនៅកម្ពុជា។' },
@@ -56,6 +59,7 @@ export const FACTS = [
     k: { en: 'Largest HDPE OD', km: 'អង្កត់ផ្ចិត HDPE ធំបំផុត' },
     d: { en: 'From 20 mm service line up to 400 mm mains.', km: 'ពី 20 ម.ម ខ្សែសេវារហូតដល់ 400 ម.ម បំពង់មេ។' },
     img: '/images/stats/stat4.png',
+    placeholder: '20–400mm HDPE',
     color: '#2278CA',
     bullets: [
       { en: 'HDPE from 20 mm service line up to 400 mm mains and trunk pipes.', km: 'HDPE ពី 20 ម.ម ខ្សែសេវារហូតដល់ 400 ម.ម បំពង់មេ និងបំពង់ចែកចាយ។' },
@@ -78,6 +82,7 @@ export const FEATURES = [
       km: 'ការធ្វើតេស្តសម្ពាធសន្ទនីយស្តាទិច ផលប៉ះពាល់ និងការសំប៉ែតដំណើរការក្នុងមន្ទីរពិសោធន៍ផ្ទាល់របស់យើង ដើម្បីឱ្យបំពង់ទប់សម្ពាធខាងក្នុង និងបន្ទុកពីលើលេណដ្ឋាន។',
     },
     img: '/images/feats/feat1.png',
+    placeholder: 'Pressure Testing',
     color: '#0B57A4',
     bullets: [
       { en: 'Hydrostatic pressure tests prove the pipe holds internal pressure at its rated pressure over time.', km: 'ការធ្វើតេស្តសម្ពាធសន្ទនីយស្តាទិចបញ្ជាក់ថាបំពង់ទប់សម្ពាធខាងក្នុងតាមកម្រិតកំណត់តាមពេលវេលា។' },
@@ -97,6 +102,7 @@ export const FEATURES = [
       km: 'សមាសធាតុគ្មានជាតិពុល សមស្របសម្រាប់ទឹកស្អាត ដោយគ្មានក្លិន ឬរសជាតិចូលក្នុងបណ្តាញផ្គត់ផ្គង់។',
     },
     img: '/images/feats/feat2.png',
+    placeholder: 'Drinking Water Safe',
     color: '#2278CA',
     bullets: [
       { en: 'Non-toxic, food-grade compound formulations with no lead or heavy-metal stabilisers.', km: 'រូបមន្តសមាសធាតុគ្មានជាតិពុល គ្មានសារធាតុស្ថេរភាពសំណ ឬលោហៈធ្ងន់។' },
@@ -116,6 +122,7 @@ export const FEATURES = [
       km: 'បង្កើតឡើងសម្រាប់អាកាសធាតុត្រូពិក — មានស្ថេរភាពប្រឆាំងនឹងពន្លឺព្រះអាទិត្យ និងកម្តៅលើដំបូល និងការតម្លើងពីលើដី។',
     },
     img: '/images/feats/feat3.png',
+    placeholder: 'UV Resistant',
     color: '#E0A106',
     bullets: [
       { en: 'Stabilised against sunlight for rooftop and above-ground runs in tropical conditions.', km: 'មានស្ថេរភាពប្រឆាំងនឹងពន្លឺព្រះអាទិត្យសម្រាប់ការតម្លើងលើដំបូល និងពីលើដីក្នុងអាកាសធាតុត្រូពិក។' },
@@ -135,6 +142,7 @@ export const FEATURES = [
       km: 'បំពង់ដឹកខ្សែ និងថាសខ្សែដែលពន្លត់ខ្លួនឯង មិនដឹកចរន្ត បានសាកល្បងការរីករាលដាលអណ្តាតភ្លើង។',
     },
     img: '/images/feats/feat4.png',
+    placeholder: 'Fire Safety',
     color: '#C70F2D',
     bullets: [
       { en: 'Self-extinguishing conduit and trunking that stops flame propagation.', km: 'បំពង់ដឹកខ្សែ និងថាសខ្សែពន្លត់ខ្លួនឯង បញ្ឈប់ការរីករាលដាលអណ្តាតភ្លើង។' },
@@ -154,6 +162,7 @@ export const FEATURES = [
       km: 'សមាសធាតុបង្កើតផ្ទាល់ក្នុងមន្ទីរពិសោធន៍ R&D របស់យើង មិនមែនទិញរូបមន្តទូទៅទេ — នេះជាប្រភពនៃភាពស្ថិតស្ថេរ។',
     },
     img: '/images/feats/feat5.png',
+    placeholder: 'R&D Lab',
     color: '#12A150',
     bullets: [
       { en: 'Compounds developed in-house through our R&D lab, not bought as a generic recipe.', km: 'សមាសធាតុបង្កើតផ្ទាល់ក្នុងមន្ទីរពិសោធន៍ R&D របស់យើង មិនមែនទិញរូបមន្តទូទៅទេ។' },
@@ -173,6 +182,7 @@ export const FEATURES = [
       km: 'ប្រព័ន្ធគ្រប់គ្រងគុណភាពដែលទទួលបានវិញ្ញាបនបត្រ គ្របដណ្តប់បំពង់ uPVC, HDPE, LDPE, PPR បំពង់ដឹកខ្សែ និងគ្រឿងបន្លាស់ — សវនកម្មឡើងវិញដោយភាគីខាងក្រៅ មិនមែនប្រកាសខ្លួនឯងទេ។',
     },
     img: '/images/feats/feat6.png',
+    placeholder: 'ISO Certified',
     color: '#0C3466',
     bullets: [
       { en: 'Certified quality management system covering uPVC, HDPE, LDPE, PPR, conduit and fittings.', km: 'ប្រព័ន្ធគ្រប់គ្រងគុណភាពដែលមានវិញ្ញាបនបត្រ គ្របដណ្តប់ uPVC, HDPE, LDPE, PPR បំពង់ដឹកខ្សែ និងគ្រឿងបន្លាស់។' },

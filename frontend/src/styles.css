@@ -11,6 +11,11 @@
   --paper:#F2F5F9;--paper-2:#E7ECF3;--grey:#5C6F8A;--white:#fff;
   --fg:#07213F;--card:#fff;--row-hover:#FFF8D6;
   --ok-bg:#E9F7EF;--err-bg:#FDECEC;
+  /* RGB-channel companions so Tailwind's /NN opacity modifiers (bg-ink/85 etc) can apply — see tailwind.config.js */
+  --ink-rgb:7 33 63;--ink-2-rgb:12 52 102;--blue-rgb:11 87 164;--blue-lite-rgb:43 167 224;
+  --yellow-rgb:255 209 0;--yellow-deep-rgb:242 183 5;--red-rgb:228 0 43;
+  --paper-rgb:242 245 249;--paper-2-rgb:231 236 243;--grey-rgb:92 111 138;
+  --fg-rgb:7 33 63;--card-rgb:255 255 255;
   --line:rgba(7,33,63,.13);--line-strong:rgba(7,33,63,.28);
   --c-upvc:#2BA7E0;--c-ppr:#12A150;--c-hdpe:#15191F;--c-conduit:#FFC400;--c-corr:#EDF1F6;
   --display:'Space Grotesk','Arial Narrow','Kantumruy Pro','Noto Sans Khmer',sans-serif;
@@ -23,6 +28,13 @@
 @keyframes rise{
   from{transform:translateY(60px) scaleY(.9);opacity:0}
   to{transform:none;opacity:1}
+}
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:none}
+}
+.animate-pageIn{
+  animation:pageIn .4s var(--ease) both;
 }
 
 /* ============================================================
@@ -269,6 +281,9 @@ html.theme-dark{
   --blue:#1A6FC4;--blue-lite:#4EAFE0;
   --row-hover:#1B2B47;
   --ok-bg:#0F2A1E;--err-bg:#331416;
+  --ink-rgb:5 13 26;--ink-2-rgb:11 30 58;--fg-rgb:231 238 247;--grey-rgb:168 183 204;
+  --paper-rgb:11 19 34;--paper-2-rgb:18 30 51;--card-rgb:17 28 47;
+  --blue-rgb:26 111 196;--blue-lite-rgb:78 175 224;
 }
 
 /* ============================================================
