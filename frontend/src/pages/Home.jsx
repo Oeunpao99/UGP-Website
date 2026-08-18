@@ -228,11 +228,11 @@ export default function Home() {
             }
             lead={t('home.why.lead')}
           />
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(238px,1fr))] gap-[2px] overflow-hidden rounded-[14px] bg-white/[0.16]">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f, i) => (
-              <Reveal className="bg-ink-2 transition-colors duration-300 ease-brand hover:bg-ink" key={f.id} as="div">
+              <Reveal className="overflow-hidden rounded-[14px] border border-white/10 bg-ink-2 transition-all duration-300 hover:-translate-y-[4px] hover:border-yellow/30 hover:shadow-[0_16px_36px_-14px_rgba(224,161,6,.15)]" key={f.id} as="div">
                 <Link to={loc(lang, `/features/${f.id}`)} className="group block h-full">
-                  <div className="relative h-[128px] overflow-hidden">
+                  <div className="relative h-[140px] overflow-hidden">
                     <PlaceholderImage
                       label={f.placeholder}
                       color={f.color}
@@ -243,11 +243,16 @@ export default function Home() {
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
-                  <div className="px-[26px] pt-5 pb-[30px]">
-                    <h4 className="mb-2 font-display text-[1.06rem] font-bold">{f.t[lang]}</h4>
-                    <p className="m-0 text-[.9rem] text-white/[0.66]">{f.b[lang]}</p>
-                    <span className="mt-4 inline-flex items-center gap-2 font-mono text-[.7rem] uppercase tracking-[.16em] text-yellow">
-                      {t('info.detail')} <span className="ar">→</span>
+                  <div className="px-6 pt-5 pb-6">
+                    <h4 className="mb-2 font-display text-[1.08rem] font-bold">{f.t[lang]}</h4>
+                    <p className="m-0 text-[.9rem] leading-relaxed text-white/[0.66]">{f.b[lang]}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 font-display text-[.86rem] font-bold text-yellow">
+                      {t('info.detail')}
+                      <span className="grid h-6 w-6 place-items-center rounded-full bg-yellow text-ink transition-transform duration-200 group-hover:translate-x-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-3.5 w-3.5">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </span>
                   </div>
                 </Link>
