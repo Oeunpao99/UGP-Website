@@ -151,21 +151,49 @@ export default function About() {
       <section className="band">
         <div className="shell">
           <HeadRow eyebrow={t('about.stats.eyebrow')} title={t('about.stats.title')} />
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {stats.map((s, i) => (
-              <div
-                className="relative overflow-hidden rounded-[14px] border border-line bg-card px-[26px] py-[30px]"
-                key={i}
-              >
-                <span className="absolute inset-y-0 left-0 w-[6px]" style={{ background: s.color }} />
-                <b className="block font-display text-[clamp(2.2rem,4vw,3rem)] font-extrabold leading-none" style={{ color: s.color }}>
-                  {s.n}
-                </b>
-                <span className="mt-2 block font-mono text-[.7rem] uppercase tracking-[.14em] text-grey">{s.k}</span>
-                <p className="mb-0 mt-[10px] text-[.9rem] text-grey">{s.d}</p>
+          <Reveal className="overflow-hidden rounded-[14px] border border-line bg-card">
+            <div className="grid lg:grid-cols-[1fr_1.1fr]">
+              <div className="flex flex-col justify-center gap-8 p-[clamp(28px,4vw,48px)]">
+                <div>
+                  <span className="font-mono text-[.7rem] uppercase tracking-[.14em] text-grey">{t('about.stats.total')}</span>
+                  <b className="mt-1 block font-display text-[clamp(3rem,6vw,5rem)] font-extrabold leading-none text-blue">177</b>
+                </div>
+                <p className="m-0 text-[.95rem] leading-relaxed text-grey">
+                  {t('about.team.lead')}
+                </p>
+                <div className="flex gap-3">
+                  <Link to={loc(lang, '/products')} className="btn">
+                    {t('home.family.go')} <span className="ar">→</span>
+                  </Link>
+                  <Link to={loc(lang, '/contact')} className="btn ghost">
+                    {t('nav.quote')} <span className="ar">→</span>
+                  </Link>
+                </div>
               </div>
-            ))}
-          </div>
+              <div className="grid grid-cols-1 gap-[2px] bg-line sm:grid-cols-2 lg:grid-cols-1">
+                {stats.slice(1).map((s, i) => (
+                  <div className="flex items-start gap-5 bg-card p-[clamp(22px,3vw,32px)]" key={i}>
+                    <span className="flex-none grid h-12 w-12 place-items-center rounded-[12px] text-white" style={{ background: s.color }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+                        {i === 0 ? (
+                          <><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1" /><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" /></>
+                        ) : (
+                          <><circle cx="12" cy="8" r="4" /><path d="M4 20c1-4.2 4-6.4 8-6.4s7 2.2 8 6.4" /></>
+                        )}
+                      </svg>
+                    </span>
+                    <div>
+                      <b className="block font-display text-[clamp(1.6rem,2.5vw,2rem)] font-extrabold leading-none" style={{ color: s.color }}>
+                        {s.n}
+                      </b>
+                      <span className="mt-1 block font-mono text-[.68rem] uppercase tracking-[.12em] text-grey">{s.k}</span>
+                      <p className="m-0 mt-2 text-[.88rem] leading-relaxed text-grey">{s.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
