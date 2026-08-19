@@ -338,7 +338,7 @@ export function SwatchInput({ value, onChange, placeholder = 'var(--c-upvc) or a
 
 export function ActionBar({ left, children }) {
   return (
-    <div className="sticky bottom-0 z-10 mt-6 rounded-[14px] border border-line bg-card p-4 shadow-[0_-8px_30px_-18px_rgba(7,33,63,.35)]">
+    <div className="sticky bottom-0 z-10 mt-6 rounded-[14px] border border-line bg-card p-4 shadow-[0_-8px_30px_-18px_rgba(27,68,156,.35)]">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>{left}</div>
         <div className="flex items-center gap-3">{children}</div>
@@ -348,7 +348,7 @@ export function ActionBar({ left, children }) {
 }
 
 export function Card({ children, className = '' }) {
-  return <div className={`rounded-[14px] border border-line bg-card shadow-[0_1px_2px_rgba(7,33,63,.05)] ${className}`}>{children}</div>
+  return <div className={`rounded-[14px] border border-line bg-card shadow-[0_1px_2px_rgba(27,68,156,.05)] ${className}`}>{children}</div>
 }
 
 export function PageHeader({ title, action, onBack, backLabel, eyebrow }) {

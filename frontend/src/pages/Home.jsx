@@ -174,7 +174,7 @@ export default function Home() {
             {products.map((p, i) => (
               <Link
                 to={`${loc(lang, '/products')}/${p.id}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card p-[26px] text-left transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-[14px] border border-line bg-card p-[26px] text-left transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(27,68,156,.75)]"
                 style={{ '--c': p.color }}
                 key={p.id}
               >
@@ -268,7 +268,7 @@ export default function Home() {
             {FACTS.map((f) => (
               <Link
                 to={loc(lang, `/facts/${f.id}`)}
-                className="group relative block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
+                className="group relative block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(27,68,156,.75)]"
                 key={f.id}
               >
                 <div className="relative h-[150px] overflow-hidden">

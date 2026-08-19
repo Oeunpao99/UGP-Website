@@ -42,7 +42,7 @@ export default function Products() {
     const idx = String(products.indexOf(p) + 1).padStart(2, '0')
     return (
       <article
-        className="group relative mb-5 grid grid-cols-1 overflow-hidden rounded-[16px] border border-line bg-card scroll-mt-[120px] transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:border-transparent hover:shadow-[0_32px_56px_-30px_rgba(7,33,63,.62)] lg:grid-cols-[220px_1fr]"
+        className="group relative mb-5 grid grid-cols-1 overflow-hidden rounded-[16px] border border-line bg-card scroll-mt-[120px] transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:border-transparent hover:shadow-[0_32px_56px_-30px_rgba(27,68,156,.62)] lg:grid-cols-[220px_1fr]"
         id={`p-${p.id}`}
         key={p.id}
         style={{ '--c': p.color }}

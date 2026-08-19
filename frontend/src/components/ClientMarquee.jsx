@@ -43,7 +43,7 @@ export default function ClientMarquee({ title, items, reverse, accent }) {
         <span className="h-[3px] w-[26px] flex-none rounded-full bg-yellow" />
         <h3 className="m-0 font-mono text-[.72rem] uppercase tracking-[.18em] text-grey">{title}</h3>
       </div>
-      <div className="overflow-hidden rounded-[14px] border border-line bg-card shadow-[0_22px_44px_-34px_rgba(7,33,63,.5)]">
+      <div className="overflow-hidden rounded-[14px] border border-line bg-card shadow-[0_22px_44px_-34px_rgba(27,68,156,.5)]">
         <div className={`group flex w-max animate-slide group-hover:[animation-play-state:paused]${reverse ? ' [animation-direction:reverse]' : ''}`} style={{ animationDuration: `${dur}s` }}>
           {cells}
           {cells}

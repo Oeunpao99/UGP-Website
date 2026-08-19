@@ -318,7 +318,7 @@ export default function AdminSettings() {
           </div>
         </Section>
 
-        <div className="sticky bottom-0 z-10 mt-6 rounded-[14px] border border-line bg-card p-4 shadow-[0_-8px_30px_-18px_rgba(7,33,63,.35)]">
+        <div className="sticky bottom-0 z-10 mt-6 rounded-[14px] border border-line bg-card p-4 shadow-[0_-8px_30px_-18px_rgba(27,68,156,.35)]">
           <div className="flex items-center justify-end gap-3">
             <button type="submit" disabled={busy} className={BTN}>{busy ? t('saving') : t('save')}</button>
           </div>
