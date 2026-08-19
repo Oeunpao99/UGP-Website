@@ -38,7 +38,7 @@ python -m venv .venv
 .venv\Scripts\activate          # Windows
 pip install -r requirements.txt
 ```
-
+#new
 API is served at `http://localhost:8000` (health check: `http://localhost:8000/api/health`).
 
 ### 2. Frontend (Vite + React, port 5173)
