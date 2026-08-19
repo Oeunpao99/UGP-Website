@@ -279,14 +279,14 @@ body.lang-km .job-row li{font-size:.72rem;line-height:1.75}
    ============================================================ */
 html.theme-dark{
   color-scheme:dark;
-  --ink:#0B1F4C;--ink-2:#132D66;
+  --ink:#050D1A;--ink-2:#0B1E3A;
   --fg:#E7EEF7;--grey:#A8B7CC;
   --paper:#0B1322;--paper-2:#121E33;--card:#111C2F;
   --line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.26);
   --blue:#1b449c;--blue-lite:#4EAFE0;
   --row-hover:#1B2B47;
   --ok-bg:#0F2A1E;--err-bg:#331416;
-  --ink-rgb:11 31 76;--ink-2-rgb:19 45 102;--fg-rgb:231 238 247;--grey-rgb:168 183 204;
+  --ink-rgb:5 13 26;--ink-2-rgb:11 30 58;--fg-rgb:231 238 247;--grey-rgb:168 183 204;
   --paper-rgb:11 19 34;--paper-2-rgb:18 30 51;--card-rgb:17 28 47;
   --blue-rgb:27 68 156;--blue-lite-rgb:78 175 224;
 }
