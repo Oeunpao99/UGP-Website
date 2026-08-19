@@ -191,7 +191,7 @@ export default function About() {
 
           <div className={`team-reveal${teamInView ? ' in' : ''}`} ref={teamRef}>
             <h2 className="mb-4 text-center">Management Team</h2>
-            <div className="group overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:shadow-[0_26px_44px_-30px_rgba(27,68,156,.75)]">
+            <div className="group overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[5px] hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]">
               <div className="team-reveal-img overflow-hidden">
                 <img
                   src="/images/image_2026-08-18_16-46-00.png"
@@ -221,7 +221,7 @@ export default function About() {
             {FAMILIES.map((f) => (
               <Link
                 to={loc(lang, '/products')}
-                className="group relative block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(27,68,156,.75)]"
+                className="group relative block overflow-hidden rounded-[14px] border border-line bg-card transition-all duration-300 ease-brand hover:-translate-y-[6px] hover:border-transparent hover:shadow-[0_26px_44px_-30px_rgba(7,33,63,.75)]"
                 key={f.tKey}
               >
                 <div className="relative h-[150px] overflow-hidden">
