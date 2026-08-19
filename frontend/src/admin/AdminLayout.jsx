@@ -47,7 +47,7 @@ export default function AdminLayout({ username, onLogout, children }) {
 
   return (
     <div className="admin-shell flex h-screen overflow-hidden bg-paper text-fg">
-      <aside className="flex w-[248px] flex-none flex-col bg-ink text-white">
+      <aside className="flex w-[248px] flex-none flex-col bg-blue text-white">
         <div className="border-b border-white/[0.08] px-5 py-6">
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 flex-none place-items-center rounded-[12px] bg-yellow font-display text-[1.05rem] font-black text-ink">

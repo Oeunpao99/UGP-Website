@@ -16,7 +16,7 @@
    Smart pipe legends, plus the ID stripe colour of each family.
    ============================================================ */
 :root{
-  --ink:#07213F;
+  --ink:#1b449c;
   --ink-2:#1b449c;
   --blue:#1b449c;
   --blue-lite:#2BA7E0;
@@ -27,8 +27,8 @@
   --paper-2:#E7ECF3;
   --white:#fff;
   --grey:#5C6F8A;
-  --line:rgba(7,33,63,.13);
-  --line-strong:rgba(7,33,63,.28);
+  --line:rgba(27,68,156,.13);
+  --line-strong:rgba(27,68,156,.28);
 
   /* product family ID stripes */
   --c-upvc:#2BA7E0;
@@ -97,16 +97,16 @@ p{margin:0 0 1.05em}
   font-variation-settings:'wdth' 105;letter-spacing:.01em;
   background:var(--yellow);color:var(--ink);
   transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .2s;
-  box-shadow:0 2px 0 rgba(7,33,63,.18);
+  box-shadow:0 2px 0 rgba(27,68,156,.18);
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(7,33,63,.5);background:#FFDC3D}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px rgba(27,68,156,.5);background:#FFDC3D}
 .btn .ar{transition:transform .25s var(--ease)}
 .btn:hover .ar{transform:translateX(4px)}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line-strong)}
 .btn.ghost:hover{background:var(--white);box-shadow:inset 0 0 0 2px var(--ink)}
 .on-dark .btn.ghost{color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.36)}
 .on-dark .btn.ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 2px #fff}
-.btn.solid{background:var(--blue);color:#fff;box-shadow:0 2px 0 rgba(7,33,63,.3)}
+.btn.solid{background:var(--blue);color:#fff;box-shadow:0 2px 0 rgba(27,68,156,.3)}
 .btn.solid:hover{background:var(--ink-2)}
 
 /* ============================================================
@@ -123,7 +123,7 @@ p{margin:0 0 1.05em}
 }
 
 .masthead{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .25s}
-.masthead.stuck{box-shadow:0 14px 34px -26px rgba(7,33,63,.7)}
+.masthead.stuck{box-shadow:0 14px 34px -26px rgba(27,68,156,.7)}
 .masthead .shell{display:flex;align-items:center;gap:22px;height:74px}
 
 .brandmark{display:flex;align-items:center;gap:12px;margin-right:auto}
@@ -228,7 +228,7 @@ section.tight{padding:clamp(48px,5vw,72px) 0}
   color:rgba(255,255,255,.9);white-space:nowrap;user-select:none;
   margin-top:26px;
 }
-.pipe.on-light .legend{color:rgba(7,33,63,.62)}
+.pipe.on-light .legend{color:rgba(27,68,156,.62)}
 .pipe .stripe{position:absolute;top:34px;bottom:0;width:5px;background:var(--s);left:7px;opacity:.95}
 .pipe .stripe.r{left:auto;right:7px}
 
@@ -272,7 +272,7 @@ section.tight{padding:clamp(48px,5vw,72px) 0}
   border:1px solid var(--line);overflow:hidden;cursor:pointer;text-align:left;width:100%;
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;
 }
-.family:hover{transform:translateY(-6px);box-shadow:0 26px 44px -30px rgba(7,33,63,.75);border-color:transparent}
+.family:hover{transform:translateY(-6px);box-shadow:0 26px 44px -30px rgba(27,68,156,.75);border-color:transparent}
 .family .bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
 .family .idx{font-family:var(--mono);font-size:.7rem;color:var(--grey);letter-spacing:.14em}
 .family h3{margin:12px 0 8px}
@@ -356,13 +356,13 @@ caption{caption-side:bottom;padding:10px 2px;font-size:.75rem;color:var(--grey);
 .feature-event{display:grid;grid-template-columns:1.1fr .9fr;background:var(--ink);color:#fff;border-radius:var(--r);overflow:hidden}
 .feature-event .txt{padding:clamp(32px,4vw,52px)}
 .feature-event .visual{background:var(--yellow);position:relative;min-height:300px;display:grid;place-items:center;overflow:hidden}
-.feature-event .visual .ring{position:absolute;inset:-20%;background:repeating-radial-gradient(circle,rgba(7,33,63,.14) 0 1.5px,transparent 1.5px 18px)}
+.feature-event .visual .ring{position:absolute;inset:-20%;background:repeating-radial-gradient(circle,rgba(27,68,156,.14) 0 1.5px,transparent 1.5px 18px)}
 .feature-event .visual .stamp{position:relative;text-align:center;font-family:var(--display);color:var(--ink);font-weight:900;font-size:clamp(2rem,4vw,3rem);line-height:.95;padding:20px}
 .feature-event .visual .stamp small{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;font-weight:500;margin-top:12px}
 
 .events{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}
 .event{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.event:hover{transform:translateY(-5px);box-shadow:0 26px 44px -30px rgba(7,33,63,.7)}
+.event:hover{transform:translateY(-5px);box-shadow:0 26px 44px -30px rgba(27,68,156,.7)}
 .event .top{height:126px;position:relative;background:var(--c,var(--blue));display:grid;place-items:center;overflow:hidden}
 .event .top::before{content:"";position:absolute;inset:-40%;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.1) 0 10px,transparent 10px 20px)}
 .event .top b{position:relative;font-family:var(--display);color:#fff;font-size:2.4rem;font-weight:800;opacity:.92}
@@ -456,7 +456,7 @@ footer a:hover{color:var(--yellow)}
 .chat-fab{
   position:fixed;right:24px;bottom:24px;z-index:80;display:flex;align-items:center;gap:11px;
   padding:13px 20px 13px 15px;border-radius:100px;border:0;cursor:pointer;background:var(--ink);color:#fff;
-  box-shadow:0 16px 34px -14px rgba(7,33,63,.85);font-family:var(--display);font-weight:700;font-size:.92rem;
+  box-shadow:0 16px 34px -14px rgba(27,68,156,.85);font-family:var(--display);font-weight:700;font-size:.92rem;
   transition:transform .25s var(--ease),background .25s;
 }
 .chat-fab:hover{transform:translateY(-3px);background:var(--blue)}
@@ -467,7 +467,7 @@ footer a:hover{color:var(--yellow)}
 .chat{
   position:fixed;right:24px;bottom:24px;z-index:90;width:min(392px,calc(100vw - 32px));
   height:min(612px,calc(100vh - 48px));background:#fff;border-radius:20px;overflow:hidden;
-  box-shadow:0 34px 70px -22px rgba(7,33,63,.6);display:none;flex-direction:column;
+  box-shadow:0 34px 70px -22px rgba(27,68,156,.6);display:none;flex-direction:column;
   border:1px solid var(--line);
 }
 .chat.open{display:flex;animation:chatIn .34s var(--ease) both}
@@ -552,7 +552,7 @@ footer a:hover{color:var(--yellow)}
   <div class="shell">
     <a href="#/home" data-link class="brandmark" aria-label="UPG PIPE home">
       <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
-        <rect width="48" height="48" rx="11" fill="#07213F"/>
+        <rect width="48" height="48" rx="11" fill="#1b449c"/>
         <circle cx="24" cy="24" r="14" fill="none" stroke="#ffd000" stroke-width="2.4"/>
         <circle cx="24" cy="24" r="8" fill="none" stroke="#2BA7E0" stroke-width="2.4"/>
         <path d="M24 10v28" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
@@ -612,7 +612,7 @@ footer a:hover{color:var(--yellow)}
           <div class="pipe" style="--c:var(--c-upvc);--d:.25s;height:100%"><span class="legend">EAGLE uPVC PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
           <div class="pipe" style="--c:var(--c-upvc);--d:.35s;height:88%"><span class="legend">LION HEAD uPVC PIPE · ISO 9001:2015</span></div>
           <div class="pipe" style="--c:var(--c-hdpe);--d:.45s;height:70%"><span class="stripe" style="--s:#ff0000"></span><span class="legend">EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA</span></div>
-          <div class="pipe" style="--c:var(--c-conduit);--d:.55s;height:54%"><span class="legend" style="color:rgba(7,33,63,.66)">EAGLE ELECTRICAL CONDUIT · ISO 9001:2015</span></div>
+          <div class="pipe" style="--c:var(--c-conduit);--d:.55s;height:54%"><span class="legend" style="color:rgba(27,68,156,.66)">EAGLE ELECTRICAL CONDUIT · ISO 9001:2015</span></div>
         </div>
       </div>
     </div>
@@ -1070,9 +1070,9 @@ footer a:hover{color:var(--yellow)}
         <div class="brandmark">
           <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
             <rect width="48" height="48" rx="11" fill="#ffd000"/>
-            <circle cx="24" cy="24" r="14" fill="none" stroke="#07213F" stroke-width="2.4"/>
+            <circle cx="24" cy="24" r="14" fill="none" stroke="#1b449c" stroke-width="2.4"/>
             <circle cx="24" cy="24" r="8" fill="none" stroke="#1b449c" stroke-width="2.4"/>
-            <path d="M24 10v28" stroke="#07213F" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M24 10v28" stroke="#1b449c" stroke-width="2.4" stroke-linecap="round"/>
           </svg>
           <span class="wordmark"><b>UPG PIPE</b><span>CO., LTD · ISO 9001:2015</span></span>
         </div>
@@ -1368,7 +1368,7 @@ $('#clientGrid').innerHTML = CLIENTS.map(([n,intl])=>`<div class="client${intl?'
 function pipeEl(p){
   return `<div class="pipe${p.light?' on-light':''}" style="--c:${p.color}">
     ${p.stripe?`<span class="stripe" style="--s:${p.stripe}"></span>`:''}
-    <span class="legend"${p.light?' style="color:rgba(7,33,63,.6)"':''}>${esc(p.legend)}</span>
+    <span class="legend"${p.light?' style="color:rgba(27,68,156,.6)"':''}>${esc(p.legend)}</span>
   </div>`;
 }
 function renderProducts(brand){

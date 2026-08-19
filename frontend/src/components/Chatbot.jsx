@@ -146,7 +146,7 @@ export default function Chatbot() {
         <div
           className={`fixed right-6 bottom-[106px] z-[79] max-sm:right-4 max-sm:bottom-[98px]${teaser ? ' animate-teaserIn' : ' pointer-events-none opacity-0'}`}
         >
-          <div className="relative flex items-start gap-[8px] rounded-[16px] rounded-br-[5px] border border-line bg-card px-[15px] py-[11px] text-[.86rem] leading-snug text-fg shadow-[0_22px_44px_-20px_rgba(7,33,63,.45)]">
+          <div className="relative flex items-start gap-[8px] rounded-[16px] rounded-br-[5px] border border-line bg-card px-[15px] py-[11px] text-[.86rem] leading-snug text-fg shadow-[0_22px_44px_-20px_rgba(27,68,156,.45)]">
             <span>{t('chat.teaser')}</span>
             <button
               type="button"
@@ -165,7 +165,7 @@ export default function Chatbot() {
       )}
 
       <div className={`fixed right-6 bottom-6 z-[80] max-sm:right-4 max-sm:bottom-4${open ? ' hidden' : ' flex animate-fabFloat'}`}>
-        <div className="relative rounded-full bg-gradient-to-br from-yellow via-blue-lite to-red p-[3px] shadow-[0_22px_46px_-18px_rgba(7,33,63,.8)] transition-transform duration-300 ease-brand hover:scale-[1.06]">
+        <div className="relative rounded-full bg-gradient-to-br from-yellow via-blue-lite to-red p-[3px] shadow-[0_22px_46px_-18px_rgba(27,68,156,.8)] transition-transform duration-300 ease-brand hover:scale-[1.06]">
           <button
             type="button"
             aria-label={t('chat.fab')}
@@ -189,7 +189,7 @@ export default function Chatbot() {
         </div>
       </div>
 
-      <div className={`fixed right-6 bottom-6 z-[90] w-[min(460px,calc(100vw-32px))] h-[min(700px,calc(100vh-48px))] flex-col overflow-hidden rounded-[20px] border border-line bg-card shadow-[0_34px_70px_-22px_rgba(7,33,63,.6)] max-sm:right-0 max-sm:bottom-0 max-sm:h-dvh max-sm:w-screen max-sm:rounded-none${open ? ' flex animate-chatIn' : ' hidden'}`} role="dialog" aria-label={t('chat.fab')}>
+      <div className={`fixed right-6 bottom-6 z-[90] w-[min(460px,calc(100vw-32px))] h-[min(700px,calc(100vh-48px))] flex-col overflow-hidden rounded-[20px] border border-line bg-card shadow-[0_34px_70px_-22px_rgba(27,68,156,.6)] max-sm:right-0 max-sm:bottom-0 max-sm:h-dvh max-sm:w-screen max-sm:rounded-none${open ? ' flex animate-chatIn' : ' hidden'}`} role="dialog" aria-label={t('chat.fab')}>
         <div className="flex items-center gap-[13px] bg-ink px-[18px] py-[17px] text-white">
           <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-yellow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6 text-ink">

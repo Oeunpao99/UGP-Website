@@ -79,7 +79,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`sticky top-0 z-[60] border-b border-line bg-card backdrop-blur-[14px] transition-shadow duration-300${stuck ? ' shadow-[0_14px_34px_-26px_rgba(7,33,63,.7)]' : ''}`}>
+      <header className={`sticky top-0 z-[60] border-b border-line bg-card backdrop-blur-[14px] transition-shadow duration-300${stuck ? ' shadow-[0_14px_34px_-26px_rgba(27,68,156,.7)]' : ''}`}>
         <div className="shell flex h-[74px] items-center gap-[16px]">
           <Link to={loc(lang, '/home')} className="flex flex-none items-center pl-[6px]" aria-label="UPG PIPE home">
             <img src="/images/logo.jpg" alt="UPG PIPE CO., LTD" className="h-[58px] w-[58px] flex-none rounded-full border-[3px] border-blue object-cover" />
@@ -161,7 +161,7 @@ export default function Header() {
         </div>
 
         <div
-          className={`absolute inset-x-0 top-full z-10 border-t border-b border-line bg-card shadow-[0_18px_40px_-20px_rgba(7,33,63,.35)] transition-all duration-200 ease-brand ${
+          className={`absolute inset-x-0 top-full z-10 border-t border-b border-line bg-card shadow-[0_18px_40px_-20px_rgba(27,68,156,.35)] transition-all duration-200 ease-brand ${
             productsOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-[4px] opacity-0'
           }`}
           onMouseEnter={openProducts}
