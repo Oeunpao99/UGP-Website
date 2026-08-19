@@ -88,7 +88,7 @@ export default function About() {
   ]
 
   const stats = [
-    { n: '177', k: t('about.stats.total'), d: t('about.ho.team'), color: '#0B57A4' },
+    { n: '177', k: t('about.stats.total'), d: t('about.ho.team'), color: '#1b449c' },
     { n: '30', k: t('about.cert.ho'), d: t('about.k.team'), color: '#12A150' },
     { n: '147', k: t('about.cert.factory'), d: t('about.factory.team'), color: '#E0A106' },
   ]

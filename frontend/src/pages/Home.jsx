@@ -12,11 +12,11 @@ import { loc } from '../links'
 import { FACTS, FEATURES } from './homeDetails'
 
 const HERO_PIPES = [
-  { color: 'var(--c-hdpe)', stripe: '#FFD100', h: '62%', d: 0.05, legend: 'EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA' },
+  { color: 'var(--c-hdpe)', stripe: '#ffd000', h: '62%', d: 0.05, legend: 'EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA' },
   { color: 'var(--c-ppr)', h: '78%', d: 0.15, legend: 'EAGLE PPR PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA' },
   { color: 'var(--c-upvc)', h: '100%', d: 0.25, legend: 'EAGLE uPVC PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA' },
   { color: 'var(--c-upvc)', h: '88%', d: 0.35, legend: 'LION HEAD uPVC PIPE · ISO 9001:2015' },
-  { color: 'var(--c-hdpe)', stripe: '#E4002B', h: '70%', d: 0.45, legend: 'EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA' },
+  { color: 'var(--c-hdpe)', stripe: '#ff0000', h: '70%', d: 0.45, legend: 'EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA' },
   { color: 'var(--c-conduit)', light: true, h: '54%', d: 0.55, legend: 'EAGLE ELECTRICAL CONDUIT · ISO 9001:2015' },
 ]
 

@@ -253,7 +253,7 @@ export default function Products() {
                   <div className="relative h-[160px] overflow-hidden bg-paper-2">
                     <PlaceholderImage
                       label={f.n}
-                      color="#0B57A4"
+                      color="#1b449c"
                       className="h-full w-full transition-transform duration-500 group-hover:scale-105"
                     />
                     <span className="absolute inset-x-0 bottom-0 h-[4px] bg-blue" />

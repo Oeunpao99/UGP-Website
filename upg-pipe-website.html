@@ -17,12 +17,12 @@
    ============================================================ */
 :root{
   --ink:#07213F;
-  --ink-2:#0C3466;
-  --blue:#0B57A4;
+  --ink-2:#1b449c;
+  --blue:#1b449c;
   --blue-lite:#2BA7E0;
-  --yellow:#FFD100;
+  --yellow:#ffd000;
   --yellow-deep:#F2B705;
-  --red:#E4002B;
+  --red:#ff0000;
   --paper:#F2F5F9;
   --paper-2:#E7ECF3;
   --white:#fff;
@@ -553,7 +553,7 @@ footer a:hover{color:var(--yellow)}
     <a href="#/home" data-link class="brandmark" aria-label="UPG PIPE home">
       <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
         <rect width="48" height="48" rx="11" fill="#07213F"/>
-        <circle cx="24" cy="24" r="14" fill="none" stroke="#FFD100" stroke-width="2.4"/>
+        <circle cx="24" cy="24" r="14" fill="none" stroke="#ffd000" stroke-width="2.4"/>
         <circle cx="24" cy="24" r="8" fill="none" stroke="#2BA7E0" stroke-width="2.4"/>
         <path d="M24 10v28" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
         <path d="M10 24h28" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".35"/>
@@ -607,11 +607,11 @@ footer a:hover{color:var(--yellow)}
           </div>
         </div>
         <div class="rack" aria-hidden="true">
-          <div class="pipe" style="--c:var(--c-hdpe);--d:.05s;height:62%"><span class="stripe" style="--s:#FFD100"></span><span class="legend">EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-hdpe);--d:.05s;height:62%"><span class="stripe" style="--s:#ffd000"></span><span class="legend">EAGLE HDPE PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
           <div class="pipe" style="--c:var(--c-ppr);--d:.15s;height:78%"><span class="legend">EAGLE PPR PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
           <div class="pipe" style="--c:var(--c-upvc);--d:.25s;height:100%"><span class="legend">EAGLE uPVC PIPE · ISO 9001:2015 · PRODUCT OF CAMBODIA</span></div>
           <div class="pipe" style="--c:var(--c-upvc);--d:.35s;height:88%"><span class="legend">LION HEAD uPVC PIPE · ISO 9001:2015</span></div>
-          <div class="pipe" style="--c:var(--c-hdpe);--d:.45s;height:70%"><span class="stripe" style="--s:#E4002B"></span><span class="legend">EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA</span></div>
+          <div class="pipe" style="--c:var(--c-hdpe);--d:.45s;height:70%"><span class="stripe" style="--s:#ff0000"></span><span class="legend">EAGLE HDPE PIPE · PE100 · PRODUCT OF CAMBODIA</span></div>
           <div class="pipe" style="--c:var(--c-conduit);--d:.55s;height:54%"><span class="legend" style="color:rgba(7,33,63,.66)">EAGLE ELECTRICAL CONDUIT · ISO 9001:2015</span></div>
         </div>
       </div>
@@ -1069,9 +1069,9 @@ footer a:hover{color:var(--yellow)}
       <div class="foot-brand">
         <div class="brandmark">
           <svg class="glyph" viewBox="0 0 48 48" aria-hidden="true">
-            <rect width="48" height="48" rx="11" fill="#FFD100"/>
+            <rect width="48" height="48" rx="11" fill="#ffd000"/>
             <circle cx="24" cy="24" r="14" fill="none" stroke="#07213F" stroke-width="2.4"/>
-            <circle cx="24" cy="24" r="8" fill="none" stroke="#0B57A4" stroke-width="2.4"/>
+            <circle cx="24" cy="24" r="8" fill="none" stroke="#1b449c" stroke-width="2.4"/>
             <path d="M24 10v28" stroke="#07213F" stroke-width="2.4" stroke-linecap="round"/>
           </svg>
           <span class="wordmark"><b>UPG PIPE</b><span>CO., LTD · ISO 9001:2015</span></span>
@@ -1193,7 +1193,7 @@ const PRODUCTS = [
   },
   {
     id:'hdpe', name:'HDPE pipe', brands:['Eagle','Smart'],
-    color:'var(--c-hdpe)', stripe:'#FFD100',
+    color:'var(--c-hdpe)', stripe:'#ffd000',
     meta:'PE100 raw material · OD 20–400 mm · PN6–PN20',
     legend:'EAGLE HDPE PIPE ISO 9001:2015 · PRODUCT OF CAMBODIA',
     blurb:'Coiled black polyethylene for municipal water supply and drainage, and for telecommunication, electricity and gas conduit. Butt-fusion and electrofusion joints are stronger than the pipe itself, so a buried line has no leak path — and the material is tough enough to take ground movement and traffic loading without cracking.',
@@ -1533,7 +1533,7 @@ $('#quoteForm').addEventListener('submit',function(e){
   }
   const body = `Name: ${name}\nCompany: ${f.get('company')||'-'}\nPhone: ${phone}\nEmail: ${f.get('email')||'-'}\nProduct: ${f.get('product')}\nRequest: ${f.get('topic')}\n\n${f.get('message')||''}`;
   box.className='sent show'; box.style.background='#E9F7EF'; box.style.borderColor='#A8DEC0';
-  box.innerHTML = `Thanks, ${esc(name)} — your request is ready to send. <a href="mailto:sales@upgpipe.com?subject=${encodeURIComponent('Quote request — '+(f.get('product')||''))}&body=${encodeURIComponent(body)}" style="font-weight:600;color:#0B57A4">Open it in your email app</a>, or call +855 (0)23 939 399 to speak to sales now.`;
+  box.innerHTML = `Thanks, ${esc(name)} — your request is ready to send. <a href="mailto:sales@upgpipe.com?subject=${encodeURIComponent('Quote request — '+(f.get('product')||''))}&body=${encodeURIComponent(body)}" style="font-weight:600;color:#1b449c">Open it in your email app</a>, or call +855 (0)23 939 399 to speak to sales now.`;
 });
 
 route();

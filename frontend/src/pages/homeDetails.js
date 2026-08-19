@@ -6,7 +6,7 @@ export const FACTS = [
     d: { en: 'Founded in June 2016 as a Cambodian manufacturer.', km: 'បង្កើតឡើងនៅខែមិថុនា ឆ្នាំ២០១៦ ជាអ្នកផលិតកម្ពុជា។' },
     img: '/images/stats/stat1.png',
     placeholder: 'Factory Est. 2016',
-    color: '#0B57A4',
+    color: '#1b449c',
     bullets: [
       { en: 'Started production in June 2016 with a single uPVC line at Prek Phnov.', km: 'ចាប់ផ្តើមផលិតកម្មនៅខែមិថុនា ឆ្នាំ២០១៦ ជាមួយខ្សែផលិត uPVC តែមួយនៅព្រែកភ្នៅ។' },
       { en: "Khmer-owned and Khmer-led, built to serve Cambodia's own construction and infrastructure market.", km: 'គ្រប់គ្រង និងដឹកនាំដោយជនជាតិខ្មែរ បង្កើតឡើងដើម្បីបម្រើទីផ្សារសំណង់ និងហេដ្ឋារចនាសម្ព័ន្ធកម្ពុជាផ្ទាល់។' },
@@ -83,7 +83,7 @@ export const FEATURES = [
     },
     img: '/images/feats/feat1.png',
     placeholder: 'Pressure Testing',
-    color: '#0B57A4',
+    color: '#1b449c',
     bullets: [
       { en: 'Hydrostatic pressure tests prove the pipe holds internal pressure at its rated pressure over time.', km: 'ការធ្វើតេស្តសម្ពាធសន្ទនីយស្តាទិចបញ្ជាក់ថាបំពង់ទប់សម្ពាធខាងក្នុងតាមកម្រិតកំណត់តាមពេលវេលា។' },
       { en: 'Impact and flattening tests simulate the trench: stones, backfill weight, careless loading.', km: 'ការធ្វើតេស្តផលប៉ះពាល់ និងការសំប៉ែតក្លែងធ្វើលក្ខខណ្ឌក្នុងលេណដ្ឋាន៖ ថ្ម ទម្ងន់សម្ភារៈបំពេញ និងការផ្ទុកដោយធ្វេសប្រហែស។' },
@@ -183,7 +183,7 @@ export const FEATURES = [
     },
     img: '/images/feats/feat6.png',
     placeholder: 'ISO Certified',
-    color: '#0C3466',
+    color: '#1b449c',
     bullets: [
       { en: 'Certified quality management system covering uPVC, HDPE, LDPE, PPR, conduit and fittings.', km: 'ប្រព័ន្ធគ្រប់គ្រងគុណភាពដែលមានវិញ្ញាបនបត្រ គ្របដណ្តប់ uPVC, HDPE, LDPE, PPR បំពង់ដឹកខ្សែ និងគ្រឿងបន្លាស់។' },
       { en: 'Externally re-audited on a schedule — not a self-declaration.', km: 'សវនកម្មឡើងវិញដោយភាគីខាងក្រៅតាមកាលវិភាគ — មិនមែនការប្រកាសខ្លួនឯងទេ។' },

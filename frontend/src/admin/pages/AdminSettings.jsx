@@ -120,7 +120,7 @@ const BLANK = {
   team: [],
 }
 
-const TEAM_COLORS = ['#0B57A4', '#12A150', '#E0A106', '#2278CA']
+const TEAM_COLORS = ['#1b449c', '#12A150', '#E0A106', '#2278CA']
 
 function normMember(m = {}, i = 0) {
   return {

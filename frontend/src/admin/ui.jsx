@@ -49,7 +49,7 @@ const ALERT_ICONS = {
 const ALERT_STYLES = {
   error: 'border-[#F3C6C6] bg-[#FDEEEE] text-[#B23B3B]',
   success: 'border-[#BFE8CE] bg-[#E9F7EF] text-[#1E8449]',
-  info: 'border-[#C7D9F0] bg-[#EDF3FB] text-[#0B57A4]',
+  info: 'border-[#C7D9F0] bg-[#EDF3FB] text-[#1b449c]',
 }
 
 export function Alert({ kind = 'error', children }) {
@@ -220,7 +220,7 @@ export function Select({ children, className = '', ...props }) {
 export function Checkbox({ label, ...props }) {
   return (
     <label className="flex cursor-pointer items-center gap-2.5 text-[.88rem] text-fg/90">
-      <input type="checkbox" {...props} className="h-4 w-4 cursor-pointer accent-[#0B57A4]" />
+      <input type="checkbox" {...props} className="h-4 w-4 cursor-pointer accent-[#1b449c]" />
       <span>{label}</span>
     </label>
   )
@@ -228,7 +228,7 @@ export function Checkbox({ label, ...props }) {
 
 const PRESET_COLORS = [
   'var(--blue)', 'var(--c-upvc)', 'var(--c-hdpe)', 'var(--c-ppr)', 'var(--c-conduit)',
-  '#0B57A4', '#12A150', '#E0A106', '#C70F2D', '#0C3466',
+  '#1b449c', '#12A150', '#E0A106', '#C70F2D', '#0C3466',
 ]
 
 export function ImagePicker({ value, onChange, hint, labels = {} }) {
